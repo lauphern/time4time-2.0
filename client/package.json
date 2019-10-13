@@ -1,0 +1,46 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.16",
+    "@fortawesome/free-solid-svg-icons": "^5.8.0",
+    "@fortawesome/react-fontawesome": "^0.1.4",
+    "@pusher/chatkit-client": "^1.4.1",
+    "axios": "^0.18.1",
+    "axios-progress-bar": "^1.2.0",
+    "bulma": "^0.7.4",
+    "date-fns": "^1.30.1",
+    "moment": "^2.24.0",
+    "node-sass": "^4.11.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-infinite-scroll-component": "^4.5.3",
+    "react-infinite-scroller": "^1.2.4",
+    "react-moment": "^0.8.4",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "2.1.8",
+    "react-share": "^2.4.0",
+    "react-star-rating-component": "^1.4.1",
+    "react-transition-group": "^1.2.1",
+    "skeleton-css": "^2.0.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "dotenv -e .env react-scripts build",
+    "build-dev": "dotenv -e .env.development react-scripts build && cr -r build ../API/public",
+    "build-prod": "dotenv -e .prod.env react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
