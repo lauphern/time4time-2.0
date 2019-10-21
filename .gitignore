@@ -25,3 +25,7 @@ yarn-error.log*
 
 /server/node_modules
 /server/.env
+
+old-db
+
+kidos_review
