@@ -52,68 +52,68 @@ class UserSettings extends Component {
     render() { 
         return (
                 <section>
-                            <div className="column">
-                                <h3 className="title has-text-grey">User's settings</h3>
-                                <div className="box">
+                            <div>
+                                <h3>User's settings</h3>
+                                <div>
                                     <form ref={this.form} onSubmit={this.handleSubmitProfileImage}>
-                                        <div className="field">
-                                        <label className="label">Image</label>
-                                            <div className="control">
-                                                <input onChange={this.handleInput} name='profile-image' className="input" type="file"/>
+                                        <div>
+                                        <label>Image</label>
+                                            <div>
+                                                <input onChange={this.handleInput} name='profile-image' type="file"/>
                                             </div>
                                         </div>
                                         <p style={{color: 'red'}}>{this.state.error? this.state.error:''}</p>
-                                        <button className="button is-block is-large is-fullwidth" value="submit">Edit profile image</button>
+                                        <button value="submit">Edit profile image</button>
                                     </form>
                                 </div>
-                                <div className="box">
+                                <div>
                                     <form onSubmit={this.handleSubmitPersonalInfo}>
-                                        <div className="field">
-                                            <div className="control">
+                                        <div>
+                                            <div>
                                                 <p>{this.state.user.firstname}</p>
                                             </div>
                                         </div>
-                                        <div className="field">
-                                            <div className="control">
+                                        <div>
+                                            <div>
                                             <p>{this.state.user.lastname}</p>
                                             </div>
                                         </div>
-                                        <div className="field">
-                                            <div className="control">
+                                        <div>
+                                            <div>
                                             <p>{this.state.user.username}</p>
                                             </div>
                                         </div>
-                                        <div className="field">
-                                            <label className="label">Bio</label>
-                                            <div className="control has-icons-left has-icons-right">
-                                            <div className="control">
+                                        <div>
+                                            <label>Bio</label>
+                                            <div>
+                                            <div>
                                                 <textarea onChange={this.handleInput} 
-                                                name='bio' className="textarea" placeholder="Describe yourself in max 250 characters" 
+                                                name='bio' placeholder="Describe yourself in max 250 characters" 
                                                 maxLength="250"
                                                 value={this.state.bio}/>
                                             </div>
                                             </div>
                                         </div>
-                                        <div className="field">
-                                            <div className="control">
-                                                <input onChange={this.handleInput} className="input is-large" type="email" name="email" placeholder="e-mail" value={this.state.email}/>
+                                        <div>
+                                            <div>
+                                                <input onChange={this.handleInput} type="email" name="email" placeholder="e-mail" value={this.state.email}/>
                                             </div>
                                         </div>
-                                        <div className="field">
-                                            <div className="control">
+                                        <div>
+                                            <div>
                                             <p>{this.state.user.birth}</p>
                                             </div>
                                         </div>
-                                        <div className="field">
-                                            <p className="control has-icons-left">
-                                                <input onChange={this.handleInput} className="input is-large" type="password" name="password" placeholder="Password" value={this.state.password} pattern="^[a-zA-Z0-9]{8,}$" title="At least 8 characters"/>
-                                                <span className="icon is-small is-left">
+                                        <div>
+                                            <p>
+                                                <input onChange={this.handleInput} type="password" name="password" placeholder="Password" value={this.state.password} pattern="^[a-zA-Z0-9]{8,}$" title="At least 8 characters"/>
+                                                <span>
                                                 <i className="fa fa-lock" aria-hidden="true"></i>
                                                 </span>
                                             </p>
                                         </div>
                                         <p style={{color: 'red'}}>{this.state.error? this.state.error:''}</p>
-                                        <button className="button is-block is-large is-fullwidth" value="submit">Edit personal information</button>
+                                        <button value="submit">Edit personal information</button>
                                     </form>
                                 </div>
                             </div>

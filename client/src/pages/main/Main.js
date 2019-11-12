@@ -11,13 +11,14 @@ class Main extends Component {
     render() { 
         return ( 
             <>
-                <section className="hero is-medium is-bold hero-bg">
-                    <div className="hero-body">
-                        <div className="container">
+                <section>
+                    <div>
+                        <div>
+                            <h2>We think time is priceless. Do you want to join us and share new experiences and pay with just your time?</h2>
                         </div>
                     </div>
                 </section>
-                <div className="section">
+                <div>
                     <Search {...this.props}/>
                 </div>
             </>

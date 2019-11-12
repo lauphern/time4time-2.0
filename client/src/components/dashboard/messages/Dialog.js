@@ -4,15 +4,14 @@ import React from 'react';
       const { userId, handleInput, connectToChatkit} = props;
 
       return (
-        <div className="dialog-container">
-          <div className="dialog">
-            <form className="dialog-form" onSubmit={connectToChatkit}>
-              <label className="username-label" htmlFor="username">
+        <div>
+          <div>
+            <form onSubmit={connectToChatkit}>
+              <label htmlFor="username">
                 Enter your username
               </label>
               <input
                 id="username"
-                className="username-input"
                 autoFocus
                 type="text"
                 name="userId"
@@ -20,7 +19,7 @@ import React from 'react';
                 onChange={handleInput}
                 placeholder="Enter your username"
               />
-              <button type="submit" className="submit-btn">
+              <button type="submit">
                 Submit
               </button>
             </form>

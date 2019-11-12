@@ -11,8 +11,6 @@ import RoomList from './RoomList';
 import ChatSession from './ChatSession';
 import RoomUsers from './RoomUsers';
 
-
-import '../../../DirectMessages.css'
 //this component is for render and send private messages between time4time user's
 class DirectMessages extends Component {
     constructor(props) {
@@ -49,12 +47,12 @@ class DirectMessages extends Component {
             roomName,
         } = this.state;
         return(
-            <div className="direct-messages">
-            <aside className="sidebar left-sidebar">
+            <div>
+            <aside>
               {currentUser ? (
-                <div className="user-profile">
-                  <span className="username">{currentUser.name}</span>
-                  <span className="user-id">{`@${currentUser.id}`}</span>
+                <div>
+                  <span>{currentUser.name}</span>
+                  <span>{`@${currentUser.id}`}</span>
                 </div>
               ) : null}
               {currentRoom ? (
@@ -66,27 +64,26 @@ class DirectMessages extends Component {
                 />
               ) : null}
             </aside>
-            <section className="chat-screen">
-              <header className="chat-header">
+            <section>
+              <header>
                 {currentRoom ? <h3>{roomName}</h3> : null}
               </header>
-              <ul className="chat-messages">
+              <ul>
                 <ChatSession messages={messages} />
               </ul>
-              <footer className="chat-footer">
-                <form onSubmit={this.sendMessage} className="message-form">
+              <footer>
+                <form onSubmit={this.sendMessage}>
                   <input
                     type="text"
                     value={newMessage}
                     name="newMessage"
-                    className="message-input"
                     placeholder="Type your message and hit ENTER to send"
                     onChange={this.handleInput}
                   />
                 </form>
               </footer>
             </section>
-            <aside className="sidebar right-sidebar">
+            <aside>
               {currentRoom ? (
                 <RoomUsers
                   currentUser={currentUser}

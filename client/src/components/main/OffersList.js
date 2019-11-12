@@ -73,13 +73,13 @@ class OffersList extends Component {
         const renderOffers = firstOffers.map((offer) => {
             return (
                 <div key={offer._id}>
-                    <div className="tile is-ancestor">
-                        <div className="tile is-child box">
-                                <h3 className="title">{offer.title}</h3>
+                    <div>
+                        <div>
+                                <h3>{offer.title}</h3>
                                 <h4><strong>User</strong>: {offer.authorUsername}</h4>
                                 <p>{offer.description}</p>
                                 <p><strong>Category</strong>: {offer.category}</p>
-                            <Link className='btn' onClick={()=> {this.toggle(offer._id)}}>Open offer</Link>
+                            <Link onClick={()=> {this.toggle(offer._id)}}>View offer</Link>
                         </div>
                     </div>
                     <OfferModal {...this.props} close={this.toggle} 
@@ -104,15 +104,15 @@ class OffersList extends Component {
         let renderFilteredOffers = this.props.filteredOffers.map((filteredOffer) => {
             return (
                 <div key={filteredOffer._id}>
-                    <div className="tile is-ancestor">
-                        <div className="tile is-child box">
-                                <h3 className="title">{filteredOffer.title}</h3>
+                    <div>
+                        <div>
+                                <h3>{filteredOffer.title}</h3>
                                 {/* TODO */}
                                 <img src={`${process.env.REACT_APP_API}/${filteredOffer.authorProfileImage}`} alt=""/>
                                 <h4><strong>User</strong>: {filteredOffer.authorUsername}</h4>
                                 <p>{filteredOffer.description}</p>
                                 <p><strong>Category</strong>: {filteredOffer.category}</p>
-                            <Link className='btn' onClick={()=> {this.toggle(filteredOffer._id)}}> Open offer</Link>
+                            <Link onClick={()=> {this.toggle(filteredOffer._id)}}>View offer</Link>
                         </div>
                     </div>
                     <OfferModal  {...this.state} {...this.props} close={this.toggle} 
@@ -134,7 +134,7 @@ class OffersList extends Component {
 
             return (
                 <div>
-                    <div className="list is-hoverable">
+                    <div>
                             <InfiniteScroll
                                 dataLength={this.state.firstOffers.length}
                                 next={this.fetchMoreData}

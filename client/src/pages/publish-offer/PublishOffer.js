@@ -45,46 +45,46 @@ class PublishOffer extends Component {
  
     render() { 
         return ( 
-            <div className="column is-three-fifths is-offset-one-fifth publish-offer">
-                <h3 className="title has-text-grey">Publish a new offer</h3>
+            <div>
+                <h3>Publish a new offer</h3>
                 <form ref={this.form} onSubmit={this.handleSubmit}>
                
-                    <div className="field">
-                        <label className="label">Title</label>
-                        <div className="control has-icons-left has-icons-right">
-                        <div className="control">
-                        <input onChange={this.handleInput} name='title' className="input" type="text" placeholder="Title" value={this.state.title}/>
+                    <div>
+                        <label>Title</label>
+                        <div>
+                        <div>
+                        <input onChange={this.handleInput} name='title' type="text" placeholder="Title" value={this.state.title}/>
                         </div>
                         </div>
                     </div>
 
-                    <div className="field">
-                        <label className="label">Description</label>
-                        <div className="control has-icons-left has-icons-right">
-                        <div className="control">
+                    <div>
+                        <label>Description</label>
+                        <div>
+                        <div>
                             <textarea onChange={this.handleInput} 
-                            name='description' className="textarea" placeholder="Describe your offer in max 250 characters" 
+                            name='description' placeholder="Describe your offer in max 250 characters" 
                             maxLength="250"
                             value={this.state.description}/>
                         </div>
                         </div>
                     </div>
-                    <div className="field">
-                        <label className="label">Date</label>
-                        <div className="control">
-                            <input onChange={this.handleInput} name='date'className="input" type="date" placeholder="Date" value={this.state.date}/>
+                    <div>
+                        <label>Date</label>
+                        <div>
+                            <input onChange={this.handleInput} name='date'type="date" placeholder="Date" value={this.state.date}/>
                         </div>
                     </div>
-                    <div className="field">
-                        <label className="label">Duration</label>
-                        <div className="control">
-                            <input onChange={this.handleInput} name='duration' className="input" type="number" placeholder="Duration" value={this.state.duration} min='1'/>
+                    <div>
+                        <label>Duration</label>
+                        <div>
+                            <input onChange={this.handleInput} name='duration' type="number" placeholder="Duration" value={this.state.duration} min='1'/>
                         </div>
                     </div>
-                    <div className="field">
-                        <label  className="label">Category</label>
-                        <div className="control">
-                            <div className="select">
+                    <div>
+                        <label >Category</label>
+                        <div>
+                            <div>
                             <select name='category' value={this.state.category} onChange={this.handleInput}>
                                 <option>Select a category</option>
                                 <option value='house'>House</option>
@@ -97,19 +97,19 @@ class PublishOffer extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="field">
-                        <label className="label">Image</label>
-                        <div className="control">
-                            <input onChange={this.handleInput} name='image' className="input" type="file"/>
+                    <div>
+                        <label>Image</label>
+                        <div>
+                            <input onChange={this.handleInput} name='image' type="file"/>
                         </div>
                     </div>
                     <p style={{color: 'red'}}>{this.state.error? this.state.error:''}</p>
-                    <div className="field is-grouped">
-                        <div className="control">
-                            <button className="button is-link">Submit</button>
+                    <div>
+                        <div>
+                            <button>Submit</button>
                         </div>
-                        <div className="control">
-                            <button className="button is-text">Cancel</button>
+                        <div>
+                            <button>Cancel</button>
                         </div>
                     </div>
                 </form>

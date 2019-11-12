@@ -67,6 +67,7 @@ class MyProfile extends Component {
             />
         })
 
+        // TODO
         const pageNumbers = []
         for (let i = 1; i <= Math.ceil(myReviews.length / reviewsPerPage); i++) {
             pageNumbers.push(i)
@@ -78,30 +79,29 @@ class MyProfile extends Component {
                     key={number}
                     id={number}
                     onClick={this.handlePageClick}
-                    className="page-numbers column"
                 >
                     {number}
                 </li>
             )
         })
         return (
-            <div className="card">
-                <div className="columns">
-                    <div className="card-image column is-one-quarter profile-img">
-                        <figure className="image is-128x128">
+            <div>
+                <div>
+                    <div>
+                        <figure>
                         {/* TODO */}
                         <img src={`${process.env.REACT_APP_API}/${this.state.profileInfo.profileImage}`} alt="Profile"/>
                         </figure>
                     </div>
-                    <div className="content column">
-                        <p className="title has-text-left">{this.state.profileInfo.firstname} {this.state.profileInfo.lastname}</p>
-                        <p className="title is-5 has-text-left">Time wallet: {this.state.profileInfo.timeWallet} hour(s)</p>
-                        <p className="has-text-left"><strong>Registration Date:</strong> &nbsp;<Moment format="D MMM YYYY" withTitle>{this.state.profileInfo.registrationDate}</Moment></p>
+                    <div>
+                        <p>{this.state.profileInfo.firstname} {this.state.profileInfo.lastname}</p>
+                        <p>Time wallet: {this.state.profileInfo.timeWallet} hour(s)</p>
+                        <p><strong>Registration Date:</strong> &nbsp;<Moment format="D MMM YYYY" withTitle>{this.state.profileInfo.registrationDate}</Moment></p>
                     </div>
                 </div>
-                <div className="card-content">
-                    <div className="media">
-                    <div className="media-content">
+                <div>
+                    <div>
+                    <div>
                         <p><strong>Username:</strong> &nbsp; {this.state.profileInfo.username}</p>
                         <p><strong>e-mail:</strong> &nbsp; {this.state.profileInfo.email}</p>
                         <p><strong>Bio:</strong> &nbsp; {this.state.profileInfo.bio}</p>
@@ -109,11 +109,11 @@ class MyProfile extends Component {
                     </div>
                     {this.state.myReviews.length > 0 ?
                         <>
-                            <h1 className="title">Reviews I have received</h1>
-                            <div className="column">
+                            <h1>Reviews I have received</h1>
+                            <div>
                                 { renderReviews }
-                                <div className="columns page-numbers-column">
-                                    <ul className="level column is-half is-offset-one-quarter columns">
+                                <div>
+                                    <ul>
                                         { renderPageNumbers }
                                     </ul>
                                 </div>

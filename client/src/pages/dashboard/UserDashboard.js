@@ -98,12 +98,12 @@ class UserDashboard extends Component {
     render() { 
 
         return (
-            <div className='content-sticky'>
-                <div className='section'>
-                    <div className='container'>
-                        <div className='columns'>
-                            <aside className="menu column is-3">
-                                <ul className="menu-list">
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            <aside>
+                                <ul>
                                     {this.state.myOffers ?
                                         <Link className={this.state.activeMenuItems[0] ? "is-active" : "has-notification"} onClick={()=> {this.openSection('all requests')}}>
                                             My offers &nbsp;<i className="fas fa-bell"></i>
@@ -138,7 +138,7 @@ class UserDashboard extends Component {
                                         Settings
                                     </Link></ul>
                             </aside>
-                            <div className="column">
+                            <div>
                             {(() => {
                                 //this switch case is used to open the selected section when you click the menu item
                                 switch(this.state.activeSection) {

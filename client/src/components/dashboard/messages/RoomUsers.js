@@ -5,7 +5,7 @@ const RoomUsers = props => {
   const { roomUsers, sendDM, currentUser } = props;
   const users = roomUsers.map(user => {
     return (
-      <li className="room-member" key={user.id}>
+      <li key={user.id}>
         <div>
           <span className={`presence ${user.presence.state}`} />
           <span>{user.name}</span>
@@ -14,7 +14,6 @@ const RoomUsers = props => {
           <button
             onClick={() => sendDM(user.id)}
             title={`Send ${user.name} a direct message`}
-            className="send-dm"
           >
             +
           </button>
@@ -24,7 +23,7 @@ const RoomUsers = props => {
   });
 
   return (
-    <div className="room-users">
+    <div>
       <ul>{users}</ul>
     </div>
   );

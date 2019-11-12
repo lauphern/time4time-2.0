@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import 'bulma/css/bulma.css'
 import './index.scss';
-import './custom.scss'
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from "react-router-dom";
 

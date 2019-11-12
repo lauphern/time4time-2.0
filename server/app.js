@@ -21,11 +21,13 @@ app.use(bodyParser.urlencoded({extended: true}))
 //   origin: 'https://www.time4time.org',
 //   credentials: true
 // }))
+if(process.env.ENV == "development") {
+  app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+  }))
+}
 
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true
-}))
 
 mongoose.connect(process.env.MONGOURI, { useNewUrlParser: true }, function(err) {
    if(err) console.log("ERROR")

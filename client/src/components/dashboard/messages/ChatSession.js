@@ -9,12 +9,12 @@ const ChatSession = props => {
     const time = format(new Date(`${message.updatedAt}`), 'HH:mm');
 
     return (
-      <li className="message" key={message.id}>
+      <li key={message.id}>
         <div>
-          <span className="user-id">{message.senderId}</span>
+          <span>{message.senderId}</span>
           <span>{message.text}</span>
         </div>
-        <span className="message-time">{time}</span>
+        <span>{time}</span>
       </li>
     );
   });

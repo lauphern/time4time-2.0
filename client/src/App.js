@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from "react-router-dom";
 import { CSSTransitionGroup } from 'react-transition-group'
 
-import './App.css';
+import './App.scss';
 
 import PrivateRoute from './utils/PrivateRoute'
 import Main from './pages/main/Main';
@@ -39,7 +39,7 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App">
+            <div>
             <header> 
                 {this.state.loggedIn ?
                     <AuthNav {...this.state} logOut={this.logOut}/> :

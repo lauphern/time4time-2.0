@@ -45,14 +45,14 @@ class OneRequest extends Component {
     }
     render() { 
         return (
-            <div className="card">
-                <header className="card-header">
-                    <p className="card-header-title">
+            <div>
+                <header>
+                    <p>
                     {this.props.title}
                     </p>
                 </header>
-                <div className="card-content">
-                    <div className="content">
+                <div>
+                    <div>
                     <p>Date: &nbsp; <Moment format="D MMM YYYY" withTitle>{this.props.date}</Moment></p>
                     <p>Duration: &nbsp; {this.props.duration} hour(s)</p>
                     {this.props.userRequest ?
@@ -62,20 +62,20 @@ class OneRequest extends Component {
                     <p style={{color: 'red'}}>{this.state.error? this.state.error:''}</p>
                     </div>
                 </div>
-                <footer className="card-footer is-vertical-center">
+                <footer>
                     {this.state.offerApproved ?
-                        <p className="card-footer-item"> Offer status: &nbsp; {this.state.offerApproved.status}</p> :
-                        <p className="card-footer-item"> Offer status: &nbsp; {this.props.status}</p>
+                        <p> Offer status: &nbsp; {this.state.offerApproved.status}</p> :
+                        <p> Offer status: &nbsp; {this.props.status}</p>
                     }
                     {this.state.offerStatus === 'Approved' ?
-                    <Link className="card-footer-item button is-success">Approved!</Link> :
+                    <Link>Approved!</Link> :
                     <>
                         {this.props.status === 'Open' ?
                         null :
                         <>
                             {this.props.status === 'Approved'? 
-                            <Link className="card-footer-item button is-success is-static">Approved!</Link> :
-                            <Link onClick={this.approveOffer} className="card-footer-item button is-warning">Approve</Link>
+                            <Link>Approved!</Link> :
+                            <Link onClick={this.approveOffer}>Approve</Link>
                             }
                         </>
                         }

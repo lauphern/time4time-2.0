@@ -32,46 +32,46 @@ export const UnauthNav = class UnauthNav extends Component {
     }
     render() { 
         return ( 
-            <div className="navfill">
-            <nav className="navbar is-transparent">
-                <div className="container is-fluid">
-                    <div className="navbar-brand">
-                        <NavLink className="navbar-item" to="/">
+            <div>
+            <nav>
+                <div>
+                    <div>
+                        <NavLink to="/">
                             <img src="/logo_black.png" alt="" height="98"></img>
                         </NavLink>
-                        <div onClick={this.toggleDropdownMenu} className="navbar-burger burger" data-target="navbarExampleTransparentExample">
+                        <div onClick={this.toggleDropdownMenu} data-target="navbarExampleTransparentExample">
                             <span></span>
                             <span></span>
                             <span></span>
                         </div>
                     </div>
                     <div className={this.state.dropdownMenu}>
-                        <NavLink onClick={this.toggleDropdownMenu} to='/' className="navbar-item">
+                        <NavLink onClick={this.toggleDropdownMenu} to='/'>
                         Home
                         </NavLink>
-                        <NavLink onClick={this.toggleDropdownMenu} to="/login" className="navbar-item">
+                        <NavLink onClick={this.toggleDropdownMenu} to="/login">
                         Login
                         </NavLink>
-                        <NavLink onClick={this.toggleDropdownMenu} to="/signup" className="navbar-item">
+                        <NavLink onClick={this.toggleDropdownMenu} to="/signup">
                         Sign up
                         </NavLink>
                     </div>
-                    <div id="navbarExampleTransparentExample" className="navbar-menu">
-                        <div className="navbar-start">
-                            <NavLink to='/' className="navbar-item">Home</NavLink>
+                    <div id="navbarExampleTransparentExample">
+                        <div>
+                            <NavLink to='/'>Home</NavLink>
                         </div>
-                        <div className="navbar-end">
-                            <div className="navbar-item">
-                                <div className="field is-grouped is-vertical-center">
-                                    <p className="control">
+                        <div>
+                            <div>
+                                <div>
+                                    <p>
                                         <NavLink to="/login" >
-                                            <button className="button is-success">Publish new offer</button>
+                                            <button>Publish new offer</button>
                                         </NavLink>
                                     </p>
-                                    <p className="control">
+                                    <p>
                                         <NavLink to="/login">Login</NavLink>
                                     </p>
-                                    <p className="control">
+                                    <p>
                                         <NavLink to="/signup">Sign Up</NavLink>
                                     </p>
                                 </div>
@@ -111,51 +111,51 @@ export const AuthNav = class AuthNav extends Component {
     }
     render() { 
         return ( 
-            <div className='navfill'>
-            <nav className="navbar is-transparent">
-                <div className="container is-fluid">
-                    <div className="navbar-brand">
-                        <NavLink className="navbar-item" to="/">
+            <div>
+            <nav>
+                <div>
+                    <div>
+                        <NavLink to="/">
                             <img src="/logo_black.png" alt="" height="98"></img>
                         </NavLink>
-                        <div onClick={this.toggleDropdownMenu} className="navbar-burger burger" data-target="navbarExampleTransparentExample">
+                        <div onClick={this.toggleDropdownMenu} data-target="navbarExampleTransparentExample">
                             <span></span>
                             <span></span>
                             <span></span>
                         </div>
                     </div>
                     <div className={this.state.dropdownMenu}>
-                        <NavLink onClick={this.toggleDropdownMenu} to='/' className="navbar-item">
+                        <NavLink onClick={this.toggleDropdownMenu} to='/'>
                         Home
                         </NavLink>
-                        <NavLink onClick={this.toggleDropdownMenu} to="/dashboard" className="navbar-item">
+                        <NavLink onClick={this.toggleDropdownMenu} to="/dashboard">
                         Dashboard
                         </NavLink>
-                        <NavLink onClick={this.toggleDropdownMenu} to="/publish-offer" className="navbar-item">
+                        <NavLink onClick={this.toggleDropdownMenu} to="/publish-offer">
                         Publish new offer
                         </NavLink>
                         <NavLink onClick={() => {
                             this.toggleDropdownMenu()
                             this.logMeOut()
-                            }} to="/login" className="navbar-item">
+                            }} to="/login">
                         Logout
                         </NavLink>
                     </div>
-                    <div id="navbarExampleTransparentExample" className="navbar-menu">
-                        <div className="navbar-start">
-                            <NavLink to='/' className="navbar-item">Home</NavLink>
-                            <NavLink to='/dashboard' className="navbar-item">Dashboard</NavLink>
+                    <div id="navbarExampleTransparentExample">
+                        <div>
+                            <NavLink to='/'>Home</NavLink>
+                            <NavLink to='/dashboard'>Dashboard</NavLink>
                         </div>
-                        <div className="navbar-end">
-                            <div className="navbar-item">
-                                <div className="field is-grouped is-vertical-center">
-                                    <p className="control">
+                        <div>
+                            <div>
+                                <div>
+                                    <p>
                                         <NavLink to="/publish-offer" >
-                                            <button className="button is-success">Publish new offer</button>
+                                            <button>Publish new offer</button>
                                         </NavLink>
                                     </p>
-                                    <p className="control">Hello, <NavLink to="/dashboard">{this.props.username}</NavLink></p>
-                                    <p className="control">
+                                    <p>Hello, <NavLink to="/dashboard">{this.props.username}</NavLink></p>
+                                    <p>
                                         <NavLink to="/login" onClick={this.logMeOut}>Logout</NavLink>
                                     </p>
                                 </div>

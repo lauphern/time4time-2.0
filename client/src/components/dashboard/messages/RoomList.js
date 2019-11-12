@@ -14,20 +14,20 @@ const RoomList = props => {
         key={room.id}
         onClick={() => connectToRoom(room.id)}
       >
-        <span className="room-icon">{roomIcon}</span>
+        <span>{roomIcon}</span>
         {room.customData && room.customData.isDirectMessage ? (
-          <span className="room-name">
+          <span>
             {room.customData.userIds.filter(id => id !== currentUser.id)[0]}
           </span>
         ) : (
-          <span className="room-name">{room.name}</span>
+          <span>{room.name}</span>
         )}
       </li>
     );
   });
   return (
-    <div className="rooms">
-      <ul className="chat-rooms">{roomList}</ul>
+    <div>
+      <ul>{roomList}</ul>
     </div>
   );
 };

@@ -138,36 +138,36 @@ class AuthorProfile extends Component {
         })
 
         return (
-            <div className="columns">
-                <div className="card column is-3">
-                    <div className="card-image">
-                        <figure className="image is-square">
+            <div>
+                <div>
+                    <div>
+                        <figure>
                             {/* TODO */}
                             <img src= {`${process.env.REACT_APP_API}/${this.state.authorProfile.profileImage}`} alt="User profile"></img>
                         </figure>
                     </div>
-                    <div className="card-content">
-                        <div className="media">
-                            <div className="media-content">
-                                <p className="title is-4">{this.state.authorProfile.firstname}&nbsp;{this.state.authorProfile.lastname}</p>
-                                <div className="content">
+                    <div>
+                        <div>
+                            <div>
+                                <p>{this.state.authorProfile.firstname}&nbsp;{this.state.authorProfile.lastname}</p>
+                                <div>
                                     <p>In the app from: &nbsp;<Moment format="D MMM YYYY" withTitle>{this.state.authorProfile.registrationDate}</Moment></p>
                                 </div>
                             </div>
                         </div>
-                        <div className="content">
+                        <div>
                             <p>{this.state.authorProfile.bio}</p>
                             
                         </div>
                     </div>
                 </div>
-                <div className="column">
-                    <div className="column">
+                <div>
+                    <div>
                     <form ref={this.form} onSubmit={this.handleSubmitReview}>
-                        <div className="field">
-                            <label className="label">Reviews</label>
+                        <div>
+                            <label>Reviews</label>
                             <p style={{color: 'green'}}>{this.state.success? this.state.success:''}</p>
-                            <div className="control">
+                            <div>
                                 <h2>Your Rating: {rating} <span style={{color: 'red'}}><small>*Required</small></span></h2>
                                 <StarRatingComponent 
                                     name="rate1" 
@@ -177,42 +177,42 @@ class AuthorProfile extends Component {
                                 />
                             </div>
                         </div>
-                        <div className="field">
-                            <label className="label">Opinion</label> <span style={{color: 'red'}}><small>*Required</small></span>
-                            <div className="control has-icons-left has-icons-right">
-                            <div className="control">
-                                <textarea onChange={this.handleInput} name='opinion' value={this.state.opinion} className="textarea" placeholder="Your opinion" required></textarea>
+                        <div>
+                            <label>Opinion</label> <span style={{color: 'red'}}><small>*Required</small></span>
+                            <div>
+                            <div>
+                                <textarea onChange={this.handleInput} name='opinion' value={this.state.opinion} placeholder="Your opinion" required></textarea>
                             </div>
                             </div>
                         </div>
-                        <div className="field">
-                            <label className="label">Date</label> <span style={{color: 'red'}}><small>*Required</small></span>
-                            <div className="control">
-                                <input onChange={this.handleInput} name='date' value={this.state.date} className="input" type="date" placeholder="Date of activity" required/>
+                        <div>
+                            <label>Date</label> <span style={{color: 'red'}}><small>*Required</small></span>
+                            <div>
+                                <input onChange={this.handleInput} name='date' value={this.state.date} type="date" placeholder="Date of activity" required/>
                             </div>
                         </div>
-                        <div className="field">
-                            <label className="label">Picture</label> <span style={{color: 'red'}}><small>*Required</small></span>
-                            <div className="control">
-                            <input onChange={this.handleInput} name='review-image' className="input" type="file" required/>
+                        <div>
+                            <label>Picture</label> <span style={{color: 'red'}}><small>*Required</small></span>
+                            <div>
+                            <input onChange={this.handleInput} name='review-image' type="file" required/>
                             </div>
                         </div>
-                        <div className="field is-grouped">
-                            <div className="control">
-                                <button handleSubmitReview className="button is-link">Submit</button>
+                        <div>
+                            <div>
+                                <button handleSubmitReview>Submit</button>
                             </div>
-                            <div className="control">
-                                <button className="button is-text">Cancel</button>
+                            <div>
+                                <button>Cancel</button>
                             </div>
                         </div>
                         </form>
                     </div>
                     {this.state.listOfReviews.length > 0 ?
                         <>
-                            <h1 className="title">List of reviews</h1>
+                            <h1>List of reviews</h1>
                             {/* TODO */}
                             {/* organize css */}
-                            <div id="scrollableDiv" style={{ height: "70vh", overflow: "auto", "z-index": 100 }} className="column">
+                            <div id="scrollableDiv" style={{ height: "70vh", overflow: "auto", "z-index": 100 }}>
                                 <InfiniteScroll
                                     dataLength={this.state.firstReviews.length}
                                     next={this.fetchMoreData}

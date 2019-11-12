@@ -26,19 +26,18 @@ class MyReview extends Component {
     }
     render() { 
         return (
-            <div className="card">
-                <div className="card-content">
-
-                        <p className="is-size-5 column has-text-weight-semibold has-text-left">
+            <div>
+                <div>
+                        <p>
                             Username: {this.state.reviewer.username}
                         </p>
-                        <p className="subtitle column has-text-left">Date <Moment format="D MMM YYYY" withTitle>{this.props.date}</Moment></p>
-                    <div className="columns">
-                        <figure className="image column">
+                        <p>Date <Moment format="D MMM YYYY" withTitle>{this.props.date}</Moment></p>
+                    <div>
+                        <figure>
                             {/* TODO */}
                             <img src={`${process.env.REACT_APP_API}/${this.props.pictureUrl}`} alt="Review"/>
                         </figure>
-                        <p className="is-size-6 column has-text-left">
+                        <p>
                             {this.props.opinion}
                         </p>
                     </div>
