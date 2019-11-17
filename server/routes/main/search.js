@@ -21,11 +21,13 @@ router.post('/search', function(req, res) {
             ]},
             {status:'Open'}
         ])
-      .then((filteredOffer) => {        
-          res.json(filteredOffer)})
-      .catch((err) => {
-          res.status(404).json({errorMessage: "Offers not found"})
-      })
+        .then((filteredOffer) => {
+            debugger
+            res.json(filteredOffer)
+        })
+        .catch((err) => {
+            res.status(404).json({errorMessage: "Offers not found"})
+        })
 })
 
 module.exports = router;
