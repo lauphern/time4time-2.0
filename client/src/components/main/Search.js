@@ -45,9 +45,8 @@ class Search extends Component {
                     <input onChange={this.handleCheck} name="cooking" id="cooking" type="checkbox" />
                     <label for="cooking">Cooking</label>
 
-                    <div>
-                        <button>Search</button>
-                    </div>
+                    <button className="search-btn"><i className="fas fa-search"></i> Search</button>
+                    
                     <p style={{color: "red"}}>{this.props.error? this.props.error:""}</p>
                 </form>
             </>

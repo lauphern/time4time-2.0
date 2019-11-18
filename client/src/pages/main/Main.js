@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Search from '../../components/main/Search'
-import OffersList from '../../components/main/OffersList';
+import OfferList from '../../components/main/OfferList';
 
 import "./Main.scss"
 
@@ -46,7 +46,7 @@ class Main extends Component {
                     </div>
                 </header>
                 <Search handleSearch={this.handleSearch} error={this.state.error}/>
-                <OffersList {...this.props} filteredOffers={this.state.filteredOffers}/>
+                <OfferList {...this.props} filteredOffers={this.state.filteredOffers}/>
             </>
          );
     }

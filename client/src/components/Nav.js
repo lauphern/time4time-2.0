@@ -53,7 +53,7 @@ class Nav extends Component {
 
     render() { 
         return ( 
-            <nav className={this.state.scrollPos > 200 ? "shrink-nav" : null}>
+            <nav className={this.state.scrollPos > 150 ? "shrink-nav" : null}>
                 <div>
                     <NavLink to="/">
                         <img src="/logo_black.png" alt=""></img>

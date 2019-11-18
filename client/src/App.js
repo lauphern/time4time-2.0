@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Switch } from "react-router-dom";
-import { CSSTransitionGroup } from 'react-transition-group'
+
+// TODO
+// import { CSSTransitionGroup } from 'react-transition-group'
 
 import './App.scss';
 
@@ -44,22 +46,22 @@ class App extends Component {
                     <Nav {...this.state} logOut={this.logOut}/> :
                     <Nav {...this.state} />
                 }
-                <Route render={({location}) => (
+                {/* <Route render={({location}) => (
                     <CSSTransitionGroup
                         transitionName="fade"
                         transitionEnterTimeout={500}
                         transitionLeaveTimeout={300}
-                    >
-                        <Switch key={location.key} location={location}>
-                            <Route exact path='/' render={(props) => <Main {...props} {...this.state}/>} />
+                    > */}
+                        <Switch >
                             <Route path='/login' render={(props) => <Login {...props} loggedIn={this.loggedIn}/>} />
                             <Route path='/signup' render={(props) => <Signup {...props} loggedIn={this.loggedIn}/>} /> 
                             <PrivateRoute path='/dashboard' component={UserDashboard} {...this.state} currentUsername={this.state.username} loggedIn={this.state.loggedIn} />
                             <PrivateRoute path='/publish-offer' component={PublishOffer} currentUsername={this.state.username} loggedIn={this.state.loggedIn} />
                             <PrivateRoute path='/profile/:id' component={AuthorProfile} currentUsername={this.state.username} loggedIn={this.state.loggedIn} />
+                            <Route exact path={["/", "/:offerId"]} render={(props) => <Main {...props} {...this.state}/>} />
                         </Switch>
-                    </CSSTransitionGroup>
-                )} />
+                    {/* </CSSTransitionGroup>
+                )} /> */}
                 <Footer />
             </>
         );

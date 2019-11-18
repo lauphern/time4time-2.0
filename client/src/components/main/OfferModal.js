@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import customAxios from '../../utils/customAxios';
 import Moment from 'react-moment';
 
+import "./OfferModal.scss"
+
 import {
     FacebookIcon,
     FacebookShareButton,
@@ -10,17 +12,7 @@ import {
     TwitterIcon,
     PinterestShareButton,
     PinterestIcon,
-    
 } from 'react-share';
-
-
-const display = {
-    display: 'block'
-};
-
-const hide = {
-    display: 'none'
-}
 
 class OfferModal extends Component {
     state = { 
@@ -29,7 +21,8 @@ class OfferModal extends Component {
         description: '',
         category: '',
         errorTimeWallet: '',
-        myOffer: undefined
+        myOffer: undefined,
+        test: undefined
     }
 
     handleApply = (event) => {
@@ -69,19 +62,19 @@ class OfferModal extends Component {
     }
 
 
-    redirectToAuthorProfile = () =>{
+    redirectToAuthorProfile = () => {
         if(this.props.authorUsername === this.props.username) this.props.history.push('/dashboard')
         else this.props.history.push(`/profile/${this.props.author}`)
-    }  
+    }
 
-    render() { 
+    render() {
         return (
-                <div style={this.props.toggle ? display : hide}>
-                    <div>
+                <div onClick={() => {console.log(`${process.env.REACT_APP_FRONT}${this.props.location.pathname}`)}} className={`modal-container ${this.props.toggle && `show`}`} >
+                    <div className="offer offer-modal">
                         <header>
                             <p>{this.props.title}</p>
                             <Link>
-                                <button onClick={this.props.close} aria-label="close"></button>
+                                <i className="fa fa-times-circle" onClick={this.props.close}></i>
                             </Link>
                         </header>
                         <section>
@@ -108,15 +101,15 @@ class OfferModal extends Component {
                                             <h1>Description</h1>
                                             <p>{this.props.description}</p>
                                             <div>
-                                            {/* TODO */}
-                                                <FacebookShareButton url={'https://www.facebook.com'}>
+                                            {/* TODO check on deploy */}
+                                                <FacebookShareButton url={`${process.env.REACT_APP_FRONT}${this.props.location.pathname}`}>
                                                     <FacebookIcon size={32} round={true}/>
                                                 </FacebookShareButton>
-                                                <TwitterShareButton url={'https://www.twitter.com'}>
+                                                <TwitterShareButton url={`${process.env.REACT_APP_FRONT}${this.props.location.pathname}`}>
                                                     <TwitterIcon size={32} round={true}/>
                                                 </TwitterShareButton>
                                                 {/* TODO */}
-                                                <PinterestShareButton url={'http://www.pinterest.com/'} media={`${process.env.REACT_APP_API}`}>
+                                                <PinterestShareButton url={`${process.env.REACT_APP_FRONT}${this.props.location.pathname}`} media={`${process.env.REACT_APP_API}`}>
                                                     <PinterestIcon size={32} round={true}/>
                                                 </PinterestShareButton>
                                             </div>
@@ -162,6 +155,7 @@ class OfferModal extends Component {
                             <p></p>}
                         </footer>
                     </div>
+                    <div onClick={this.props.close} className={this.props.toggle && "modal-bg"}></div>
                 </div>
         );
     }

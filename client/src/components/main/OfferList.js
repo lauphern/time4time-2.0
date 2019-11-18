@@ -4,11 +4,13 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import customAxios from '../../utils/customAxios';
 import OfferModal from './OfferModal'
 
+import "./OfferList.scss"
+
 
 //this component displays all offers in the main page with OPEN status
 //pending and closed offers don't show in main page
 
-class OffersList extends Component {
+class OfferList extends Component {
 
     constructor(props){
         super(props);
@@ -24,7 +26,8 @@ class OffersList extends Component {
     toggle(offerId){
         this.setState(() =>({
             toggle: offerId
-        }));
+        }))
+        typeof offerId == "string" ? this.props.history.push(`/${offerId}`) : this.props.history.push(`/`) 
     }
 
     getAllOffers = () =>{
@@ -39,7 +42,7 @@ class OffersList extends Component {
           })
         })
         .catch(err => {
-            console.log('error')
+            console.log(err)
         })
     }
 
@@ -72,18 +75,16 @@ class OffersList extends Component {
         //All the offers we see by default, before searching
         const renderOffers = firstOffers.map((offer) => {
             return (
-                <div key={offer._id}>
+                <div className="offer" key={offer._id}>
                     <div>
-                        <div>
-                                <h3>{offer.title}</h3>
-                                <h4><strong>User</strong>: {offer.authorUsername}</h4>
-                                <p>{offer.description}</p>
-                                <p><strong>Category</strong>: {offer.category}</p>
-                            <Link onClick={()=> {this.toggle(offer._id)}}>View offer</Link>
-                        </div>
+                        <h3>{offer.title}</h3>
+                        <h4><strong>User</strong>: {offer.authorUsername}</h4>
+                        <p>{offer.description}</p>
+                        <p><strong>Category</strong>: {offer.category}</p>
+                        <Link onClick={()=> {this.toggle(offer._id)}}>View offer</Link>
                     </div>
                     <OfferModal {...this.props} close={this.toggle} 
-                        toggle={this.state.toggle === offer._id} 
+                        toggle={this.props.location.pathname === `/${offer._id}`} 
                         offerIdentificator={offer._id}
                         title={offer.title} 
                         image={offer.image}
@@ -103,17 +104,15 @@ class OffersList extends Component {
         //Offers you get when you search
         let renderFilteredOffers = this.props.filteredOffers.map((filteredOffer) => {
             return (
-                <div key={filteredOffer._id}>
+                <div className="offer" key={filteredOffer._id}>
                     <div>
-                        <div>
-                                <h3>{filteredOffer.title}</h3>
-                                {/* TODO */}
-                                <img src={`${process.env.REACT_APP_API}/${filteredOffer.authorProfileImage}`} alt=""/>
-                                <h4><strong>User</strong>: {filteredOffer.authorUsername}</h4>
-                                <p>{filteredOffer.description}</p>
-                                <p><strong>Category</strong>: {filteredOffer.category}</p>
-                            <Link onClick={()=> {this.toggle(filteredOffer._id)}}>View offer</Link>
-                        </div>
+                        <h3>{filteredOffer.title}</h3>
+                        {/* TODO */}
+                        <img src={`${process.env.REACT_APP_API}/${filteredOffer.authorProfileImage}`} alt=""/>
+                        <h4><strong>User</strong>: {filteredOffer.authorUsername}</h4>
+                        <p>{filteredOffer.description}</p>
+                        <p><strong>Category</strong>: {filteredOffer.category}</p>
+                        <Link onClick={()=> {this.toggle(filteredOffer._id)}}>View offer</Link>
                     </div>
                     <OfferModal {...this.state} {...this.props} close={this.toggle} 
                         toggle={this.state.toggle === filteredOffer._id} 
@@ -134,30 +133,28 @@ class OffersList extends Component {
 
             return (
                 <div>
-                    <div>
-                            <InfiniteScroll
-                                dataLength={this.state.firstOffers.length}
-                                next={this.fetchMoreData}
-                                hasMore={this.state.hasMore}
-                                loader={<h4>Loading...</h4>}
-                                endMessage={
-                                    <p style={{ textAlign: "center" }}>
-                                    <b>There are no more offers! Would you like to <Link to="/publish-offer">publish one?</Link></b>
-                                    </p>
-                                }
-                            >
-                            {/* Ternary operator to show the whole list of offers or the filtered one 
-                            if you have done a search */}
-                            { this.props.filteredOffers.length > 0 ?
-                                renderFilteredOffers :
-                                renderOffers
-                            }
-                            </InfiniteScroll>
-                    </div>
+                    <InfiniteScroll
+                        dataLength={this.state.firstOffers.length}
+                        next={this.fetchMoreData}
+                        hasMore={this.state.hasMore}
+                        loader={<h4>Loading...</h4>}
+                        endMessage={
+                            <p style={{ textAlign: "center" }}>
+                            <b>There are no more offers! Would you like to <Link to="/publish-offer">publish one?</Link></b>
+                            </p>
+                        }
+                    >
+                    {/* Ternary operator to show the whole list of offers or the filtered one 
+                    if you have done a search */}
+                    { this.props.filteredOffers.length > 0 ?
+                        renderFilteredOffers :
+                        renderOffers
+                    }
+                    </InfiniteScroll>
                 </div>
             );
     }
 }
 
 
-export default OffersList;
+export default OfferList;

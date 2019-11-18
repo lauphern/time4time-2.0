@@ -16,6 +16,7 @@ label {
 }
 
 input {
+
     display: none;
 
     &:checked + label {
@@ -24,3 +25,41 @@ input {
         color: white;
     }
 }
+
+.search-btn {
+
+    box-shadow: 0px 2px 2px $light-grey;
+    background-color: white;
+    border-radius: 20px;
+    font-weight: 600;
+    padding: 5px 15px;
+    margin: 5px;
+    width: 100px;
+    border: none;
+
+    .fa-search {
+        margin: 5px;
+    }
+
+    &:hover {
+
+        .fa-search {
+            animation-duration: 1s;
+            animation-name: search-rotate;
+        }
+        
+    }
+
+}
+
+@keyframes search-rotate {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
