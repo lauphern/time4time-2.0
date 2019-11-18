@@ -27,40 +27,28 @@ class Search extends Component {
                 <h6 id="pick-category">Pick a category</h6>
                 <form onSubmit={(e) => {this.props.handleSearch(e, this.state)}}>
                     
-                    <label>
-                        <input onChange={this.handleCheck} name='house' type="checkbox"/>
-                        &nbsp;House &nbsp;
-                    </label>
+                    <input onChange={this.handleCheck} name="house" id="house" type="checkbox"/>
+                    <label for="house">House</label>
 
-                    <label>
-                        <input onChange={this.handleCheck} name='technology' type="checkbox" />
-                        &nbsp;Technology &nbsp;
-                    </label>
+                    <input onChange={this.handleCheck} name="technology" id="technology" type="checkbox" />
+                    <label for="technology">Technology</label>
 
-                    <label>
-                        <input onChange={this.handleCheck} name='music' type="checkbox" />
-                        &nbsp;Music &nbsp;
-                    </label>
+                    <input onChange={this.handleCheck} name="music" id="music" type="checkbox" />
+                    <label for="music">Music</label>
 
-                    <label>
-                        <input onChange={this.handleCheck} name='repair' type="checkbox" />
-                        &nbsp;Repair &nbsp;
-                    </label>
+                    <input onChange={this.handleCheck} name="repair" id="repair" type="checkbox" />
+                    <label for="repair">Repair</label>
 
-                    <label>
-                        <input onChange={this.handleCheck} name='languages' type="checkbox" />
-                        &nbsp;Languages &nbsp;
-                    </label>
+                    <input onChange={this.handleCheck} name="languages" id="languages" type="checkbox" />
+                    <label for="languages">Languages</label>
 
-                    <label>
-                        <input onChange={this.handleCheck} name='cooking' type="checkbox" />
-                        &nbsp;Cooking
-                    </label>
+                    <input onChange={this.handleCheck} name="cooking" id="cooking" type="checkbox" />
+                    <label for="cooking">Cooking</label>
 
                     <div>
                         <button>Search</button>
                     </div>
-                    <p style={{color: 'red'}}>{this.props.error? this.props.error:''}</p>
+                    <p style={{color: "red"}}>{this.props.error? this.props.error:""}</p>
                 </form>
             </>
         );
