@@ -45,7 +45,7 @@ class Search extends Component {
     render() { 
         return ( 
             <>
-                <h6>Pick a category</h6>
+                <h6 id="pick-category">Pick a category</h6>
                 <form onSubmit={(e) => {this.props.handleSearch(e, this.state)}}>
                     
                     <label>

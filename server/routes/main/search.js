@@ -22,7 +22,6 @@ router.post('/search', function(req, res) {
             {status:'Open'}
         ])
         .then((filteredOffer) => {
-            debugger
             res.json(filteredOffer)
         })
         .catch((err) => {

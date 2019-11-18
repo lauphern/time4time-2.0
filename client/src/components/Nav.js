@@ -2,128 +2,67 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import customAxios from '../utils/customAxios';
 
+import "./Nav.scss"
 
-// TODO
-// combine in one component if it's not too long
-
-//Nav component: render this nav if the user isn't logged in
-export const UnauthNav = class UnauthNav extends Component {
+class Nav extends Component {
     constructor(props){
         super(props)
-        this.state={
-            dropdownMenu: "navbar-dropdown is-hidden"
+        this.state = {
+            dropdownMenu: "dropdown-hidden",
+            scrollPos: window.pageYOffset
         }
     }
+
     logMeOut = ()=> {
         customAxios({
             method: "post",
             url: "/logout"
         })
-        .then((response)=> {
+        .then(()=> {
             this.props.logOut()
         })
         .catch((error)=> {
             console.log(error)
         })
     }
+
     toggleDropdownMenu = () => {
-        if( this.state.dropdownMenu === "navbar-dropdown is-hidden") this.setState({dropdownMenu: "navbar-dropdown"})
-        else this.setState({dropdownMenu: "navbar-dropdown is-hidden"})
+        if( this.state.dropdownMenu === "dropdown-hidden") this.setState({dropdownMenu: "dropdown-show"})
+        else this.setState({dropdownMenu: "dropdown-hidden"})
     }
+
+    handleScroll = () => {
+        // const { scrollPos } = this.state;
+
+        const currentScrollPos = window.pageYOffset;
+        // const visible = scrollPos > currentScrollPos;
+    
+        this.setState({
+          scrollPos: currentScrollPos,
+        //   visible
+        });
+    }
+
+    componentDidMount() {
+        window.addEventListener("scroll", this.handleScroll);
+    }
+    
+    componentWillUnmount() {
+        window.removeEventListener("scroll", this.handleScroll);
+    }
+
     render() { 
         return ( 
-            <div>
-            <nav>
+            <nav className={this.state.scrollPos > 200 ? "shrink-nav" : null}>
                 <div>
-                    <div>
-                        <NavLink to="/">
-                            <img src="/logo_black.png" alt="" height="98"></img>
-                        </NavLink>
-                        <div onClick={this.toggleDropdownMenu} data-target="navbarExampleTransparentExample">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
-                    <div className={this.state.dropdownMenu}>
-                        <NavLink onClick={this.toggleDropdownMenu} to='/'>
-                        Home
-                        </NavLink>
-                        <NavLink onClick={this.toggleDropdownMenu} to="/login">
-                        Login
-                        </NavLink>
-                        <NavLink onClick={this.toggleDropdownMenu} to="/signup">
-                        Sign up
-                        </NavLink>
-                    </div>
-                    <div id="navbarExampleTransparentExample">
-                        <div>
-                            <NavLink to='/'>Home</NavLink>
-                        </div>
-                        <div>
-                            <div>
-                                <div>
-                                    <p>
-                                        <NavLink to="/login" >
-                                            <button>Publish new offer</button>
-                                        </NavLink>
-                                    </p>
-                                    <p>
-                                        <NavLink to="/login">Login</NavLink>
-                                    </p>
-                                    <p>
-                                        <NavLink to="/signup">Sign Up</NavLink>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                    <NavLink to="/">
+                        <img src="/logo_black.png" alt=""></img>
+                    </NavLink>
+                    <div className="nav-burger" onClick={this.toggleDropdownMenu}>
+                        <div></div>
                     </div>
                 </div>
-            </nav>       
-            </div>     
-         );
-    }
-}
-
-//Auth nav for when the user is logged in
-export const AuthNav = class AuthNav extends Component {
-    constructor(props){
-        super(props)
-        this.state={
-            dropdownMenu: "navbar-dropdown is-hidden"
-        }
-    }
-    logMeOut = ()=> {
-        customAxios({
-            method: "post",
-            url: "/logout"
-        })
-        .then((response)=> {
-            this.props.logOut()
-        })
-        .catch((error)=> {
-            console.log(error)
-        })
-    }
-    toggleDropdownMenu = () => {
-        if( this.state.dropdownMenu === "navbar-dropdown is-hidden") this.setState({dropdownMenu: "navbar-dropdown"})
-        else this.setState({dropdownMenu: "navbar-dropdown is-hidden"})
-    }
-    render() { 
-        return ( 
-            <div>
-            <nav>
-                <div>
-                    <div>
-                        <NavLink to="/">
-                            <img src="/logo_black.png" alt="" height="98"></img>
-                        </NavLink>
-                        <div onClick={this.toggleDropdownMenu} data-target="navbarExampleTransparentExample">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
+                {this.props.logOut ? 
                     <div className={this.state.dropdownMenu}>
                         <NavLink onClick={this.toggleDropdownMenu} to='/'>
                         Home
@@ -141,30 +80,44 @@ export const AuthNav = class AuthNav extends Component {
                         Logout
                         </NavLink>
                     </div>
-                    <div id="navbarExampleTransparentExample">
-                        <div>
-                            <NavLink to='/'>Home</NavLink>
-                            <NavLink to='/dashboard'>Dashboard</NavLink>
-                        </div>
-                        <div>
-                            <div>
-                                <div>
-                                    <p>
-                                        <NavLink to="/publish-offer" >
-                                            <button>Publish new offer</button>
-                                        </NavLink>
-                                    </p>
-                                    <p>Hello, <NavLink to="/dashboard">{this.props.username}</NavLink></p>
-                                    <p>
-                                        <NavLink to="/login" onClick={this.logMeOut}>Logout</NavLink>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                    :
+                    <div className={this.state.dropdownMenu}>
+                        <NavLink onClick={this.toggleDropdownMenu} to='/'>
+                        Home
+                        </NavLink>
+                        <NavLink onClick={this.toggleDropdownMenu} to="/login">
+                        Login
+                        </NavLink>
+                        <NavLink onClick={this.toggleDropdownMenu} to="/signup">
+                        Sign up
+                        </NavLink>
                     </div>
+                }
+                
+                <div className="full-menu">
+                    <NavLink to='/'>Home</NavLink>
+                    {this.props.logOut ?
+                        <>
+                            <NavLink to='/dashboard'>Dashboard</NavLink>
+                            <NavLink to="/publish-offer" >
+                                <button>Publish new offer</button>
+                            </NavLink>
+                            <p>Hello, <NavLink to="/dashboard">{this.props.username}</NavLink></p>
+                            <NavLink to="/login" onClick={this.logMeOut}>Logout</NavLink>
+                        </>
+                        :
+                        <>
+                            <NavLink to="/login" >
+                                <button className="button is-success">Publish new offer</button>
+                            </NavLink>
+                            <NavLink to="/login">Login</NavLink>
+                            <NavLink to="/signup">Sign Up</NavLink>
+                        </>
+                    }
                 </div>
             </nav>        
-        </div>    
         );
     }
 }
+
+export default Nav

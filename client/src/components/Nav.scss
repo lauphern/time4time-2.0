@@ -1,0 +1,72 @@
+nav {
+    display: flex;
+    height: 5vh;
+    padding: 2vh 10vw;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.5);
+    transition: 0.5s;
+
+    &.shrink-nav {
+        height: 2vh;
+    }
+
+    img {
+        height: 100%;
+    }
+
+    .nav-burger {
+        margin: 1em;
+        width: 40px;
+        display: none;
+    
+        &:after, &:before, div {
+            background-color: #fff;
+            border-radius: 3px;
+            content: '';
+            display: block;
+            height: 5px;
+            margin: 7px 0;
+            transition: all .2s ease-in-out;    
+        }
+    
+        &:hover:before {
+            transform: translateY(12px) rotate(135deg);
+        }
+    
+        &:hover:after {
+            transform: translateY(-12px) rotate(-135deg);
+        }
+    
+        &:hover div {
+            transform: scale(0);
+        }
+    }
+
+    .dropdown-hidden {
+        display: none;
+    }
+
+    .dropdown-show {
+        display: block;
+    }
+}
+
+
+
+@media (max-width: 600px) {
+    nav {
+
+        .nav-burger {
+            display: block;
+        }
+
+        .full-menu {
+            display: none;
+        }
+    }
+    
+}

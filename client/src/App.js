@@ -12,7 +12,7 @@ import Login from './pages/authentication/Login'
 import Signup from './pages/authentication/Signup'
 import AuthorProfile from './pages/author-profile/AuthorProfile'
 import Footer from './components/Footer'
-import { UnauthNav, AuthNav } from './components/Nav';
+import Nav from './components/Nav';
 
 
 class App extends Component {
@@ -39,35 +39,31 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-            <header> 
+            <>
                 {this.state.loggedIn ?
-                    <AuthNav {...this.state} logOut={this.logOut}/> :
-                    <UnauthNav {...this.state} />
+                    <Nav {...this.state} logOut={this.logOut}/> :
+                    <Nav {...this.state} />
                 }
-            </header>
-            <Route render={({location}) => (
-                <CSSTransitionGroup
-                    transitionName="fade"
-                    transitionEnterTimeout={500}
-                    transitionLeaveTimeout={300}
-                >
-                    <Switch key={location.key} location={location}>
-                        <Route exact path='/' render={(props) => <Main {...props} {...this.state}/>} />
-                        <Route path='/login'  render={(props) => <Login {...props} loggedIn={this.loggedIn}/>} />
-                        <Route path='/signup'  render={(props) => <Signup {...props} loggedIn={this.loggedIn}/>} /> 
-                        <PrivateRoute path='/dashboard' component={UserDashboard} {...this.state} currentUsername={this.state.username} loggedIn={this.state.loggedIn} />
-                        <PrivateRoute path='/publish-offer' component={PublishOffer} currentUsername={this.state.username} loggedIn={this.state.loggedIn} />
-                        <PrivateRoute path='/profile/:id' component={AuthorProfile} currentUsername={this.state.username} loggedIn={this.state.loggedIn} />
-                    </Switch>
-                </CSSTransitionGroup>
-            )} />
-            <Footer />
-            </div>
+                <Route render={({location}) => (
+                    <CSSTransitionGroup
+                        transitionName="fade"
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={300}
+                    >
+                        <Switch key={location.key} location={location}>
+                            <Route exact path='/' render={(props) => <Main {...props} {...this.state}/>} />
+                            <Route path='/login'  render={(props) => <Login {...props} loggedIn={this.loggedIn}/>} />
+                            <Route path='/signup'  render={(props) => <Signup {...props} loggedIn={this.loggedIn}/>} /> 
+                            <PrivateRoute path='/dashboard' component={UserDashboard} {...this.state} currentUsername={this.state.username} loggedIn={this.state.loggedIn} />
+                            <PrivateRoute path='/publish-offer' component={PublishOffer} currentUsername={this.state.username} loggedIn={this.state.loggedIn} />
+                            <PrivateRoute path='/profile/:id' component={AuthorProfile} currentUsername={this.state.username} loggedIn={this.state.loggedIn} />
+                        </Switch>
+                    </CSSTransitionGroup>
+                )} />
+                <Footer />
+            </>
         );
     }
 }
-
-
 
 export default App;

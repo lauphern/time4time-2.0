@@ -115,7 +115,7 @@ class OffersList extends Component {
                             <Link onClick={()=> {this.toggle(filteredOffer._id)}}>View offer</Link>
                         </div>
                     </div>
-                    <OfferModal  {...this.state} {...this.props} close={this.toggle} 
+                    <OfferModal {...this.state} {...this.props} close={this.toggle} 
                         toggle={this.state.toggle === filteredOffer._id} 
                         offerIdentificator={filteredOffer._id}
                         title={filteredOffer.title} 

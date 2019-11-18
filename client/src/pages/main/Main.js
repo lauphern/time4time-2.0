@@ -10,13 +10,6 @@ import { loadProgressBar } from 'axios-progress-bar';
 loadProgressBar(customAxios)
 
 
-
-//TODO
-//take OffersList out of Search and have it be a child of Main
-
-
-//first page render search, this component is public
-//if you wanna make some transactios into web site 
 class Main extends Component {
     constructor(props){
         super(props)
@@ -26,8 +19,7 @@ class Main extends Component {
     }
 
     //search button
-    handleSearch = (event, search) =>{
-        debugger
+    handleSearch = (event, search) => {
         event.preventDefault();
         let newSearch = search 
         customAxios({
@@ -35,7 +27,6 @@ class Main extends Component {
           url: '/search',
           data: newSearch
           }).then(databaseResponse => {
-              debugger
             this.setState({filteredOffers: databaseResponse.data})
           }).catch(() => {
             this.setState({error: 'Something went wrong!'})
@@ -45,12 +36,16 @@ class Main extends Component {
     render() { 
         return ( 
             <>
-                <section>
+                <header className="hero">
                     <div>
                         <h2>We think time is priceless. Do you want to join us and share new experiences and pay with just your time?</h2>
                     </div>
-                </section>
-                <Search {...this.props} handleSearch={this.handleSearch} error={this.state.error}/>
+                    <div className="arrow">
+                        <i className="fas fa-grip-lines"></i>
+                        <a href="#pick-category"><i className="fas fa-angle-double-down"></i></a>
+                    </div>
+                </header>
+                <Search handleSearch={this.handleSearch} error={this.state.error}/>
                 <OffersList {...this.props} filteredOffers={this.state.filteredOffers}/>
             </>
          );

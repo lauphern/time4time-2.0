@@ -76,31 +76,30 @@ class OfferModal extends Component {
 
     render() { 
         return (
-                <div className="modal" style={this.props.toggle ? display : hide}>
-                <div className="modal-background"></div>
-                    <div className="modal-card">
-                        <header className="modal-card-head">
-                            <p className="modal-card-title modal-offer-title">{this.props.title}</p>
+                <div style={this.props.toggle ? display : hide}>
+                    <div>
+                        <header>
+                            <p>{this.props.title}</p>
                             <Link>
-                                <button className="delete" onClick={this.props.close} aria-label="close"></button>
+                                <button onClick={this.props.close} aria-label="close"></button>
                             </Link>
                         </header>
-                        <section className="modal-card-body">
-                            <div className='media columns'>
-                                <div className="content">
+                        <section>
+                            <div>
+                                <div>
                                     <p>Username: {this.props.authorUsername}</p>
-                                    <div className="level">
-                                        <div className="level-left">
+                                    <div>
+                                        <div>
                                             <Link>
-                                                <button onClick={this.redirectToAuthorProfile}className="button is-success">Visit profile</button>
+                                                <button onClick={this.redirectToAuthorProfile}>Visit profile</button>
                                             </Link>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className='media columns'>
+                            <div>
                                 <div>
-                                    <div className="columns">
+                                    <div>
                                         <div>
                                             {/* TODO */}
                                             <img src={`${process.env.REACT_APP_API}/${this.props.image}`} alt=""/>
@@ -109,6 +108,7 @@ class OfferModal extends Component {
                                             <h1>Description</h1>
                                             <p>{this.props.description}</p>
                                             <div>
+                                            {/* TODO */}
                                                 <FacebookShareButton url={'https://www.facebook.com'}>
                                                     <FacebookIcon size={32} round={true}/>
                                                 </FacebookShareButton>
