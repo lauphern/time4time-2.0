@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-// import OffersList from './OffersList';
-// import customAxios from '../../utils/customAxios';
-// import { loadProgressBar } from 'axios-progress-bar';
 
-// loadProgressBar(customAxios)
+import "./Search.scss"
 
-//render general search
 class Search extends Component {
     constructor(props){
         super(props)
@@ -19,29 +15,12 @@ class Search extends Component {
         }
     }
 
-
     handleCheck = (event)=> {
-        let generalSearch = {} //empty object
-        generalSearch[event.target.name] = event.target.name
+        let generalSearch = {} 
+        generalSearch[event.target.name] = event.target.checked ? event.target.name : ""
         this.setState(generalSearch)
     }
-
-    // //submit button
-    // handleSubmit = (event) =>{
-    //     event.preventDefault();
-    //     let newSearch = this.state  
-    //     customAxios({
-    //     method: 'post',
-    //       url: '/search',
-    //       data: newSearch
-    //       }).then(databaseResponse => {
-    //         this.setState({filteredOffers: databaseResponse.data})
-    //       }).catch(() => {
-    //           this.setState({error: 'Something went wrong!'})
-    //       })
-    // }
     
-
     render() { 
         return ( 
             <>
@@ -83,9 +62,6 @@ class Search extends Component {
                     </div>
                     <p style={{color: 'red'}}>{this.props.error? this.props.error:''}</p>
                 </form>
-                {/* <div>
-                    <OffersList {...this.props} filteredOffers={this.state.filteredOffers}/>
-                </div> */}
             </>
         );
     }
