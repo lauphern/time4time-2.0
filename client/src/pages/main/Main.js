@@ -19,8 +19,9 @@ class Main extends Component {
     }
 
     //search button
-    handleSearch = (event, search) => {
-        event.preventDefault();
+    handleSearch = (search) => {
+        
+        // event.preventDefault();
         let newSearch = search 
         customAxios({
         method: 'post',

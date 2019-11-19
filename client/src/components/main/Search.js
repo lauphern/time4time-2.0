@@ -20,12 +20,21 @@ class Search extends Component {
         generalSearch[event.target.name] = event.target.checked ? event.target.name : ""
         this.setState(generalSearch)
     }
+
+    componentDidUpdate(prevProps, prevState) {
+
+        if(prevState !== this.state) {
+            this.props.handleSearch(this.state)
+        }
+        
+    }
     
     render() { 
         return ( 
             <>
                 <h6 id="pick-category">Pick a category</h6>
-                <form onSubmit={(e) => {this.props.handleSearch(e, this.state)}}>
+                {/* <form onSubmit={(e) => {this.props.handleSearch(e, this.state)}}> */}
+                <form>
                     
                     <input onChange={this.handleCheck} name="house" id="house" type="checkbox"/>
                     <label for="house">House</label>
