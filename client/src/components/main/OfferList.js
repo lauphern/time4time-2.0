@@ -75,13 +75,14 @@ class OfferList extends Component {
         //All the offers we see by default, before searching
         const renderOffers = firstOffers.map((offer) => {
             return (
-                <div className="offer" key={offer._id}>
-                    <div>
+                <>
+                    <div className="offer main-card" key={offer._id}>
                         <h3>{offer.title}</h3>
                         <h4><strong>User</strong>: {offer.authorUsername}</h4>
                         <p>{offer.description}</p>
                         <p><strong>Category</strong>: {offer.category}</p>
                         <Link onClick={()=> {this.toggle(offer._id)}}>View offer</Link>
+                        <div className="view-offer"></div>
                     </div>
                     <OfferModal {...this.props} close={this.toggle} 
                         toggle={this.props.location.pathname === `/${offer._id}`} 
@@ -96,7 +97,7 @@ class OfferList extends Component {
                         dateOffer={offer.date}
                         durationOffer={offer.duration}
                     />
-                </div>
+                </>
             )
         })
 
@@ -104,8 +105,8 @@ class OfferList extends Component {
         //Offers you get when you search
         let renderFilteredOffers = this.props.filteredOffers.map((filteredOffer) => {
             return (
-                <div className="offer" key={filteredOffer._id}>
-                    <div>
+                <>
+                    <div className="offer" key={filteredOffer._id}>
                         <h3>{filteredOffer.title}</h3>
                         {/* TODO */}
                         <img src={`${process.env.REACT_APP_API}/${filteredOffer.authorProfileImage}`} alt=""/>
@@ -127,7 +128,7 @@ class OfferList extends Component {
                         dateOffer={filteredOffer.date}
                         durationOffer={filteredOffer.duration}
                     />
-                </div>
+                </>
             )
         })
 
