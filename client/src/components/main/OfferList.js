@@ -149,7 +149,9 @@ class OfferList extends Component {
                     if you have done a search */}
                     { this.props.filteredOffers.length > 0 ?
                         renderFilteredOffers :
-                        renderOffers
+                        ( this.props.noResultsFound ?
+                        <p>No results found!</p> :
+                        renderOffers)
                     }
                     </InfiniteScroll>
                 </div>

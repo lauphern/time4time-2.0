@@ -11,7 +11,7 @@ router.post('/search', function(req, res) {
     const repair = req.body.repair
     const languages = req.body.languages
     const cooking = req.body.cooking
-
+    
     Offer.find()
         .and([
             {$or: 

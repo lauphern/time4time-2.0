@@ -15,23 +15,26 @@ class Main extends Component {
         super(props)
         this.state = { 
             filteredOffers: [],
+            noResultsFound: null
         }
     }
 
     //search button
     handleSearch = (search) => {
-        
-        // event.preventDefault();
-        let newSearch = search 
-        customAxios({
-        method: 'post',
-          url: '/search',
-          data: newSearch
-          }).then(databaseResponse => {
-            this.setState({filteredOffers: databaseResponse.data})
-          }).catch(() => {
-            this.setState({error: 'Something went wrong!'})
-          })
+        if(Object.values(search).every(val => val === "" )) this.setState({filteredOffers: [], noResultsFound: null})
+        else {
+            customAxios({
+                method: 'post',
+                url: '/search',
+                data: search
+                }).then(databaseResponse => {
+                    if(databaseResponse.data.length === 0) {
+                    this.setState({filteredOffers: databaseResponse.data, noResultsFound: true})
+                    } else this.setState({filteredOffers: databaseResponse.data})
+                }).catch(() => {
+                    this.setState({error: 'Something went wrong!'})
+                })
+        }
     }
 
     render() { 
@@ -47,7 +50,7 @@ class Main extends Component {
                     </div>
                 </header>
                 <Search handleSearch={this.handleSearch} error={this.state.error}/>
-                <OfferList {...this.props} filteredOffers={this.state.filteredOffers}/>
+                <OfferList {...this.props} filteredOffers={this.state.filteredOffers} noResultsFound={this.state.noResultsFound}/>
             </>
          );
     }

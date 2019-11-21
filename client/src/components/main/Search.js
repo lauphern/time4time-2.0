@@ -6,25 +6,36 @@ class Search extends Component {
     constructor(props){
         super(props)
         this.state = { 
-            house:      '',
-            technology:   '',
-            music:      '',
-            repair:     '',
-            languages:  '',
-            cooking:    ''
+            search: {
+                house:      '',
+                technology:   '',
+                music:      '',
+                repair:     '',
+                languages:  '',
+                cooking:    '',
+            },
+            notHovered: undefined
         }
     }
 
     handleCheck = (event)=> {
-        let generalSearch = {} 
+        let generalSearch = {...this.state.search}
         generalSearch[event.target.name] = event.target.checked ? event.target.name : ""
-        this.setState(generalSearch)
+        this.setState({search: generalSearch})
+    }
+
+    addClass = () => {
+        this.setState({notHovered: "label-hover"})
+    }
+
+    removeClass = () => {
+        this.setState({notHovered: undefined})
     }
 
     componentDidUpdate(prevProps, prevState) {
 
-        if(prevState !== this.state) {
-            this.props.handleSearch(this.state)
+        if(prevState.search !== this.state.search) {
+            this.props.handleSearch(this.state.search)
         }
         
     }
@@ -37,24 +48,24 @@ class Search extends Component {
                 <form>
                     
                     <input onChange={this.handleCheck} name="house" id="house" type="checkbox"/>
-                    <label for="house">House</label>
+                    <label onMouseEnter={this.addClass} onMouseLeave={this.removeClass} className={this.state.notHovered} for="house">House</label>
 
                     <input onChange={this.handleCheck} name="technology" id="technology" type="checkbox" />
-                    <label for="technology">Technology</label>
+                    <label onMouseEnter={this.addClass} onMouseLeave={this.removeClass} className={this.state.notHovered} for="technology">Technology</label>
 
                     <input onChange={this.handleCheck} name="music" id="music" type="checkbox" />
-                    <label for="music">Music</label>
+                    <label onMouseEnter={this.addClass} onMouseLeave={this.removeClass} className={this.state.notHovered} for="music">Music</label>
 
                     <input onChange={this.handleCheck} name="repair" id="repair" type="checkbox" />
-                    <label for="repair">Repair</label>
+                    <label onMouseEnter={this.addClass} onMouseLeave={this.removeClass} className={this.state.notHovered} for="repair">Repair</label>
 
                     <input onChange={this.handleCheck} name="languages" id="languages" type="checkbox" />
-                    <label for="languages">Languages</label>
+                    <label onMouseEnter={this.addClass} onMouseLeave={this.removeClass} className={this.state.notHovered} for="languages">Languages</label>
 
                     <input onChange={this.handleCheck} name="cooking" id="cooking" type="checkbox" />
-                    <label for="cooking">Cooking</label>
+                    <label onMouseEnter={this.addClass} onMouseLeave={this.removeClass} className={this.state.notHovered} for="cooking">Cooking</label>
 
-                    <button className="search-btn"><i className="fas fa-search"></i> Search</button>
+                    {/* <button className="search-btn"><i className="fas fa-search"></i> Search</button> */}
                     
                     <p style={{color: "red"}}>{this.props.error? this.props.error:""}</p>
                 </form>
