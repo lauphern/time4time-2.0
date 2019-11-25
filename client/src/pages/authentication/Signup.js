@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import customAxios from '../../utils/customAxios';
 import { Link } from 'react-router-dom'
 
+// TODO poner una foto default para cada usuario e implementar que ya puedan subir una foto aqui
+
 class SignUp extends Component {
     
     //set values for signup form

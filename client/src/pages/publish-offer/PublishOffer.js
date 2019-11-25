@@ -4,7 +4,8 @@ import { loadProgressBar } from 'axios-progress-bar'
 
 loadProgressBar(customAxios)
 
-//in this component you can publish a new offer
+// TODO asegurarme de que la foto es obligatoria
+
 class PublishOffer extends Component {
     constructor(props){
         super(props)
@@ -17,10 +18,12 @@ class PublishOffer extends Component {
             error:          ''
         }
         this.form = React.createRef()
+        this.handleInput = this.handleInput.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     //input
-    handleInput = (event)=> {
+    handleInput(event) {
         let publish = {} //empty object
         publish[event.target.name] = event.target.value
         this.setState(publish)
@@ -28,17 +31,22 @@ class PublishOffer extends Component {
     }   
 
     //submit button
-    handleSubmit = (event) =>{
+    handleSubmit(event) {
+        debugger
         event.preventDefault();
+        // TODO check why I'm not getting the info from the form
         let newOffer = new FormData(this.form.current)
+        debugger
         customAxios({
         method: 'post',
           url: '/publish-offer',
           config: {headers: {'Content-Type': 'multipart/form-data'}},
           data: newOffer
-          }).then(() => {
+          }).then((response) => {
+              debugger
             this.props.history.push('/')
-          }).catch(() => {
+          }).catch((err) => {
+              debugger
             this.setState({error: "Something went wrong! Your offer was not published"})
           })
     }
@@ -82,7 +90,7 @@ class PublishOffer extends Component {
                         </div>
                     </div>
                     <div>
-                        <label >Category</label>
+                        <label>Category</label>
                         <div>
                             <div>
                             <select name='category' value={this.state.category} onChange={this.handleInput}>
@@ -100,7 +108,7 @@ class PublishOffer extends Component {
                     <div>
                         <label>Image</label>
                         <div>
-                            <input onChange={this.handleInput} name='image' type="file"/>
+                            <input onChange={this.handleInput} name='offerImage' type="file"/>
                         </div>
                     </div>
                     <p style={{color: 'red'}}>{this.state.error? this.state.error:''}</p>

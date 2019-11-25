@@ -6,8 +6,7 @@ import Moment from 'react-moment'
 import customAxios from '../../utils/customAxios';
 import Review from '../../components/author-profile/Review'
 
-//author profile component, this component it's private
-//You only see this component if you have a username
+
 class AuthorProfile extends Component {
     constructor() {
         super();
@@ -55,6 +54,7 @@ class AuthorProfile extends Component {
     //add a review and sent to database
     handleSubmitReview = (event) => {
         event.preventDefault();
+        // TODO revisar que funciona que this esta bound
         let formData = new FormData(this.form.current) 
         customAxios({
             method: 'post',

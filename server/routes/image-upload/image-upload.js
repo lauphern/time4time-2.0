@@ -8,13 +8,10 @@ const path = require( 'path' );
 // TODO desinstalar url si al final no lo necesito
 // const url = require('url');
 
-/**
- * PROFILE IMAGE STORING STARTS
- */
 const s3 = new aws.S3({
- accessKeyId: process.env.S3ACCESSKEYID,
- secretAccessKey: process.env.S3ACCESSKEY,
- Bucket: process.env.S3BUCKET
+  accessKeyId: process.env.S3ACCESSKEYID,
+  secretAccessKey: process.env.S3ACCESSKEY,
+  Bucket: process.env.S3BUCKET
 });
 /**
  * Single Upload
@@ -57,37 +54,40 @@ if( mimetype && extname ){
  * @desc Upload post image
  * @access public
  */
-router.post( '/profile-img-upload', ( req, res ) => {
-profileImgUpload( req, res, ( error ) => {
-  // console.log( 'requestOkokok', req.file );
-  // console.log( 'error', error );
-  if( error ){
-   console.log( 'errors', error );
-   res.json( { error: error } );
-  } else {
-   // If File not found
-   if( req.file === undefined ){
-    console.log( 'Error: No File Selected!' );
-    res.json( 'Error: No File Selected' );
-   } else {
-    // If Success
-    const imageName = req.file.key;
-    const imageLocation = req.file.location;
-// Save the file name into database into profile model
-res.json( {
-     image: imageName,
-     location: imageLocation
-    } );
-   }
-  }
- });
+router.post('/profile-img-upload', ( req, res ) => {
+  profileImgUpload( req, res, ( error ) => {
+    // console.log( 'requestOkokok', req.file );
+    // console.log( 'error', error );
+    if( error ){
+      console.log( 'errors', error );
+      res.json( { error: error } );
+    } else {
+      // If File not found
+      if( req.file === undefined ){
+        console.log( 'Error: No File Selected!' );
+        res.json( 'Error: No File Selected' );
+      } else {
+        // If Success
+        const imageName = req.file.key;
+        const imageLocation = req.file.location;
+        // Save the file name into database into profile model
+        res.json({
+          image: imageName,
+          location: imageLocation
+        });
+      }
+    }
+  });
 });
-// End of single profile upload
+
+
 /**
  * BUSINESS GALLERY IMAGES
  * MULTIPLE FILE UPLOADS
  */
 // Multiple File Uploads ( max 4 )
+// TODO podria usar esto para las reviews
+// pero poner validation en el frontend para que sea opcional y no crash cuando no subes una foto
 const uploadsBusinessGallery = multer({
  storage: multerS3({
   s3: s3,

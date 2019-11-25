@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const User = require('../../models/User');
 
 router.post("/login", (req, res)=> {
-
   User.findOne({username: req.body.username})
     .then((result)=> {
       if(bcrypt.compareSync(req.body.password, result.password)) {

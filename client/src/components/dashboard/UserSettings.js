@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import customAxios from '../../utils/customAxios';
 
+// TODO asegurarme de que subir foto es opcional y que no crash si no la suben
+
 class UserSettings extends Component {
     constructor(props) {
         super(props)
@@ -20,6 +22,7 @@ class UserSettings extends Component {
 
     handleSubmitProfileImage = (event) => {
         event.preventDefault();
+        // TODO revisar que funciona que this esta bound
         let formData = new FormData(this.form.current) 
         customAxios({
             method: 'post',

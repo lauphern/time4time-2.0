@@ -1,11 +1,12 @@
-var express = require('express');
-var router = express.Router();
-var Offer = require('../../models/Offer')
-var multer = require("multer")
-var upload = multer({ dest: 'public/images' })
+const express = require('express');
+const router = express.Router();
+const Offer = require('../../models/Offer')
+const multer = require("multer")
+const upload = multer({ dest: 'public/images' })
+const { singleUpload } = require("../../utils/s3")
 
-
-router.post('/publish-offer', upload.single('image'), function (req,res) {
+router.post('/publish-offer', function (req,res) {
+    debugger
     let addOffer = {
         author:         req.session.user._id,
         authorUsername: req.session.user.username,
@@ -16,10 +17,9 @@ router.post('/publish-offer', upload.single('image'), function (req,res) {
         duration :      req.body.duration,
         category :      req.body.category,
         status:         'Open',
-        image:          req.file.path,
+        image:          req.file.location,
         userRequest:    ''
     }
-
 
     const newOffer = new Offer(addOffer);
     newOffer.save()
