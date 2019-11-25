@@ -84,7 +84,6 @@ app.use('/api', require('./routes/dashboard/directMessages'));
 app.use('/api', require('./routes/dashboard/myPetitions'));
 app.use('/api', require('./routes/dashboard/userSettings'));
 app.use('/api', require('./routes/publish-offer/publishOffer'));
-app.use('/api', require('./routes/image-upload/image-upload'));
 
 
 
