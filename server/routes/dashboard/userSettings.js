@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var User = require('../../models/User')
-var multer = require("multer")
-var bcrypt = require("bcrypt")
-var upload = multer({ dest: 'public/images' })
+const express = require('express');
+const router = express.Router();
+const User = require('../../models/User')
+const multer = require("multer")
+const bcrypt = require("bcrypt")
+const upload = multer({ dest: 'public/images' })
 
 
 

@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var User = require('../../models/User')
-var Review = require('../../models/Review')
+const express = require('express');
+const router = express.Router();
+const User = require('../../models/User')
+const Review = require('../../models/Review')
 
 
 router.get('/my-profile', function(req, res, next) {

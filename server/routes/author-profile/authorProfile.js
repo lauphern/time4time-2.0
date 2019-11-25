@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
-var User = require('../../models/User')
-var Review = require('../../models/Review')
-var multer = require("multer")
-var upload = multer({ dest: 'public/images' })
+const express = require('express');
+const router = express.Router();
+const User = require('../../models/User')
+const Review = require('../../models/Review')
+// TODO do I need this now? can I combine it with the new stuff?
+const multer = require("multer")
+const upload = multer({ dest: 'public/images' })
 
 router.get('/author-profile/:id', function(req, res, next) {
   //find by author id 

@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var Offer = require('../../models/Offer')
-var moment = require('moment')
+const express = require('express');
+const router = express.Router();
+const Offer = require('../../models/Offer')
+const moment = require('moment')
 moment().format()
 
 router.get('/display-offers', function(req, res, next) {

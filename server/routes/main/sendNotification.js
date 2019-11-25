@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const nodemailer = require('nodemailer')
 const Offer = require('../../models/Offer')
 
@@ -30,8 +30,8 @@ router.post('/send-mail', (req,res,next) => {
             }).then((mailOffer) => {
                 res.status(200).json(mailOffer)
             }).catch(error =>{
-                 res.status(500).json(error)
-                });
+                res.status(500).json(error)
+            });
 });
 
 

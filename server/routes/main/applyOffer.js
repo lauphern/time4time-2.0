@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var Offer = require('../../models/Offer')
-var User = require('../../models/User')
+const express = require('express');
+const router = express.Router();
+const Offer = require('../../models/Offer')
+const User = require('../../models/User')
 
 router.post('/apply', function(req, res, next) {
     let offerId = req.body.offerId;
