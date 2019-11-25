@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import customAxios from '../../utils/customAxios';
-import { loadProgressBar } from 'axios-progress-bar'
+// TODO
+// import { loadProgressBar } from 'axios-progress-bar'
 
-loadProgressBar(customAxios)
+// loadProgressBar(customAxios)
 
 // TODO asegurarme de que la foto es obligatoria
 
@@ -18,35 +19,27 @@ class PublishOffer extends Component {
             error:          ''
         }
         this.form = React.createRef()
-        this.handleInput = this.handleInput.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     //input
-    handleInput(event) {
+    handleInput = (event) => {
         let publish = {} //empty object
         publish[event.target.name] = event.target.value
         this.setState(publish)
-        
     }   
 
     //submit button
-    handleSubmit(event) {
-        debugger
+    handleSubmit = (event) => {
         event.preventDefault();
-        // TODO check why I'm not getting the info from the form
-        let newOffer = new FormData(this.form.current)
-        debugger
+        let formData = new FormData(this.form.current)
         customAxios({
         method: 'post',
           url: '/publish-offer',
           config: {headers: {'Content-Type': 'multipart/form-data'}},
-          data: newOffer
-          }).then((response) => {
-              debugger
+          data: formData
+          }).then(() => {
             this.props.history.push('/')
-          }).catch((err) => {
-              debugger
+          }).catch(() => {
             this.setState({error: "Something went wrong! Your offer was not published"})
           })
     }
@@ -55,7 +48,7 @@ class PublishOffer extends Component {
         return ( 
             <div>
                 <h3>Publish a new offer</h3>
-                <form ref={this.form} onSubmit={this.handleSubmit}>
+                <form ref={this.form} onSubmit={this.handleSubmit} enctype='multipart/form-data'>
                
                     <div>
                         <label>Title</label>
@@ -80,7 +73,7 @@ class PublishOffer extends Component {
                     <div>
                         <label>Date</label>
                         <div>
-                            <input onChange={this.handleInput} name='date'type="date" placeholder="Date" value={this.state.date}/>
+                            <input onChange={this.handleInput} name='date' type="date" placeholder="Date" value={this.state.date}/>
                         </div>
                     </div>
                     <div>

@@ -5,8 +5,7 @@ const multer = require("multer")
 const upload = multer({ dest: 'public/images' })
 const { singleUpload } = require("../../utils/s3")
 
-router.post('/publish-offer', function (req,res) {
-    debugger
+router.post('/publish-offer', singleUpload.single('offerImage'), function (req,res) {
     let addOffer = {
         author:         req.session.user._id,
         authorUsername: req.session.user.username,
@@ -20,7 +19,6 @@ router.post('/publish-offer', function (req,res) {
         image:          req.file.location,
         userRequest:    ''
     }
-
     const newOffer = new Offer(addOffer);
     newOffer.save()
     .then((newOfferDocument) => {

@@ -34,7 +34,18 @@ function checkFileType( file, cb ){
      cb( 'Error: Images Only!' );
     }
 }
-
+var upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'some-bucket',
+    metadata: function (req, file, cb) {
+      cb(null, {fieldName: file.fieldname});
+    },
+    key: function (req, file, cb) {
+      cb(null, Date.now().toString())
+    }
+  })
+})
 
 /**
  * Single Upload
@@ -43,9 +54,10 @@ const singleUpload = multer({
  storage: multerS3({
   s3: s3,
   bucket: process.env.S3BUCKET,
-  acl: 'public-read',
+  // acl: 'public-read',
   key: function (req, file, cb) {
    cb(null, path.basename( file.originalname, path.extname( file.originalname ) ) + '-' + Date.now() + path.extname( file.originalname ) )
+    // cb(null, Date.now().toString())
   }
  }),
 //  limits:{ fileSize: 2000000 }, // In bytes: 2000000 bytes = 2 MB
