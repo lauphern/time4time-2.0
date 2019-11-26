@@ -89,8 +89,7 @@ class MyProfile extends Component {
                 <div>
                     <div>
                         <figure>
-                        {/* TODO */}
-                        <img src={`${process.env.REACT_APP_API}/${this.state.profileInfo.profileImage}`} alt="Profile"/>
+                        <img src={this.state.profileInfo.profileImage} alt="Profile"/>
                         </figure>
                     </div>
                     <div>

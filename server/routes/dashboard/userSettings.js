@@ -1,24 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../../models/User')
-const multer = require("multer")
 const bcrypt = require("bcrypt")
-const upload = multer({ dest: 'public/images' })
+const { singleUpload } = require("../../utils/s3")
 
-
+const User = require('../../models/User')
 
 //You can change user's profile picture here
-router.post('/profile-image', upload.single('profile-image'), function(req, res, next) {
-    
+router.post('/profile-image', singleUpload.single('profile-image'), function(req, res, next) {
     let editUser = {}
-    editUser.profileImage = req.file.path
+    editUser.profileImage = req.file.location
+    debugger
     User.findOneAndUpdate({username: req.session.user.username}, editUser)
     .then((response) => {
-        
         res.status(200).json(response)
     })
     .catch((err) => {
-        
         res.status(500).json({message: err})
     })
 });
