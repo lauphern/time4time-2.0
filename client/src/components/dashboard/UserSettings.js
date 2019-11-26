@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import customAxios from '../../utils/customAxios';
+import EditProfileImage from "./EditProfileImage"
 
 // TODO asegurarme de que subir foto es opcional y que no crash si no la suben
 
@@ -57,6 +58,7 @@ class UserSettings extends Component {
                 <section>
                             <div>
                                 <h3>User's settings</h3>
+                                <EditProfileImage/>
                                 <div>
                                     <form ref={this.form} onSubmit={this.handleSubmitProfileImage}>
                                         <div>
