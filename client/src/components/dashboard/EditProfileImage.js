@@ -13,7 +13,16 @@ class EditProfileImage extends Component {
         return (
             <div class="edit-image-modal">
             <h2>Drop and crop</h2>
-                <Dropzone>Drop file here</Dropzone>
+            <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
+                {({getRootProps, getInputProps}) => (
+                    <section>
+                    <div {...getRootProps()}>
+                        <input {...getInputProps()} />
+                        <p>Drag 'n' drop some files here, or click to select files</p>
+                    </div>
+                    </section>
+                )}
+            </Dropzone>
             </div>
         );
     }
