@@ -1,8 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import customAxios from '../../utils/customAxios';
 import EditProfileImage from "./EditProfileImage"
 
 // TODO asegurarme de que subir foto es opcional y que no crash si no la suben
+
+// function Test(props){
+//     const [test, setTest] = useState(1)
+//     if(test) {
+//         debugger
+//     }
+//     return (
+//         <>
+//             <h1>This is the variable from your state: {test}</h1>
+//             <button onClick={() => setTest(test + 1)}>Click meeeeh</button>
+//         </>
+//     )
+// }
 
 class UserSettings extends Component {
     constructor(props) {
@@ -21,15 +34,30 @@ class UserSettings extends Component {
         this.setState(myInput)
     }
 
-    handleSubmitProfileImage = (event) => {
-        event.preventDefault();
-        // TODO revisar que funciona que this esta bound
-        let formData = new FormData(this.form.current) 
+    // handleSubmitProfileImage = (event) => {
+    //     event.preventDefault();
+    //     // TODO revisar que funciona que this esta bound
+    //     let formData = new FormData(this.form.current) 
+    //     customAxios({
+    //         method: 'post',
+    //         url: '/profile-image',
+    //         config: { headers: {'Content-Type': 'multipart/form-data' }},
+    //         data: formData
+    //     }).then(() => {
+    //         this.props.openSection('profile')
+    //         this.props.history.push('/dashboard')
+
+    //     }).catch(err => {
+    //         this.setState({error: 'Could not edit personal information'})
+    //     })
+    // }
+    handleSubmitProfileImage = (blob) => {
+        debugger
         customAxios({
             method: 'post',
             url: '/profile-image',
             config: { headers: {'Content-Type': 'multipart/form-data' }},
-            data: formData
+            data: blob
         }).then(() => {
             this.props.openSection('profile')
             this.props.history.push('/dashboard')
@@ -58,7 +86,8 @@ class UserSettings extends Component {
                 <section>
                             <div>
                                 <h3>User's settings</h3>
-                                <EditProfileImage/>
+                                <EditProfileImage handleSubmitProfileImage={this.handleSubmitProfileImage}/>
+                                {/* <Test /> */}
                                 <div>
                                     <form ref={this.form} onSubmit={this.handleSubmitProfileImage}>
                                         <div>

@@ -52,7 +52,8 @@ function EditProfileImage(props) {
 
     const [croppedImageUrl, setCroppedImageUrl] = useState(null)
 
-    let imageRef
+    const [imageRef, setImageRef] = useState(undefined)
+
 
     let fileUrl
 
@@ -86,9 +87,7 @@ function EditProfileImage(props) {
     // CROP
 
     const onImageLoaded = image => {
-        // TODO test this next
-        debugger
-        imageRef = image
+        setImageRef(image)
     }
 
     const handleOnCrop = newCrop => {
@@ -105,8 +104,8 @@ function EditProfileImage(props) {
     }
 
     const makeClientCrop = async crop => {
-        debugger
-        if (imageRef && crop.width && crop.height) {
+        if (imageRef) {
+            debugger
             const croppedImageUrl = await getCroppedImg(
                 imageRef,
                 crop,
@@ -155,12 +154,6 @@ function EditProfileImage(props) {
     const previewImg = files.map(file => (
         <div key={file.name}>
             <p>Preview</p>
-            {/* <div>
-                <img
-                    src={file.preview}
-                    alt="Preview"
-                />
-            </div> */}
             <ReactCrop
                 src={file.preview}
                 onImageLoaded={onImageLoaded}
