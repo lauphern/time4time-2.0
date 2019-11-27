@@ -7,10 +7,8 @@ const User = require('../../models/User')
 
 //You can change user's profile picture here
 router.post('/profile-image', singleUpload.single('profile-image'), function(req, res, next) {
-    debugger
     let editUser = {}
     editUser.profileImage = req.file.location
-    debugger
     User.findOneAndUpdate({username: req.session.user.username}, editUser)
     .then((response) => {
         res.status(200).json(response)

@@ -1,49 +1,12 @@
-// import React, { Component } from 'react';
-// import Dropzone from 'react-dropzone'
-
 import React, {useEffect, useState} from 'react';
 import {useDropzone} from 'react-dropzone';
 import ReactCrop from 'react-image-crop';
 
 import 'react-image-crop/lib/ReactCrop.scss';
 
+//TODO preload the existing image and let the user edit that one
 
-// class EditProfileImage extends Component {
-//     constructor(props) {
-//         super(props)
-//         this.state = {
-
-//         }
-//     }
-
-//     handleOnDrop = (acceptedFiles) => {
-//         console.log(acceptedFiles)
-//     }
-
-//     render() { 
-//         return (
-//             <div class="edit-image-modal">
-//             <h2>Drop and crop</h2>
-//             <Dropzone 
-//                 onDrop={this.handleOnDrop}
-//             >
-//                 {({getRootProps, getInputProps}) => (
-//                     <section>
-//                     <div {...getRootProps()}>
-//                         <input {...getInputProps()} />
-//                         <p>Drag 'n' drop some files here, or click to select files</p>
-//                     </div>
-//                     </section>
-//                 )}
-//             </Dropzone>
-//             </div>
-//         );
-//     }
-// }
-
-
-//Using React Hooks
-function EditProfileImage(props) {
+function EditProfileImage(props) {    
 
     const [files, setFiles] = useState([]);
     const [crop, setCrop] = useState({
@@ -55,20 +18,20 @@ function EditProfileImage(props) {
     const [imageRef, setImageRef] = useState(undefined)
 
 
+    //DROP ZONE set up
+
     let fileUrl
 
     const maxSize = 10000000000
 
     const handleAcceptedFiles = acceptedFiles => {
         alert("accepted files")
-        console.log(acceptedFiles)
     }
 
     const handleRejectedFiles = rejectedFiles => {
         if(rejectedFiles[0].size > maxSize) {
             alert(`The file is too big, the maximum size is ${maxSize}`)
         } else alert("rejected files")
-        console.log(rejectedFiles)
     }
 
     const {acceptedFiles, rejectedFiles, getRootProps, getInputProps} = useDropzone({
@@ -84,7 +47,8 @@ function EditProfileImage(props) {
         onDropRejected: handleRejectedFiles
     });
 
-    // CROP
+
+    // CROP methods
 
     const onImageLoaded = image => {
         setImageRef(image)
@@ -95,23 +59,17 @@ function EditProfileImage(props) {
         setCrop(newCrop)
     }
 
-    // const handleImageLoaded = image => {
-    //     console.log(image)
-    // }
-
     const handleOnCropComplete = crop => {
         makeClientCrop(crop)
     }
 
     const makeClientCrop = async crop => {
         if (imageRef) {
-            debugger
             const croppedImageUrl = await getCroppedImg(
                 imageRef,
                 crop,
                 'newFile.jpeg'
             );
-            // TODO revisar
             setCroppedImageUrl(croppedImageUrl)
         }
     }
@@ -146,11 +104,13 @@ function EditProfileImage(props) {
             blob.name = fileName;
             window.URL.revokeObjectURL(fileUrl);
             fileUrl = window.URL.createObjectURL(blob);
-            resolve(fileUrl);
+            resolve(blob);
           }, 'image/jpeg');
         });
     }
 
+
+    //Create the image preview and the area to crop it
     const previewImg = files.map(file => (
         <div key={file.name}>
             <p>Preview</p>
@@ -187,6 +147,7 @@ function EditProfileImage(props) {
 
     return (
       <section className="container">
+        <form onSubmit={e => props.handleSubmitProfileImage(e, croppedImageUrl)}>
         <div {...getRootProps({className: 'dropzone'})}>
             <input {...getInputProps()} />
             <p>Drag 'n' drop some files here, or click to select files</p>
@@ -203,6 +164,8 @@ function EditProfileImage(props) {
                 {rejectedFilesItems}
             </ul>
         </aside>
+            <button>Save changes</button>
+        </form>
       </section>
     );
   }
