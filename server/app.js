@@ -34,16 +34,7 @@ mongoose.connect(process.env.MONGOURI, { useNewUrlParser: true }, function(err) 
    else console.log("connected")
 })
 
-//Firestore setup
-const admin = require('firebase-admin');
 
-let serviceAccount = require('./firestore-keys.json');
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
-
-let db = admin.firestore();
 
  
 

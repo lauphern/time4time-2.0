@@ -32,11 +32,14 @@ class SignUp extends Component {
             method: 'post',
             url: '/signup',
             data: newUser
-        }).then(() => {
-            this.props.loggedIn(true,this.state.username)
-            this.props.history.push('/dashboard')
-        }).catch(() => {
-            this.setState({error: 'Username or email already taken'})
+        }).then((res) => {
+            if(res.data.errorMessage) this.setState({errorMessage: res.data.errorMessage})
+            else {
+                this.props.loggedIn(true,this.state.username)
+                this.props.history.push('/dashboard')
+            }
+        }).catch((err) => {
+            this.setState({errorMessage: "Something went wrong"})
         })
     }
 
@@ -92,7 +95,7 @@ class SignUp extends Component {
                                             </span>
                                         </p>
                                     </div>
-                                    <p style={{color: 'red'}}>{this.state.error? this.state.error:''}</p>
+                                    <p style={{color: 'red'}}>{this.state.errorMessage && this.state.errorMessage}</p>
                                     <button value="submit">Sign up</button>
                                 </form>
                             </div>
