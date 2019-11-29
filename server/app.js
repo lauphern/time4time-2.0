@@ -33,6 +33,18 @@ mongoose.connect(process.env.MONGOURI, { useNewUrlParser: true }, function(err) 
    if(err) console.log("ERROR")
    else console.log("connected")
 })
+
+//Firestore setup
+const admin = require('firebase-admin');
+
+let serviceAccount = require('./firestore-keys.json');
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+let db = admin.firestore();
+
  
 
 app.use(session({
@@ -42,6 +54,8 @@ app.use(session({
     cookie:             {
             maxAge: 1000 * 60 *60 *24 *7
     },
+    // TODO puedo guardar esto en firestore?
+    //https://www.npmjs.com/package/@google-cloud/connect-firestore
     store: new MongoStore({
         mongooseConnection: mongoose.connection,
         ttl: 24 * 60 * 60 // 1 day

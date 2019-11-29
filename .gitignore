@@ -28,6 +28,7 @@ yarn-error.log*
 
 /server/node_modules
 /server/.env
+/server/firestore-keys.json
 
 old-db
 
