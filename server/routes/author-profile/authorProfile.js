@@ -10,6 +10,7 @@ router.get('/author-profile/:id', function(req, res, next) {
     let {id} = req.params;
     usersCollection.doc(id).get()
     .then((snap)=>{
+        //TODO hacer esta validacion en todas las busquedas!
         if(!snap.exists) res.status(500).json({errorMessage: 'author data not found'});
         else {
             let authorProfile = snap.data()
@@ -27,13 +28,14 @@ router.post('/author-profile', upload.single('review-image'), function(req, res,
         rating: req.body.rate1,
         opinion: req.body.opinion,
         date: req.body.date,
-        // picture: req.file.path,
+        picture: req.file.path,
         reviewer: req.session.user.id,
     }
     //TODO test
     reviewsCollection.add(newReview)
     .then(snap => {
         debugger
+        //TODO revisar esto
         let reviewCreated = snap.data()
         res.json(reviewCreated)
     })

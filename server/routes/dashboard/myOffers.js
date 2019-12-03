@@ -1,18 +1,28 @@
 const express = require('express');
 const router = express.Router();
-const Offer = require('../../models/Offer')
-const User = require('../../models/User')
+// const Offer = require('../../models/Offer')
+// const User = require('../../models/User')
 
+const { usersCollection, offersCollection } = require("../../utils/db")
 
 router.get('/my-offers', function(req, res, next) {
-    let username = req.session.user.username
-    Offer.find({authorUsername: username})
-        .then((myOffers) =>{
-            res.json(myOffers)
-        }) 
-        .catch((err) =>{
-            res.status(404).json({errorMessage: 'not found'})
-        })
+    //TODO continue here
+    offersCollection.where("authorUsername", "==", req.session.user.username).get()
+    .then((snap) =>{
+        debugger
+        let myOffers = snap.data()
+        res.json(myOffers)
+    }) 
+    .catch((err) =>{
+        res.status(404).json({errorMessage: 'not found'})
+    })
+    // Offer.find({authorUsername: username})
+    //     .then((myOffers) =>{
+    //         res.json(myOffers)
+    //     }) 
+    //     .catch((err) =>{
+    //         res.status(404).json({errorMessage: 'not found'})
+    //     })
 });
 
 router.post('/approve-offer', function(req, res, next) {

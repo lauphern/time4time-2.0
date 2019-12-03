@@ -2,11 +2,15 @@ const express = require('express');
 const router = express.Router();
 const { singleUpload } = require("../../utils/s3")
 
-const Offer = require('../../models/Offer')
+// const Offer = require('../../models/Offer')
+
+const { offersCollection } = require("../../utils/db")
+
 
 router.post('/publish-offer', singleUpload.single('offerImage'), function (req,res) {
-    let addOffer = {
-        author:         req.session.user._id,
+    debugger
+    let newOffer = {
+        author:         req.session.user.id,
         authorUsername: req.session.user.username,
         authorMail:     req.session.user.email,
         title :         req.body.title,
@@ -15,18 +19,21 @@ router.post('/publish-offer', singleUpload.single('offerImage'), function (req,r
         duration :      req.body.duration,
         category :      req.body.category,
         status:         'Open',
-        image:          req.file.location,
+        // image:          req.file.location,
         userRequest:    ''
     }
-    const newOffer = new Offer(addOffer);
-    newOffer.save()
-    .then((newOfferDocument) => {
-        res.json(newOfferDocument)
+    offersCollection.add(newOffer)
+    .then((snap) => {
+        return snap.get()
+    })
+    .then(snap => {
+        debugger
+        let newOffer = snap.data()
+        res.json(newOffer)
     })
     .catch((err) => {
         res.status(404).json({errorMessage: "offer not created"})
     })
-
 })
 
 module.exports = router;
