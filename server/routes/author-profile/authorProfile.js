@@ -6,7 +6,7 @@ const upload = multer({ dest: 'public/images' })
 
 const { usersCollection, reviewsCollection } = require("../../utils/db")
 
-router.get('/author-profile/:id', function(req, res, next) {
+router.get('/author-profile/:id', function(req, res) {
     let {id} = req.params;
     usersCollection.doc(id).get()
     .then((snap)=>{
@@ -22,7 +22,7 @@ router.get('/author-profile/:id', function(req, res, next) {
     });
 });
 
-router.post('/author-profile', upload.single('review-image'), function(req, res, next) {
+router.post('/author-profile', upload.single('review-image'), function(req, res) {
     debugger
     let newReview = {
         rating: req.body.rate1,
@@ -42,7 +42,7 @@ router.post('/author-profile', upload.single('review-image'), function(req, res,
     .catch(err => res.json(err))
 })
 
-router.post('/user-reviewed-id', function(req, res, next) {
+router.post('/user-reviewed-id', function(req, res) {
     //TODO revisar cuando se hacia esta request, porque parece parte de otra
     reviewsCollection.doc(req.body.newReviewId).update({
         userReviewed: req.body.userReviewedId
@@ -59,7 +59,7 @@ router.post('/user-reviewed-id', function(req, res, next) {
     })
 })
 
-router.post('/get-reviews', function(req, res, next){
+router.post('/get-reviews', function(req, res){
     debugger
     reviewsCollection.where("userReviewed", "==", req.body.userReviewedId).get()
     .then((snap) => {
@@ -72,7 +72,7 @@ router.post('/get-reviews', function(req, res, next){
     })
 })
 
-router.post('/reviewer', function(req, res, next) {
+router.post('/reviewer', function(req, res) {
     usersCollection.doc(req.body.reviewerId).get()
     .then((snap) => {
         let reviewer = snap.data()

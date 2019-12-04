@@ -2,13 +2,11 @@ const express = require('express');
 const router = express.Router();
 const { singleUpload } = require("../../utils/s3")
 
-// const Offer = require('../../models/Offer')
-
 const { offersCollection } = require("../../utils/db")
 
 
 router.post('/publish-offer', singleUpload.single('offerImage'), function (req,res) {
-    debugger
+    //TODO asegurarme de que la duration se añade como numero
     let newOffer = {
         author:         req.session.user.id,
         authorUsername: req.session.user.username,
@@ -19,7 +17,7 @@ router.post('/publish-offer', singleUpload.single('offerImage'), function (req,r
         duration :      req.body.duration,
         category :      req.body.category,
         status:         'Open',
-        // image:          req.file.location,
+        image:          req.file.location,
         userRequest:    ''
     }
     offersCollection.add(newOffer)

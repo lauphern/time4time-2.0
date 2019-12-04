@@ -15,6 +15,7 @@ const reviewsCollection = db.collection('reviews');
 
 
 module.exports = {
+    admin,
     db,
     usersCollection,
     offersCollection,

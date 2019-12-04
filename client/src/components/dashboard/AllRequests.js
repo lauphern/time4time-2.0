@@ -15,7 +15,7 @@ class AllRequests extends Component {
                 { this.props.listOfMyOffers.map( myOffer => {
                   return(
                     <OneRequest {...this.props} 
-                    offerId={myOffer._id}
+                    offerId={myOffer.id}
                     title={myOffer.title}
                     authorUsername = {myOffer.authorUsername}
                     date={myOffer.date}

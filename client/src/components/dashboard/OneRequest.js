@@ -19,11 +19,10 @@ class OneRequest extends Component {
             method: 'post',
             url: '/approve-offer',
             data: {offerId: this.props.offerId}
-        }).then(databaseResponse => {
-            this.updateTimeWallet(event)
+        }).then(res => {
             this.setState({
                 offerStatus: 'Approved',
-                offerApproved: databaseResponse.data
+                offerApproved: res.data.offerApproved
             })
             this.props.updateOffers()
             this.props.history.push('/dashboard')
@@ -37,7 +36,7 @@ class OneRequest extends Component {
             method: 'post',
             url: '/update-time-wallet',
             data: {offerId: this.props.offerId}
-        }).then(databaseResponse => {
+        }).then(() => {
             console.log('updated time wallet')
         }).catch(err => {
             this.setState({error: 'The time wallet could not be updated'})

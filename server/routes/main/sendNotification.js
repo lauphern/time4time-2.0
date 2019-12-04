@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer')
 const Offer = require('../../models/Offer')
 
 
-router.post('/send-mail', (req,res,next) => {
+router.post('/send-mail', (req,res) => {
     //step 1
     // take data from offer
     let offerId = req.body.offerId;

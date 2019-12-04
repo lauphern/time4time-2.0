@@ -6,8 +6,7 @@ const { usersCollection } = require("../../utils/db")
 
 router.post("/login", (req, res)=> {
   usersCollection
-  .where("username", "==", req.body.username)
-  .get()
+  .where("username", "==", req.body.username).get()
   .then(snap => {
     let user = snap.docs[0].data()
     if(bcrypt.compareSync(req.body.password, user.password)) {

@@ -3,7 +3,7 @@ const router = express.Router();
 const Offer = require('../../models/Offer')
 const User = require('../../models/User')
 
-router.post('/apply', function(req, res, next) {
+router.post('/apply', function(req, res) {
     let offerId = req.body.offerId;
     let userId = req.session.user._id
     let username = req.session.user.username;

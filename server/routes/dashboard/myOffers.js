@@ -3,32 +3,36 @@ const router = express.Router();
 // const Offer = require('../../models/Offer')
 // const User = require('../../models/User')
 
-const { usersCollection, offersCollection } = require("../../utils/db")
+const { usersCollection, offersCollection, admin: firebase } = require("../../utils/db")
 
-router.get('/my-offers', function(req, res, next) {
-    //TODO continue here
+router.get('/my-offers', function(req, res) {
     offersCollection.where("authorUsername", "==", req.session.user.username).get()
     .then((snap) =>{
-        debugger
-        let myOffers = snap.data()
+        let myOffers = []
+        snap.forEach(doc => {
+            let { id } = doc
+            myOffers.push({id, ...doc.data()})
+        })
         res.json(myOffers)
     }) 
     .catch((err) =>{
         res.status(404).json({errorMessage: 'not found'})
     })
-    // Offer.find({authorUsername: username})
-    //     .then((myOffers) =>{
-    //         res.json(myOffers)
-    //     }) 
-    //     .catch((err) =>{
-    //         res.status(404).json({errorMessage: 'not found'})
-    //     })
 });
 
 router.post('/approve-offer', function(req, res, next) {
-    Offer.findByIdAndUpdate(req.body.offerId, {status: 'Approved'}, {new: true})
-    .then((offerApproved) => {
-        res.json(offerApproved)
+    offersCollection.doc(req.body.offerId).update({
+        status: 'Approved'
+    })
+    .then(() => {
+        return offersCollection.doc(req.body.offerId).get()
+    })
+    .then(snap => {
+        let offerApproved = snap.data()
+        //TODO ver como pasar esto a la siguiente ruta para al final devolverlo al frontend
+        // res.json(offerApproved)
+        res.offerApproved = offerApproved
+        next('route')
     })
     .catch((err) => {
         res.status(404).json({errorMessage: 'Offer could not be approved'})
@@ -36,33 +40,37 @@ router.post('/approve-offer', function(req, res, next) {
 })
 
 
-router.post('/update-time-wallet', function(req, res, next) {
-    Offer.findById(req.body.offerId)
-    .then((offerApproved) => {
-        let offerDuration = offerApproved.duration
-        let userThatRequested = offerApproved.userRequest
-        // TODO
-        // revisar
-        User.findByIdAndUpdate(req.session.user._id, { $inc: {timeWallet: offerDuration}}, {new: true})
-            .then((authorOfferUpdated) => {
-                res.json(authorOfferUpdated)
-            })
-            .catch((err) => {
-                res.status(400).json({errorMessage: 'Could not find offer author and update their time wallet'})
-            })
-        User.findOneAndUpdate({username: userThatRequested}, { $inc: {timeWallet: -offerDuration}}, {new: true})
-            .then((userRequestUpdated) => {
-                res.json(userRequestUpdated)
-            })
-            .catch((err) => {
-                res.status(400).json({errorMessage: 'Could not find the user that requested the offer and update their time wallet'})
-            })
+router.post('/approve-offer', function(req, res, next) {
+    let { duration } = res.offerApproved
+    usersCollection.doc(req.session.user.id).update({
+        timeWallet: firebase.firestore.FieldValue.increment(duration)
+    })
+    .then(() => {
+        next('route')
     })
     .catch((err) => {
-        res.status(404).json({errorMessage: 'Time wallet could not be updated'})
+        res.status(400).json({errorMessage: 'Could not find offer author and update their time wallet'})
     })
-
 })
+
+
+router.post('/approve-offer', function(req, res, next) {
+    let { userRequest, duration } = res.offerApproved
+    usersCollection.where("username", "==", userRequest).get()
+    .then(snap => {
+        return usersCollection.doc(snap.docs[0].id).update({
+            timeWallet: firebase.firestore.FieldValue.increment(-duration)
+        })
+    })
+    .then(() => {
+        debugger
+        res.json({offerApproved: res.offerApproved})
+    })
+    .catch((err) => {
+        res.status(400).json({errorMessage: 'Could not find offer author and update their time wallet'})
+    })
+})
+//continuar en el frontend!
 
 
 module.exports = router;
