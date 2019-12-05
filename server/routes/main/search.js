@@ -1,31 +1,25 @@
 const express = require('express');
 const router = express.Router();
-const Offer = require('../../models/Offer')
+
+const { offersCollection } = require("../../utils/db")
 
 router.post('/search', function(req, res) {
-
-    const house   = req.body.house
-    const technology = req.body.technology
-    const music = req.body.music
-    const repair = req.body.repair
-    const languages = req.body.languages
-    const cooking = req.body.cooking
-    
-    Offer.find()
-        .and([
-            {$or: 
-            [{category: house}, {category:technology}, 
-            {category:music}, {category: repair},
-            {category: languages}, {category: cooking}
-            ]},
-            {status:'Open'}
-        ])
-        .then((filteredOffer) => {
-            res.json(filteredOffer)
+    //TODO revisar
+    //necesito las variables? no seria suficiente con strings?
+    const { house, technology, music, repair, languages, cooking } = req.body
+    //TODO revisar
+    offersCollection.where("category", "in", [house, technology, music, repair, languages, cooking]).where("status", "==", "Open").get()
+    .then(snap => {
+        let filteredOffers = []
+        snap.docs.forEach(doc => {
+            let { id } = doc
+            filteredOffers.push({id, ...doc.data()})
         })
-        .catch((err) => {
-            res.status(404).json({errorMessage: "Offers not found"})
-        })
+        res.json(filteredOffers)
+    })
+    .catch((err) => {
+        res.status(404).json({errorMessage: "Offers not found"})
+    })
 })
 
 module.exports = router;

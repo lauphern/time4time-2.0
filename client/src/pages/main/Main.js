@@ -27,10 +27,10 @@ class Main extends Component {
                 method: 'post',
                 url: '/search',
                 data: search
-                }).then(databaseResponse => {
-                    if(databaseResponse.data.length === 0) {
-                    this.setState({filteredOffers: databaseResponse.data, noResultsFound: true})
-                    } else this.setState({filteredOffers: databaseResponse.data})
+                }).then(res => {
+                    if(res.data.length === 0) {
+                    this.setState({filteredOffers: res.data, noResultsFound: true})
+                    } else this.setState({filteredOffers: res.data})
                 }).catch(() => {
                     this.setState({error: 'Something went wrong!'})
                 })

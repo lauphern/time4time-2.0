@@ -32,9 +32,9 @@ class OfferModal extends Component {
           url: "/apply",
           data: {offerId: this.props.offerIdentificator}
         })
-        .then(responseFromApi => {
+        .then(res => {
             //validation to make sure you have enough hours in your time wallet to apply to an activity
-            if( responseFromApi.data.message === "Not enough time in the wallet to apply" ) this.setState({errorTimeWallet: "You don't have enough time in your wallet to apply to this offer"})
+            if( res.data.message === "Not enough time in the wallet to apply" ) this.setState({errorTimeWallet: "You don't have enough time in your wallet to apply to this offer"})
             else this.props.history.push('/dashboard')
         })
         .catch(err => {
