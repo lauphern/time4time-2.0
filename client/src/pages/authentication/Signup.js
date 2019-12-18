@@ -48,7 +48,7 @@ class SignUp extends Component {
     render() { 
         return ( 
             <section className="auth-background">
-                <div>
+                <div className="auth-panel">
                     <h3>Sign up</h3>
                     <p>Please sign up to proceed.</p>
                     <div>

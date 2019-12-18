@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 import "./Authentication.scss"
 
-//render login component
 class Login extends Component {
     state = { 
         username: '',
@@ -38,7 +37,7 @@ class Login extends Component {
     render() { 
         return ( 
             <section className="auth-background">
-                <div>
+                <div className="auth-panel">
                     <h3>Login</h3>
                     <p>Please login to proceed.</p>
                     <div>

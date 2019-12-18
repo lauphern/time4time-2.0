@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import customAxios from '../../utils/customAxios';
+
+import "./PublishOffer.scss"
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 // TODO
 // import { loadProgressBar } from 'axios-progress-bar'
 
@@ -11,22 +16,29 @@ class PublishOffer extends Component {
     constructor(props){
         super(props)
         this.state = { 
+            startDate: Date.now(),
             title:          '',
             description:    '',
             date:           '',
             duration:       '',
             category:       '',
-            error:          ''
+            error:          '',
+            dateError: ''
         }
         this.form = React.createRef()
     }
 
     //input
     handleInput = (event) => {
-        let publish = {} //empty object
-        publish[event.target.name] = event.target.value
-        this.setState(publish)
-    }   
+        let update = {} //empty object
+        update[event.target.name] = event.target.value
+        this.setState(update)
+    }
+
+    dateHandler = (date) => {
+        if(date < Date.now() || date === Date.now()) this.setState({dateError: "You have to pick a future date!"})
+        else this.setState({dateError: '', startDate: date, date: date})
+    }
 
     //submit button
     handleSubmit = (event) => {
@@ -73,7 +85,14 @@ class PublishOffer extends Component {
                     <div>
                         <label>Date</label>
                         <div>
-                            <input onChange={this.handleInput} name='date' type="date" placeholder="Date" value={this.state.date}/>
+                            {/* <input onChange={this.handleInput} name='date' type="date" placeholder="Date" value={this.state.date}/> */}
+                            <DatePicker
+                                selected={this.state.startDate}
+                                // onChange={date => setStartDate(date)}
+                                onChange={this.dateHandler}
+                                inline
+                            />
+                            {this.state.dateError && <p>{this.state.dateError}</p>}
                         </div>
                     </div>
                     <div>
