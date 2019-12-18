@@ -4,10 +4,12 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+//TODO desinstalar
 const mongoose = require('mongoose');
 const cors = require('cors')
 const session = require('express-session')
 const bodyParser = require('body-parser')
+//TODO desinstalar
 const MongoStore = require('connect-mongo')(session);
 
 const app = express();
@@ -28,7 +30,7 @@ if(process.env.ENV == "development") {
   }))
 }
 
-
+//TODO
 mongoose.connect(process.env.MONGOURI, { useNewUrlParser: true }, function(err) {
    if(err) console.log("ERROR")
    else console.log("connected")

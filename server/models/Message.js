@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+//TODO borrar estos archivos
+
 const messageSchema = new Schema({
     title:              {type: String},
     bodyMessage:        {type: String},
