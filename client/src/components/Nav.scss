@@ -1,14 +1,22 @@
+@import "../Setup.scss";
+
 nav {
     display: flex;
+    justify-content: space-between;
+    // align-items: center;
     height: 5vh;
-    padding: 2vh 10vw;
+    padding: 2vh 2vw;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;
-    background: rgba(255,255,255,0.5);
+    background: white;
     transition: 0.5s;
+
+    a {
+        color: black;
+    }
 
     &.shrink-nav {
         height: 2vh;
@@ -52,6 +60,37 @@ nav {
 
     .dropdown-show {
         display: block;
+    }
+
+    .full-menu {
+        display: flex;
+        align-items: center;
+
+        * {
+            margin-left: 3vw;
+        }
+
+        a {
+            position: relative;
+            text-transform: uppercase;
+
+            &:before {
+                position: absolute;
+                color: $main;
+                top: 0px;
+                left: 0px;
+                overflow: hidden;
+                content: attr(alt);
+                transition: all 0.3s;
+                transform: scale(1.5);
+                opacity: 0;
+            }
+
+            &:hover:before {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
     }
 }
 

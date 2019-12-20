@@ -76,17 +76,17 @@ class OfferList extends Component {
         const renderOffers = firstOffers.map((offer) => {
             return (
                 <>
-                    <div className="offer main-card" key={offer._id}>
+                    <div className="offer main-card" key={offer.id}>
                         <h3>{offer.title}</h3>
                         <h4><strong>User</strong>: {offer.authorUsername}</h4>
                         <p>{offer.description}</p>
                         <p><strong>Category</strong>: {offer.category}</p>
-                        <Link onClick={()=> {this.toggle(offer._id)}}>View offer</Link>
+                        <Link onClick={()=> {this.toggle(offer.id)}}>View offer</Link>
                         <div className="view-offer"></div>
                     </div>
                     <OfferModal {...this.props} close={this.toggle} 
-                        toggle={this.props.location.pathname === `/${offer._id}`} 
-                        offerIdentificator={offer._id}
+                        toggle={this.props.location.pathname === `/${offer.id}`} 
+                        offerIdentificator={offer.id}
                         title={offer.title} 
                         image={offer.image}
                         author={offer.author}
@@ -106,18 +106,18 @@ class OfferList extends Component {
         let renderFilteredOffers = this.props.filteredOffers.map((filteredOffer) => {
             return (
                 <>
-                    <div className="offer" key={filteredOffer._id}>
+                    <div className="offer" key={filteredOffer.id}>
                         <h3>{filteredOffer.title}</h3>
                         {/* TODO */}
                         <img src={`${process.env.REACT_APP_API}/${filteredOffer.authorProfileImage}`} alt=""/>
                         <h4><strong>User</strong>: {filteredOffer.authorUsername}</h4>
                         <p>{filteredOffer.description}</p>
                         <p><strong>Category</strong>: {filteredOffer.category}</p>
-                        <Link onClick={()=> {this.toggle(filteredOffer._id)}}>View offer</Link>
+                        <Link onClick={()=> {this.toggle(filteredOffer.id)}}>View offer</Link>
                     </div>
                     <OfferModal {...this.state} {...this.props} close={this.toggle} 
-                        toggle={this.state.toggle === filteredOffer._id} 
-                        offerIdentificator={filteredOffer._id}
+                        toggle={this.state.toggle === filteredOffer.id} 
+                        offerIdentificator={filteredOffer.id}
                         title={filteredOffer.title} 
                         image={filteredOffer.image}
                         author={filteredOffer.author}

@@ -45,7 +45,7 @@ class Search extends Component {
             <>
                 <h6 id="pick-category">Pick a category</h6>
                 {/* <form onSubmit={(e) => {this.props.handleSearch(e, this.state)}}> */}
-                <form class="category-search">
+                <form className="category-search">
                     
                     <input onChange={this.handleCheck} name="house" id="house" type="checkbox"/>
                     <label onMouseEnter={this.addClass} onMouseLeave={this.removeClass} className={this.state.notHovered} for="house">House</label>

@@ -69,7 +69,7 @@ class OfferModal extends Component {
 
     render() {
         return (
-                <div onClick={() => {console.log(`${process.env.REACT_APP_FRONT}${this.props.location.pathname}`)}} className={`modal-container ${this.props.toggle && `show`}`} >
+                <div onClick={() => {console.log(`${process.env.REACT_APP_FRONT}${this.props.location.pathname}`)}} className={`modal-container ${this.props.toggle ? `show` : undefined}`} >
                     <div className="offer offer-modal">
                         <header>
                             <p>{this.props.title}</p>
@@ -95,7 +95,7 @@ class OfferModal extends Component {
                                     <div>
                                         <div>
                                             {/* TODO */}
-                                            <img src={`${process.env.REACT_APP_API}/${this.props.image}`} alt=""/>
+                                            {/* <img src={`${process.env.REACT_APP_API}/${this.props.image}`} alt=""/> */}
                                         </div>
                                         <div>
                                             <h1>Description</h1>
@@ -155,7 +155,7 @@ class OfferModal extends Component {
                             <p></p>}
                         </footer>
                     </div>
-                    <div onClick={this.props.close} className={this.props.toggle && "modal-bg"}></div>
+                    <div onClick={this.props.close} className={this.props.toggle ? "modal-bg" : undefined}></div>
                 </div>
         );
     }

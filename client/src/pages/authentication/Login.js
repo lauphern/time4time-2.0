@@ -36,7 +36,7 @@ class Login extends Component {
     //login box html
     render() { 
         return ( 
-            <section className="auth-background">
+            <section className="auth-background" style={ {backgroundImage: `url(/bg${Math.floor(Math.random() * 5) + 1}.jpg)`} }>
                 <div className="auth-panel">
                     <h3>Login</h3>
                     <p>Please login to proceed.</p>

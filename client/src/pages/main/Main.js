@@ -42,6 +42,8 @@ class Main extends Component {
             <>
                 <header className="hero">
                     <div>
+                    {/* TODO do this title with gsap */}
+                        <h1>Time for time</h1>
                         <h2>We think time is priceless. Do you want to join us and share new experiences and pay with just your time?</h2>
                     </div>
                     <div className="arrow">
@@ -49,7 +51,10 @@ class Main extends Component {
                         <a href="#pick-category"><i className="fas fa-angle-double-down"></i></a>
                     </div>
                 </header>
-                <Search handleSearch={this.handleSearch} error={this.state.error}/>
+                {/* anadir texto debajo del header para explicar tb, con fotos de unsplash, en plan con ejemplos
+                y tal vez toggle esto por la search bar y la list? */}
+                {/* show search bar AND offerlist (?) with a button */}
+                <Search handleSearch={this.handleSearch} error={this.state.error}/> 
                 <OfferList {...this.props} filteredOffers={this.state.filteredOffers} noResultsFound={this.state.noResultsFound}/>
             </>
          );

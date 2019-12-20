@@ -4,6 +4,61 @@ import customAxios from '../utils/customAxios';
 
 import "./Nav.scss"
 
+const AuthNav = (props) => {
+    return(
+        <>
+            <div className={props.dropdownMenu}>
+                <NavLink onClick={props.toggleDropdownMenu} to='/'>
+                    Home
+                </NavLink>
+                <NavLink onClick={props.toggleDropdownMenu} to="/dashboard">
+                    Dashboard
+                </NavLink>
+                <NavLink onClick={props.toggleDropdownMenu} to="/publish-offer">
+                    Publish new offer
+                </NavLink>
+                <NavLink onClick={() => {
+                    props.toggleDropdownMenu()
+                    props.logMeOut()
+                }} to="/login">
+                    Logout
+                </NavLink>
+            </div>
+            <div className="full-menu">
+                <NavLink to='/'>Home</NavLink>
+                <NavLink to='/dashboard'>Dashboard</NavLink>
+                <NavLink to="/publish-offer">Publish new offer</NavLink>
+                <p>Hello, <NavLink to="/dashboard">{props.username}</NavLink></p>
+                <NavLink to="/login" onClick={props.logMeOut}>Logout</NavLink>
+            </div>
+        </>
+    )
+}
+
+const UnauthNav = (props) => {
+    return (
+        <>
+            <div className={props.dropdownMenu}>
+                <NavLink onClick={props.toggleDropdownMenu} to='/'>
+                    Home
+                </NavLink>
+                <NavLink onClick={props.toggleDropdownMenu} to="/login">
+                    Login
+                </NavLink>
+                <NavLink onClick={props.toggleDropdownMenu} to="/signup">
+                    Sign up
+                </NavLink>
+            </div>
+            <div className="full-menu">
+                <NavLink alt="Home" to='/'>Home</NavLink>
+                <NavLink alt="Publish new offer" to="/login" >Publish new offer</NavLink>
+                <NavLink alt="Login" to="/login">Login</NavLink>
+                <NavLink alt="Sign up" to="/signup">Sign Up</NavLink>
+            </div>
+        </>
+    )
+}
+
 class Nav extends Component {
     constructor(props){
         super(props)
@@ -32,14 +87,10 @@ class Nav extends Component {
     }
 
     handleScroll = () => {
-        // const { scrollPos } = this.state;
-
         const currentScrollPos = window.pageYOffset;
-        // const visible = scrollPos > currentScrollPos;
     
         this.setState({
           scrollPos: currentScrollPos,
-        //   visible
         });
     }
 
@@ -63,58 +114,18 @@ class Nav extends Component {
                     </div>
                 </div>
                 {this.props.logOut ? 
-                    <div className={this.state.dropdownMenu}>
-                        <NavLink onClick={this.toggleDropdownMenu} to='/'>
-                        Home
-                        </NavLink>
-                        <NavLink onClick={this.toggleDropdownMenu} to="/dashboard">
-                        Dashboard
-                        </NavLink>
-                        <NavLink onClick={this.toggleDropdownMenu} to="/publish-offer">
-                        Publish new offer
-                        </NavLink>
-                        <NavLink onClick={() => {
-                            this.toggleDropdownMenu()
-                            this.logMeOut()
-                            }} to="/login">
-                        Logout
-                        </NavLink>
-                    </div>
+                    <AuthNav 
+                        dropdownMenu={this.state.dropdownMenu}
+                        toggleDropdownMenu={this.toggleDropdownMenu}
+                        logMeOut={this.logMeOut}
+                        username={this.props.username}
+                    />
                     :
-                    <div className={this.state.dropdownMenu}>
-                        <NavLink onClick={this.toggleDropdownMenu} to='/'>
-                        Home
-                        </NavLink>
-                        <NavLink onClick={this.toggleDropdownMenu} to="/login">
-                        Login
-                        </NavLink>
-                        <NavLink onClick={this.toggleDropdownMenu} to="/signup">
-                        Sign up
-                        </NavLink>
-                    </div>
+                    <UnauthNav 
+                        dropdownMenu={this.state.dropdownMenu}
+                        toggleDropdownMenu={this.toggleDropdownMenu}
+                    />
                 }
-                
-                <div className="full-menu">
-                    <NavLink to='/'>Home</NavLink>
-                    {this.props.logOut ?
-                        <>
-                            <NavLink to='/dashboard'>Dashboard</NavLink>
-                            <NavLink to="/publish-offer" >
-                                <button>Publish new offer</button>
-                            </NavLink>
-                            <p>Hello, <NavLink to="/dashboard">{this.props.username}</NavLink></p>
-                            <NavLink to="/login" onClick={this.logMeOut}>Logout</NavLink>
-                        </>
-                        :
-                        <>
-                            <NavLink to="/login" >
-                                <button className="button is-success">Publish new offer</button>
-                            </NavLink>
-                            <NavLink to="/login">Login</NavLink>
-                            <NavLink to="/signup">Sign Up</NavLink>
-                        </>
-                    }
-                </div>
             </nav>        
         );
     }
