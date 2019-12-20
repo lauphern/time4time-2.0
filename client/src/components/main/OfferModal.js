@@ -14,16 +14,29 @@ import {
     PinterestIcon,
 } from 'react-share';
 
+import { TimelineLite, CSSPlugin } from "gsap/all";
+
 class OfferModal extends Component {
-    state = { 
-        title: '',
-        author: '',
-        description: '',
-        category: '',
-        errorTimeWallet: '',
-        myOffer: undefined,
-        test: undefined
+
+    constructor(props) {
+        super(props)
+
+        this.state = { 
+            title: '',
+            author: '',
+            description: '',
+            category: '',
+            errorTimeWallet: '',
+            myOffer: undefined
+        }
+
+        this.modalContainer = null;
+		this.modalDialog = null;
+        this.modalTween = new TimelineLite({ paused: true });
+        this.closeModalTween = new TimelineLite({ paused: true })
+
     }
+    
 
     handleApply = (event) => {
         event.preventDefault();
@@ -67,10 +80,36 @@ class OfferModal extends Component {
         else this.props.history.push(`/profile/${this.props.author}`)
     }
 
+    closeFadeModal = () => {
+        // this.closeModalTween.call(function() {
+        //     //addClass, toggleClass, or your custom logic.  
+        //     // $('#map-container').addClass("red");
+
+        // }, null, null, 2);
+        //TODO continuar viendo como puedo hacer el fadeout
+        this.closeModalTween.to(this.modalContainer, 3, {css:{className:'+=modal-container'}})
+                    // TweenLite.to(element, 0.5, {css:{className:'+=newclass'}});
+
+    }
+
+    componentDidMount() {
+        this.modalTween
+        .to(this.modalContainer, 3, {css:{className:'+= modal-container show'}})
+        .fromTo(this.modalDialog, 0.2, { y: -50}, { y: 0})
+        .reversed(true)
+        .paused(false)
+    }
+
+    componentDidUpdate() {
+        this.modalTween.reversed(!this.props.toggle);
+    }
+
     render() {
         return (
-                <div onClick={() => {console.log(`${process.env.REACT_APP_FRONT}${this.props.location.pathname}`)}} className={`modal-container ${this.props.toggle ? `show` : undefined}`} >
-                    <div className="offer offer-modal">
+            //TODO esto era para intentar hacer el fadeout
+                // <div ref={div => this.modalContainer = div} className={`modal-container ${this.props.toggle ? `show` : undefined}`} >
+                <div ref={div => this.modalContainer = div} className={`modal-container`} >
+                    <div ref={div => this.modalDialog = div} className="offer offer-modal">
                         <header>
                             <p>{this.props.title}</p>
                             <Link>
@@ -155,12 +194,11 @@ class OfferModal extends Component {
                             <p></p>}
                         </footer>
                     </div>
-                    <div onClick={this.props.close} className={this.props.toggle ? "modal-bg" : undefined}></div>
+                    <div onClick={ () => {this.closeFadeModal(); this.props.close()}} className={this.props.toggle ? "modal-bg" : undefined}></div>
                 </div>
         );
     }
 }
-
 
 
 export default OfferModal;

@@ -27,6 +27,7 @@ class OfferList extends Component {
         this.setState(() =>({
             toggle: offerId
         }))
+        // TODO revisar que funciona la url unica del modal
         typeof offerId == "string" ? this.props.history.push(`/${offerId}`) : this.props.history.push(`/`) 
     }
 

@@ -22,7 +22,7 @@
     "express-session": "^1.15.6",
     "firebase-admin": "^8.8.0",
     "font-awesome": "^4.7.0",
-    "helmet": "^3.16.0",
+    "helmet": "^3.21.2",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
     "moment": "^2.24.0",

@@ -3,18 +3,30 @@
 
 .modal-container {
 
-    display: none;
+    // display: none;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    // z-index: -200;
+    visibility: hidden;
 
     &.show {
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
+        // width: 100vw;
+        // height: 100vh;
+        // display: flex;
+        // justify-content: center;
+        // align-items: center;
+        // position: fixed;
+        // top: 0;
+        // left: 0;
         z-index: 200;
+        visibility: visible;
     }
 
 
@@ -25,6 +37,7 @@
             overflow: scroll;
             position: relative;
             z-index: 200;
+            // opacity: 0;
         }
     }
 
