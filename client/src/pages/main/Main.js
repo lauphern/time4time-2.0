@@ -5,9 +5,15 @@ import OfferList from '../../components/main/OfferList';
 import "./Main.scss"
 
 import customAxios from '../../utils/customAxios';
+
+import { gsap } from "gsap";
+
+
 import { loadProgressBar } from 'axios-progress-bar';
 
-loadProgressBar(customAxios)
+//TODO revisar que funciona
+loadProgressBar(customAxios);
+
 
 
 class Main extends Component {
@@ -17,6 +23,12 @@ class Main extends Component {
             filteredOffers: [],
             noResultsFound: null
         }
+
+        this.mainTitle = null
+        this.firstSpan = null
+        this.secondSpan = null
+        this.thirdSpan = null
+        this.titleTimeline = gsap.timeline()
     }
 
     //search button
@@ -37,14 +49,37 @@ class Main extends Component {
         }
     }
 
+    componentDidMount() {
+        this.titleTimeline
+        // .fromTo(this.mainTitle, 2.5, {css: {opacity: 0.3}}, {css: {opacity: 1}})
+        // .fromTo(this.mainTitle, 0.5, {y: +200}, {y: 0})
+        // .fromTo(this.firstSpan, 0.2, {y: +200}, {y: 0}, "-=1.9")
+        // .fromTo(this.secondSpan, 0.2, {y: +200}, {y: 0}, "-=1.7")
+        // .fromTo(this.thirdSpan, 0.2, {y: +200}, {y: 0}, "-=1.5")
+        .fromTo(this.firstSpan, 0.8, {y: +200}, {y: 0})
+        .fromTo(this.secondSpan, 0.8, {y: +200}, {y: 0}, "-=0.5")
+        .fromTo(this.thirdSpan, 0.8, {y: +200}, {y: 0}, "-=0.65")
+
+
+        // https://miistudio.com.mx/
+        // https://greensock.com/docs/v2/Plugins/CSSPlugin
+    }
+
     render() { 
         return ( 
             <>
                 <header className="hero">
                     <div>
-                    {/* TODO do this title with gsap */}
-                        <h1>Time for time</h1>
-                        <h2>We think time is priceless. Do you want to join us and share new experiences and pay with just your time?</h2>
+                        <div>
+                            <h1 ref={h1 => this.mainTitle = h1} class="main-title">
+                                <span ref={span => this.firstSpan = span}>Time </span>
+                                <span ref={span => this.secondSpan = span}>for </span>
+                                <span ref={span => this.thirdSpan = span}>time</span>
+                            </h1>
+                        </div>
+                        <div>
+                            <p>We think time is priceless. Do you want to join us and share new experiences and pay with just your time?</p>
+                        </div>
                     </div>
                     <div className="arrow">
                         <i className="fas fa-grip-lines"></i>

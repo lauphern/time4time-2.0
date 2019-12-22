@@ -14,7 +14,7 @@ import {
     PinterestIcon,
 } from 'react-share';
 
-import { TimelineLite, CSSPlugin } from "gsap/all";
+import { gsap } from "gsap";
 
 class OfferModal extends Component {
 
@@ -32,8 +32,8 @@ class OfferModal extends Component {
 
         this.modalContainer = null;
 		this.modalDialog = null;
-        this.modalTween = new TimelineLite({ paused: true });
-        this.closeModalTween = new TimelineLite({ paused: true })
+        this.modalTween = gsap.timeline();
+        this.closeModalTween = gsap.timeline();
 
     }
     
@@ -87,14 +87,20 @@ class OfferModal extends Component {
 
         // }, null, null, 2);
         //TODO continuar viendo como puedo hacer el fadeout
-        this.closeModalTween.to(this.modalContainer, 3, {css:{className:'+=modal-container'}})
+        // setTimeout(() => {
+        //     this.closeModalTween.delay(50).to(this.modalContainer, 0.5, {css:{className:'+=modal-container'}})
+        // // }, 50000)
+        // console.log(this.closeModalTween.delay())
                     // TweenLite.to(element, 0.5, {css:{className:'+=newclass'}});
-
+        this.modalTween.reverse()
+        //TODO ahora mismo tengo que limpiar la url
+        this.props.history.push("/")
+        //TODO arreglar que no desaparezca a trozos
     }
 
     componentDidMount() {
         this.modalTween
-        .to(this.modalContainer, 3, {css:{className:'+= modal-container show'}})
+        .to(this.modalContainer, 0.1, {css:{className:'+= modal-container show'}})
         .fromTo(this.modalDialog, 0.2, { y: -50}, { y: 0})
         .reversed(true)
         .paused(false)
@@ -194,7 +200,7 @@ class OfferModal extends Component {
                             <p></p>}
                         </footer>
                     </div>
-                    <div onClick={ () => {this.closeFadeModal(); this.props.close()}} className={this.props.toggle ? "modal-bg" : undefined}></div>
+                    <div onClick={ () => {this.closeFadeModal(); /*this.props.close()*/}} className={"modal-bg"}></div>
                 </div>
         );
     }

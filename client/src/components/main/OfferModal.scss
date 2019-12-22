@@ -15,6 +15,7 @@
     left: 0;
     // z-index: -200;
     visibility: hidden;
+    transition: all 1s;
 
     &.show {
         // width: 100vw;
@@ -27,6 +28,8 @@
         // left: 0;
         z-index: 200;
         visibility: visible;
+        transition: all 1s;
+
     }
 
 
