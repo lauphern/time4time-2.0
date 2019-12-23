@@ -8,6 +8,7 @@ class Login extends Component {
     state = { 
         username: '',
         password: '',
+        bgNum: Math.floor(Math.random() * 5) + 1
      }
 
     //take an input and update status
@@ -36,7 +37,8 @@ class Login extends Component {
     //login box html
     render() { 
         return ( 
-            <section className="auth-background" style={ {backgroundImage: `url(/bg${Math.floor(Math.random() * 5) + 1}.jpg)`} }>
+            // TODO fix bug that reloads the image when you add an input (new state)
+            <section className="auth-background" style={ {backgroundImage: `url(/bg${this.state.bgNum}.jpg)`} }>
                 <div className="auth-panel">
                     <h3>Login</h3>
                     <p>Please login to proceed.</p>

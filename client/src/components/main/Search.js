@@ -42,7 +42,7 @@ class Search extends Component {
     
     render() { 
         return ( 
-            <>
+            <section id="search">
                 <h6 id="pick-category">Pick a category</h6>
                 {/* <form onSubmit={(e) => {this.props.handleSearch(e, this.state)}}> */}
                 <form className="category-search">
@@ -69,7 +69,7 @@ class Search extends Component {
                     
                     <p style={{color: "red"}}>{this.props.error? this.props.error:""}</p>
                 </form>
-            </>
+            </section>
         );
     }
 }

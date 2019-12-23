@@ -81,19 +81,7 @@ class OfferModal extends Component {
     }
 
     closeFadeModal = () => {
-        // this.closeModalTween.call(function() {
-        //     //addClass, toggleClass, or your custom logic.  
-        //     // $('#map-container').addClass("red");
-
-        // }, null, null, 2);
-        //TODO continuar viendo como puedo hacer el fadeout
-        // setTimeout(() => {
-        //     this.closeModalTween.delay(50).to(this.modalContainer, 0.5, {css:{className:'+=modal-container'}})
-        // // }, 50000)
-        // console.log(this.closeModalTween.delay())
-                    // TweenLite.to(element, 0.5, {css:{className:'+=newclass'}});
         this.modalTween.reverse()
-        //TODO ahora mismo tengo que limpiar la url
         this.props.history.push("/")
         //TODO arreglar que no desaparezca a trozos
     }

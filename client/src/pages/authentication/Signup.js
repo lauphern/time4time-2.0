@@ -16,7 +16,8 @@ class SignUp extends Component {
         lastname:'',
         email: '',
         birth: '',
-        error: ''
+        error: '',
+        bgNum: Math.floor(Math.random() * 5) + 1
      }
      
     //take an input and update status
@@ -47,7 +48,7 @@ class SignUp extends Component {
 
     render() { 
         return ( 
-            <section className="auth-background">
+            <section className="auth-background" style={ {backgroundImage: `url(/bg${this.state.bgNum}.jpg)`} }>
                 <div className="auth-panel">
                     <h3>Sign up</h3>
                     <p>Please sign up to proceed.</p>

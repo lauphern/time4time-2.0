@@ -134,7 +134,7 @@ class OfferList extends Component {
         })
 
             return (
-                <div>
+                <section>
                     <InfiniteScroll
                         dataLength={this.state.firstOffers.length}
                         next={this.fetchMoreData}
@@ -155,7 +155,7 @@ class OfferList extends Component {
                         renderOffers)
                     }
                     </InfiniteScroll>
-                </div>
+                </section>
             );
     }
 }

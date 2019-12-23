@@ -1,0 +1,20 @@
+#intro {
+    article {
+        display: flex;
+        width: 100vw;
+        justify-content: space-around;
+        align-items: center;
+
+        &:nth-of-type(2) {
+            flex-direction: row-reverse;
+        }
+
+        div {
+            width: 40%;
+
+            img {
+                max-width: 100%;
+            }
+        }
+    }
+}
