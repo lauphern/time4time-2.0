@@ -16,30 +16,46 @@ import AuthorProfile from './pages/author-profile/AuthorProfile'
 import Footer from './components/Footer'
 import Nav from './components/Nav';
 
+const Loader = () => {
+    return <i class="fas fa-spinner fa-pulse loader"></i>
+}
 
 class App extends Component {
     //TODO
     //Create a file in utils for auth - for this logic
     state = {
-        loggedIn : false,
-        username : "",
+        loggedIn: false,
+        username: "",
+        loading: true
     }
 
     loggedIn = (aBoolean, username) => {
         this.setState({
             loggedIn: aBoolean,
-            username: username,
+            username: username
         })
     }
     
     logOut = ()=> {
         this.setState({
             loggedIn: false,
-            username: "",
+            username: ""
         })
     }
 
+    timeout = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+
+    isLoaded = async (ms = 3000) => {
+        await this.timeout(ms)
+        this.setState({loading: false})
+    }
+
+    componentDidMount() {
+        this.isLoaded()
+    }
+
     render() {
+        if(this.state.loading) return <Loader />
         return (
             <>
                 <div className="content">

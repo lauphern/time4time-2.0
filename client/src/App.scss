@@ -22,6 +22,12 @@ body {
     height: 100vh;
 }
 
+.loader {
+    font-size: 3em;
+    margin: auto;
+    // transform: translate(-50%, -50%);
+}
+
 .content {
     flex: 1 0 auto;
 }
