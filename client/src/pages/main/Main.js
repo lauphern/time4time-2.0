@@ -110,7 +110,7 @@ class Main extends Component {
                     <div className={this.state.mainSection !== this.searchListSection ? "arrow" : "hidden-element"}>
                         <i className="fas fa-grip-lines"></i>
                         {/* TODO revisar que me lleve a la altura correcta */}
-                        <a onClick={this.toggleOfferList} href="#intro"><i className="fas fa-angle-double-down"></i></a>
+                        <a onClick={this.state.showSection ? null : this.toggleOfferList} href="#intro"><i className="fas fa-angle-double-down"></i></a>
                     </div>
                 </header>
                 {/* TODO cuando la lista esta mostrada, si hago click en Home o en el Logo de la navbar en la navbar no hace reload asi que no muestra las otras secciones, y deberia 

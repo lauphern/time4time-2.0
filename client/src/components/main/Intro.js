@@ -27,7 +27,6 @@ class Intro extends Component {
     }
 
     render() { 
-        // TODO montar este component solo en dos ocasiones: cuando hago click en el boton o cuando estoy a la altura correcta de la pagina (tengo que asegurarme que esto funcione para todas las pantallas)
         return (
             <section id="intro" className={this.props.hideOffers ? undefined : "hidden-element"}>
                 <article>
