@@ -8,28 +8,29 @@ const AuthNav = (props) => {
     return(
         <>
             <div className={props.dropdownMenu}>
-                <NavLink onClick={props.toggleDropdownMenu} to='/'>
+                <NavLink onClick={props.toggleDropdownMenu} exact to='/' activeClassName="active-nav-item">
                     Home
                 </NavLink>
-                <NavLink onClick={props.toggleDropdownMenu} to="/dashboard">
+                <NavLink onClick={props.toggleDropdownMenu} to="/dashboard" activeClassName="active-nav-item">
                     Dashboard
                 </NavLink>
-                <NavLink onClick={props.toggleDropdownMenu} to="/publish-offer">
+                <NavLink onClick={props.toggleDropdownMenu} to="/publish-offer" activeClassName="active-nav-item">
                     Publish new offer
                 </NavLink>
                 <NavLink onClick={() => {
                     props.toggleDropdownMenu()
                     props.logMeOut()
-                }} to="/login">
+                }} to="/login" 
+                activeClassName="active-nav-item">
                     Logout
                 </NavLink>
             </div>
             <div className="full-menu">
-                <NavLink to='/'>Home</NavLink>
-                <NavLink to='/dashboard'>Dashboard</NavLink>
-                <NavLink to="/publish-offer">Publish new offer</NavLink>
-                <p>Hello, <NavLink to="/dashboard">{props.username}</NavLink></p>
-                <NavLink to="/login" onClick={props.logMeOut}>Logout</NavLink>
+                <NavLink alt="Home" exact to='/' activeClassName="active-nav-item">Home</NavLink>
+                <NavLink alt="Dashboard" to='/dashboard' activeClassName="active-nav-item">Dashboard</NavLink>
+                <NavLink alt="Publish new offer" to="/publish-offer" activeClassName="active-nav-item">Publish new offer</NavLink>
+                <p>Hello, <NavLink alt={props.username} to="/dashboard" activeClassName="active-nav-item">{props.username}</NavLink></p>
+                <NavLink alt="Logout" to="/login" onClick={props.logMeOut} activeClassName="active-nav-item">Logout</NavLink>
             </div>
         </>
     )
@@ -39,21 +40,21 @@ const UnauthNav = (props) => {
     return (
         <>
             <div className={props.dropdownMenu}>
-                <NavLink onClick={props.toggleDropdownMenu} to='/'>
+                <NavLink onClick={props.toggleDropdownMenu} exact to='/' activeClassName="active-nav-item">
                     Home
                 </NavLink>
-                <NavLink onClick={props.toggleDropdownMenu} to="/login">
+                <NavLink onClick={props.toggleDropdownMenu} to="/login" activeClassName="active-nav-item">
                     Login
                 </NavLink>
-                <NavLink onClick={props.toggleDropdownMenu} to="/signup">
+                <NavLink onClick={props.toggleDropdownMenu} to="/signup" activeClassName="active-nav-item">
                     Sign up
                 </NavLink>
             </div>
             <div className="full-menu">
-                <NavLink alt="Home" to='/'>Home</NavLink>
-                <NavLink alt="Publish new offer" to="/login" >Publish new offer</NavLink>
-                <NavLink alt="Login" to="/login">Login</NavLink>
-                <NavLink alt="Sign up" to="/signup">Sign Up</NavLink>
+                <NavLink alt="Home" exact to='/' activeClassName="active-nav-item">Home</NavLink>
+                <NavLink alt="Publish new offer" to="/publish-offer" activeClassName="active-nav-item">Publish new offer</NavLink>
+                <NavLink alt="Login" to="/login" activeClassName="active-nav-item">Login</NavLink>
+                <NavLink alt="Sign up" to="/signup" activeClassName="active-nav-item">Sign Up</NavLink>
             </div>
         </>
     )
@@ -106,7 +107,7 @@ class Nav extends Component {
         return ( 
             <nav className={this.state.scrollPos > 150 ? "shrink-nav" : null}>
                 <div>
-                    <NavLink to="/">
+                    <NavLink to="/" activeClassName="active-nav-item">
                         <img src="/logo_black.png" alt=""></img>
                     </NavLink>
                     <div className="nav-burger" onClick={this.toggleDropdownMenu}>

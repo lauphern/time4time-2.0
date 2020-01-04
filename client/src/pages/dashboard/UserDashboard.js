@@ -7,6 +7,8 @@ import UserSettings from '../../components/dashboard/UserSettings'
 import MyProfile from '../../components/dashboard/MyProfile'
 import customAxios from '../../utils/customAxios';
 
+import "./UserDashboard.scss"
+
 class UserDashboard extends Component {
     constructor(props) {
         super(props)
@@ -98,67 +100,67 @@ class UserDashboard extends Component {
     render() { 
 
         return (
-            <div>
-                <div>
-                    <div>
-                        <div>
-                            <aside>
-                                <ul>
-                                    {this.state.myOffers ?
-                                        <Link className={this.state.activeMenuItems[0] ? "is-active" : "has-notification"} onClick={()=> {this.openSection('all requests')}}>
-                                            My offers &nbsp;<i className="fas fa-bell"></i>
-                                        </Link>
-                                        :
-                                        <Link className={this.state.activeMenuItems[0] ? "is-active" : "inactive"} onClick={()=> {this.openSection('all requests')}}>
-                                            My offers &nbsp;<i className="fas fa-bell-slash"></i>
-                                        </Link>
-                                    }
-                                </ul>
-                                <ul className="menu-list">
-                                    {this.state.petitionsNotification ?
-                                        <Link className={this.state.activeMenuItems[1] ? "is-active" : "has-notification"} onClick={()=> {this.openSection('my petitions')}}>
-                                            My petitions &nbsp;<i className="fas fa-bell"></i>
-                                        </Link>
-                                        :
-                                        <Link className={this.state.activeMenuItems[1] ? "is-active" : "inactive"} onClick={()=> {this.openSection('my petitions')}}>
-                                            My petitions &nbsp;<i className="fas fa-bell-slash"></i>
-                                        </Link>
-                                    }
-                                </ul>
-                                <ul className="menu-list">
-                                    <Link className={this.state.activeMenuItems[2] ? "is-active" : "inactive"} onClick={()=> {this.openSection('messages')}}>
-                                        Chat
-                                    </Link></ul>
-                                <ul className="menu-list">
-                                    <Link className={this.state.activeMenuItems[3] ? "is-active" : "inactive"} onClick={()=> {this.openSection('profile')}}>
-                                        Profile
-                                    </Link></ul>
-                                <ul className="menu-list">
-                                    <Link className={this.state.activeMenuItems[4] ? "is-active" : "inactive"} onClick={()=> {this.openSection('settings')}}>
-                                        Settings
-                                    </Link></ul>
-                            </aside>
-                            <div>
-                            {(() => {
-                                //this switch case is used to open the selected section when you click the menu item
-                                switch(this.state.activeSection) {
-                                    case 'all requests':
-                                        return <AllRequests {...this.props} {...this.state} cleanNotif={this.cleanNotif} updateOffers={this.getMyOffers} listOfMyOffers={this.state.listOfMyOffers}/>;
-                                    case 'my petitions':
-                                        return <MyPetitions {...this.props} {...this.state} cleanNotif={this.cleanNotif} listOfPetitions={this.state.listOfPetitions} />;
-                                    case 'messages':
-                                        return <DirectMessages/>
-                                    case 'profile':
-                                        return <MyProfile />
-                                    case 'settings':
-                                        return <UserSettings {...this.props} openSection={this.openSection}/>
-                                    default:
-                                        return <AllRequests {...this.props} {...this.state} listOfMyOffers={this.state.listOfMyOffers}/>
-                                }
-                            })()}
-                            </div>
-                        </div>
-                    </div>
+            <div className="user-dashboard">
+                <aside>
+                    <ul>
+                        <li>
+                            {this.state.myOffers ?
+                                <Link className={this.state.activeMenuItems[0] ? "is-active" : "has-notification"} onClick={()=> {this.openSection('all requests')}}>
+                                    <span><i class="fas fa-th-large"></i> My offers &nbsp;<i className="fas fa-bell"></i></span>
+                                </Link>
+                                :
+                                <Link className={this.state.activeMenuItems[0] ? "is-active" : "inactive"} onClick={()=> {this.openSection('all requests')}}>
+                                    <span><i class="fas fa-th-large"></i> My offers &nbsp;<i className="fas fa-bell-slash"></i></span>
+                                </Link>
+                            }
+                        </li>
+                        <li>
+                            {this.state.petitionsNotification ?
+                                <Link className={this.state.activeMenuItems[1] ? "is-active" : "has-notification"} onClick={()=> {this.openSection('my petitions')}}>
+                                    <span><i class="fas fa-th-large"></i> My petitions &nbsp;<i className="fas fa-bell"></i></span>
+                                </Link>
+                                :
+                                <Link className={this.state.activeMenuItems[1] ? "is-active" : "inactive"} onClick={()=> {this.openSection('my petitions')}}>
+                                    <span><i class="fas fa-th-large"></i> My petitions &nbsp;<i className="fas fa-bell-slash"></i></span>
+                                </Link>
+                            }
+                        </li>
+                        <li>
+                            <Link className={this.state.activeMenuItems[2] ? "is-active" : "inactive"} onClick={()=> {this.openSection('messages')}}>
+                                <span><i class="fas fa-comments"></i> Chat</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className={this.state.activeMenuItems[3] ? "is-active" : "inactive"} onClick={()=> {this.openSection('profile')}}>
+                                <span><i class="fas fa-user-alt"></i> Profile</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className={this.state.activeMenuItems[4] ? "is-active" : "inactive"} onClick={()=> {this.openSection('settings')}}>
+                                <span><i class="fas fa-sliders-h"></i> Settings</span>
+                            </Link>
+                        </li>
+                    </ul>
+                </aside>
+                <div className="dashboard-content">
+                {(() => {
+                    //this switch case is used to open the selected section when you click the menu item
+                    /* TODO combinar offers, petitions y (en el futuro) offers bookmarked */
+                    switch(this.state.activeSection) {
+                        case 'all requests':
+                            return <AllRequests {...this.props} {...this.state} cleanNotif={this.cleanNotif} updateOffers={this.getMyOffers} listOfMyOffers={this.state.listOfMyOffers}/>;
+                        case 'my petitions':
+                            return <MyPetitions {...this.props} {...this.state} cleanNotif={this.cleanNotif} listOfPetitions={this.state.listOfPetitions} />;
+                        case 'messages':
+                            return <DirectMessages/>
+                        case 'profile':
+                            return <MyProfile />
+                        case 'settings':
+                            return <UserSettings {...this.props} openSection={this.openSection}/>
+                        default:
+                            return <AllRequests {...this.props} {...this.state} listOfMyOffers={this.state.listOfMyOffers}/>
+                    }
+                })()}
                 </div>
             </div>
         );

@@ -3,7 +3,6 @@
 nav {
     display: flex;
     justify-content: space-between;
-    // align-items: center;
     height: 5vh;
     padding: 2vh 2vw;
     position: fixed;
@@ -13,6 +12,7 @@ nav {
     z-index: 100;
     background: white;
     transition: 0.5s;
+    overflow: hidden;
 
     a {
         color: black;
@@ -32,7 +32,7 @@ nav {
         display: none;
     
         &:after, &:before, div {
-            background-color: #fff;
+            background-color: $title-sm;
             border-radius: 3px;
             content: '';
             display: block;
@@ -67,7 +67,7 @@ nav {
         align-items: center;
 
         * {
-            margin-left: 3vw;
+            padding: 1vw 3vw;
         }
 
         a {
@@ -84,11 +84,16 @@ nav {
                 transition: all 0.3s;
                 transform: scale(1.5);
                 opacity: 0;
+                padding: 1vw 3vw;
             }
 
             &:hover:before {
                 transform: scale(1);
                 opacity: 1;
+            }
+
+            &:active, &.active-nav-item {
+                background-color: $light-grey;
             }
         }
     }
