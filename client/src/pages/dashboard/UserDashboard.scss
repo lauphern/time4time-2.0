@@ -1,0 +1,48 @@
+@import "../../Setup.scss";
+
+.user-dashboard {
+    display: flex;
+    height: 100%;
+
+    aside {
+        background-color: white;
+        padding: 9vh 2vw 0;
+        height: 91vh;
+
+        ul {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+
+            li {
+                height: 20%;
+
+                a {
+                    color: $title-sm;
+                    font-weight: 600;
+                    height: 80%;
+                    margin: 10% auto;
+                    display: block;
+                    display: flex;
+                    align-items: center;
+
+                    &.is-active {
+                        background-color: $light-grey;
+                    }
+
+                    &:hover {
+                        background-color: $light-grey;
+                    }
+                }
+            }
+        }
+    }
+
+    .dashboard-content {
+        padding-top: 9vh;
+    }
+}
