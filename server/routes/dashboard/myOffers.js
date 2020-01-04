@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-// const Offer = require('../../models/Offer')
-// const User = require('../../models/User')
 
 const { usersCollection, offersCollection, admin: firebase } = require("../../utils/db")
 
