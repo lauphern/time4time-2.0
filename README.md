@@ -1,6 +1,6 @@
-# Time 4 Time
+# Time 4 Time 2.0
 
-## REFACTORING
+## 2nd phase
 
 • Features/fixes already implemented:
 Custom service for axios (front-end).
@@ -21,9 +21,9 @@ Testing.
 Improve notification system.
 Implement search by location with mapbox.
 
-#### MERN stack
+#### 1st phase - Original Time 4 Time
 
-Final project at Ironhack's full-stack web development bootcamp.
+Final project at Ironhack's full-stack web development bootcamp. Developed by [Ivonne Y. Mendoza](https://github.com/TiaIvonne)
 
 In our project, you can share time with other people and accumulate time for some fun activities. No money involved, just time!
 
