@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import customAxios from '../../utils/customAxios';
 import { Link } from 'react-router-dom'
+import { login } from '../../utils/authMethods'
 
 import "./Authentication.scss"
 
@@ -21,18 +21,14 @@ class Login extends Component {
     //send data with axios
     handleSubmit = (event) =>{
         event.preventDefault();
-        let newUser = this.state
-        customAxios({
-            method: 'post',
-            url: '/login',
-            data: newUser
-            }).then(() => {
-                this.props.loggedIn(true,this.state.username)
-                this.props.history.push('/dashboard')
-            }).catch(() => {
+        login(this.state)
+        .then(() => {
+            this.props.loggedIn(true,this.state.username)
+            this.props.history.push('/dashboard')
+        }).catch(() => {
             this.setState({error: 'Username or email is incorrect'})    
             this.props.history.push('/login')
-            })
+        })
     }
     //login box html
     render() { 

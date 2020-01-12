@@ -24,7 +24,7 @@
     "react-infinite-scroller": "^1.2.4",
     "react-moment": "^0.8.4",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8",
+    "react-scripts": "^3.3.0",
     "react-share": "^2.4.0",
     "react-star-rating-component": "^1.4.1",
     "react-transition-group": "^1.2.1",
@@ -36,7 +36,9 @@
     "build-dev": "dotenv -e .env.development react-scripts build && cr -r build ../API/public",
     "build-prod": "dotenv -e .prod.env react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
