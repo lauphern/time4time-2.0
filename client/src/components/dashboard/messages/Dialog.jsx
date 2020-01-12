@@ -1,5 +1,7 @@
 import React from 'react';
     import Proptypes from 'prop-types';
+
+    // TODO borrar este component
     const Dialog = props => {
       const { userId, handleInput, connectToChatkit} = props;
 

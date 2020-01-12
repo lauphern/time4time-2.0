@@ -74,6 +74,8 @@ app.use('/api', require('./routes/main/search'));
 app.use('/api', require('./routes/authentication/signup'));
 app.use('/api', require('./routes/authentication/login'));
 app.use('/api', require('./routes/authentication/logout'));
+app.use('/api', require('./routes/dashboard/authenticateChat'));
+
 
 //Protected/private routes
 // TODO

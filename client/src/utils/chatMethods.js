@@ -26,7 +26,7 @@ function handleInput(event) {
   });
 }
 
-function connectToRoom(id = '19813420') {
+function connectToRoom(id = process.env.REACT_APP_CHATKIT_GENERAL_ROOM_ID) {
   const { currentUser } = this.state;
 
   this.setState({
@@ -73,12 +73,9 @@ function connectToRoom(id = '19813420') {
     .catch(console.error);
 }
 
-function connectToChatkit(event) {
-  event.preventDefault();
+function connectToChatkit(username) {
 
-  const { userId } = this.state;
-
-  if (userId === null || userId.trim() === '') {
+  if (username === null || username.trim() === '') {
     alert('Invalid userId');
     return;
   }
@@ -90,40 +87,41 @@ function connectToChatkit(event) {
   customAxios({
     method: 'post',
     url:'/chat-users',
-    data: { userId }
+    data: { userId: username }
   }).then(() => {
-      const tokenProvider = new Chatkit.TokenProvider({
-        url: `${process.env.REACT_APP_API}/authenticate`,
-      });
+    const tokenProvider = new Chatkit.TokenProvider({
+      url: `${process.env.REACT_APP_API}/authenticate`,
+    });
 
-      const chatManager = new Chatkit.ChatManager({
-        instanceLocator: process.env.CHATKIT_INSTANCE_LOCATOR,
-        userId,
-        tokenProvider,
-      });
-
-      return chatManager
-        .connect({
-          onAddedToRoom: room => {
-            const { rooms } = this.state;
-            this.setState({
-              rooms: [...rooms, room],
-            });
+    const chatManager = new Chatkit.ChatManager({
+      instanceLocator: process.env.REACT_APP_CHATKIT_INSTANCE_LOCATOR,
+      userId: username,
+      tokenProvider,
+    });
+    return chatManager
+      .connect({
+        onAddedToRoom: room => {
+          const { rooms } = this.state;
+          this.setState({
+            rooms: [...rooms, room],
+          });
+        },
+      })
+      .then(currentUser => {
+        this.setState(
+          {
+            currentUser,
+            showLogin: false,
+            isLoading: false,
+            rooms: currentUser.rooms,
           },
-        })
-        .then(currentUser => {
-          this.setState(
-            {
-              currentUser,
-              showLogin: false,
-              isLoading: false,
-              rooms: currentUser.rooms,
-            },
-            () => connectToRoom.call(this)
-          );
-        });
+          () => connectToRoom.call(this)
+        );
+      });
     })
-    .catch(console.error);
+    .catch(() => {
+      console.error()
+    });
 }
 
 function createPrivateRoom(id) {

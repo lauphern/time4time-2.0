@@ -36,3 +36,5 @@ kidos_review
 
 /client/.gitignore
 /server/.gitignore
+
+.vscode

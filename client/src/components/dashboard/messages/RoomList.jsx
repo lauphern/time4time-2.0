@@ -4,10 +4,10 @@ import Proptypes from 'prop-types';
 //set up roomlist for a public chat
 const RoomList = props => {
   const { rooms, currentRoom, connectToRoom, currentUser } = props;
-  const roomList = rooms.map(room => {
-  const roomIcon = !room.isPrivate ? '🌐' : '🔒';
-  const isRoomActive = room.id === currentRoom.id ? 'active' : '';
 
+  const roomList = rooms.map(room => {
+    const roomIcon = !room.isPrivate ? '🌐' : '🔒';
+    const isRoomActive = room.id === currentRoom.id ? 'active' : '';
     return (
       <li
         className={isRoomActive}
@@ -25,6 +25,7 @@ const RoomList = props => {
       </li>
     );
   });
+
   return (
     <div>
       <ul>{roomList}</ul>

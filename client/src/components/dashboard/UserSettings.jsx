@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import customAxios from '../../utils/customAxios';
 import EditProfileImage from "./EditProfileImage"
-
+import { getUser } from '../../utils/authMethods'
 // TODO asegurarme de que subir foto es opcional y que no crash si no la suben
 
 
@@ -12,13 +12,12 @@ class UserSettings extends Component {
         this.state = {
             email: '',
             bio: '',
-            user: [],
             error: ''
         }
     }
 
     handleInput = (event)=> {
-        let myInput = {} //empty object
+        let myInput = {}
         myInput[event.target.name] = event.target.value
         this.setState(myInput)
     }
@@ -49,7 +48,6 @@ class UserSettings extends Component {
             url: '/user-settings',
             data: editUser
         }).then(() => {
-            //TODO update user in localstorage
             this.props.openSection('profile')
             this.props.history.push('/dashboard')
         }).catch(err => {
@@ -67,17 +65,17 @@ class UserSettings extends Component {
                             <form onSubmit={this.handleSubmitPersonalInfo}>
                                 <div>
                                     <div>
-                                        <p>{this.state.user.firstname}</p>
+                                        <p>First name: {getUser().firstname}</p>
                                     </div>
                                 </div>
                                 <div>
                                     <div>
-                                    <p>{this.state.user.lastname}</p>
+                                        <p>Last name: {getUser().lastname}</p>
                                     </div>
                                 </div>
                                 <div>
                                     <div>
-                                    <p>{this.state.user.username}</p>
+                                        <p>Username: {getUser().username}</p>
                                     </div>
                                 </div>
                                 <div>
@@ -98,7 +96,7 @@ class UserSettings extends Component {
                                 </div>
                                 <div>
                                     <div>
-                                    <p>{this.state.user.birth}</p>
+                                        <p>Date of birth: {getUser().birth}</p>
                                     </div>
                                 </div>
                                 <div>

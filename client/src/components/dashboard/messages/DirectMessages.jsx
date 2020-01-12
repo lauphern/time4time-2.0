@@ -6,18 +6,18 @@ import {
     sendMessage,
     sendDM,
     } from '../../../utils/chatMethods';
-import Dialog from './Dialog';
 import RoomList from './RoomList';
 import ChatSession from './ChatSession';
 import RoomUsers from './RoomUsers';
+import { getUser } from '../../../utils/authMethods'
 
 //this component is for render and send private messages between time4time user's
 class DirectMessages extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            userId: '',
-            showLogin: true,
+            // userId: '',
+            // showLogin: true,
             isLoading: false,
             currentUser: null,
             currentRoom: null,
@@ -32,12 +32,16 @@ class DirectMessages extends Component {
         this.connectToRoom = connectToRoom.bind(this);
         this.sendMessage = sendMessage.bind(this);
         this.sendDM = sendDM.bind(this);
-        }
+    }
+
+    componentDidMount() {
+      this.connectToChatkit(getUser().username)
+    }
 
     render() { 
         const {
-            userId,
-            showLogin,
+            // userId,
+            // showLogin,
             rooms,
             currentRoom,
             currentUser,
@@ -92,13 +96,13 @@ class DirectMessages extends Component {
                 />
               ) : null}
             </aside>
-            {showLogin ? (
+            {/* {showLogin ? (
               <Dialog
                 userId={userId}
                 handleInput={this.handleInput}
                 connectToChatkit={this.connectToChatkit}
               />
-            ) : null}
+            ) : null} */}
           </div>
             )
     }

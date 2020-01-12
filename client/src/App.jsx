@@ -21,7 +21,6 @@ const Loader = () => {
 }
 
 class App extends Component {
-    //TODO
     state = {
         loading: true,
         loggedIn: false
