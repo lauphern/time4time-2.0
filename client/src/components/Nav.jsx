@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
-import customAxios from '../utils/customAxios';
+import { logout, getUser } from '../utils/authMethods'
 
 import "./Nav.scss"
 
 const AuthNav = (props) => {
-    return(
+    return (
         <>
             <div className={props.dropdownMenu}>
                 <NavLink onClick={props.toggleDropdownMenu} exact to='/' activeClassName="active-nav-item">
@@ -29,7 +29,7 @@ const AuthNav = (props) => {
                 <NavLink alt="Home" exact to='/' activeClassName="active-nav-item">Home</NavLink>
                 <NavLink alt="Dashboard" to='/dashboard' activeClassName="active-nav-item">Dashboard</NavLink>
                 <NavLink alt="Publish new offer" to="/publish-offer" activeClassName="active-nav-item">Publish new offer</NavLink>
-                <p>Hello, <NavLink alt={props.username} to="/dashboard" activeClassName="active-nav-item">{props.username}</NavLink></p>
+                <p>Hello, <NavLink alt={getUser().username} to="/dashboard" activeClassName="active-nav-item">{getUser().username}</NavLink></p>
                 <NavLink alt="Logout" to="/login" onClick={props.logMeOut} activeClassName="active-nav-item">Logout</NavLink>
             </div>
         </>
@@ -69,19 +69,6 @@ class Nav extends Component {
         }
     }
 
-    logMeOut = ()=> {
-        customAxios({
-            method: "post",
-            url: "/logout"
-        })
-        .then(()=> {
-            this.props.logOut()
-        })
-        .catch((error)=> {
-            console.log(error)
-        })
-    }
-
     toggleDropdownMenu = () => {
         if( this.state.dropdownMenu === "dropdown-hidden") this.setState({dropdownMenu: "dropdown-show"})
         else this.setState({dropdownMenu: "dropdown-hidden"})
@@ -114,12 +101,14 @@ class Nav extends Component {
                         <div></div>
                     </div>
                 </div>
-                {this.props.logOut ? 
+                {this.props.loggedIn ? 
                     <AuthNav 
                         dropdownMenu={this.state.dropdownMenu}
                         toggleDropdownMenu={this.toggleDropdownMenu}
-                        logMeOut={this.logMeOut}
-                        username={this.props.username}
+                        logMeOut={() => {
+                            logout()
+                            this.props.updateNav()
+                            }}
                     />
                     :
                     <UnauthNav 

@@ -35,7 +35,7 @@ router.post("/signup", (req, res) => {
             res.cookie("username", req.body.username);
             req.session.user = snap.data()
             req.session.user.id = snap.id
-            res.json('user created');
+            res.status(200).json(req.session.user)
           })
           .catch(err => res.json(err))
         })

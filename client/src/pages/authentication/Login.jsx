@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { login } from '../../utils/authMethods'
+import { login, loggedIn } from '../../utils/authMethods'
 
 import "./Authentication.scss"
 
@@ -23,17 +23,16 @@ class Login extends Component {
         event.preventDefault();
         login(this.state)
         .then(() => {
-            this.props.loggedIn(true,this.state.username)
+            this.props.updateNav(loggedIn())
             this.props.history.push('/dashboard')
         }).catch(() => {
             this.setState({error: 'Username or email is incorrect'})    
             this.props.history.push('/login')
         })
     }
-    //login box html
+
     render() { 
         return ( 
-            // TODO fix bug that reloads the image when you add an input (new state)
             <section className="auth-background" style={ {backgroundImage: `url(/bg${this.state.bgNum}.jpg)`} }>
                 <div className="auth-panel">
                     <h3>Login</h3>

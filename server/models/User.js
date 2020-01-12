@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+//TODO delete all the models
 
 const userSchema = new Schema({
     username:           {type: String, unique: true},

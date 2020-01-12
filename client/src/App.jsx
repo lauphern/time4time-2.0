@@ -6,7 +6,7 @@ import { Route, Switch } from "react-router-dom";
 
 import './App.scss';
 
-import PrivateRoute from './utils/PrivateRoute'
+import PrivateRoute from './utils/PrivateRoute.jsx'
 import Main from './pages/main/Main';
 import UserDashboard from './pages/dashboard/UserDashboard'
 import PublishOffer from './pages/publish-offer/PublishOffer'
@@ -22,26 +22,12 @@ const Loader = () => {
 
 class App extends Component {
     //TODO
-    //Create a file in utils for auth - for this logic
     state = {
-        loggedIn: false,
-        username: "",
-        loading: true
+        loading: true,
+        loggedIn: false
     }
 
-    loggedIn = (aBoolean, username) => {
-        this.setState({
-            loggedIn: aBoolean,
-            username: username
-        })
-    }
-    
-    logOut = ()=> {
-        this.setState({
-            loggedIn: false,
-            username: ""
-        })
-    }
+    syncLoggedIn = loggedIn => this.setState({loggedIn: loggedIn})
 
     timeout = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -59,10 +45,7 @@ class App extends Component {
         return (
             <>
                 <div className="content">
-                    {this.state.loggedIn ?
-                        <Nav {...this.state} logOut={this.logOut}/> :
-                        <Nav {...this.state} />
-                    }
+                    <Nav loggedIn={this.state.loggedIn} updateNav={this.syncLoggedIn}/>
                     {/* <Route render={({location}) => (
                         <CSSTransitionGroup
                             transitionName="fade"
@@ -70,12 +53,12 @@ class App extends Component {
                             transitionLeaveTimeout={300}
                         > */}
                             <Switch>
-                                <Route path='/login' render={(props) => <Login {...props} loggedIn={this.loggedIn}/>} />
-                                <Route path='/signup' render={(props) => <Signup {...props} loggedIn={this.loggedIn}/>} /> 
-                                <PrivateRoute path='/dashboard' component={UserDashboard} {...this.state} currentUsername={this.state.username} loggedIn={this.state.loggedIn} />
-                                <PrivateRoute path='/publish-offer' component={PublishOffer} currentUsername={this.state.username} loggedIn={this.state.loggedIn} />
-                                <PrivateRoute path='/profile/:id' component={AuthorProfile} currentUsername={this.state.username} loggedIn={this.state.loggedIn} />
-                                <Route exact path={["/", "/:offerId"]} render={(props) => <Main {...props} {...this.state}/>} />
+                                <Route path='/login' render={(props) => <Login {...props} updateNav={this.syncLoggedIn}/>} />
+                                <Route path='/signup' render={(props) => <Signup {...props} updateNav={this.syncLoggedIn}/>} /> 
+                                <PrivateRoute path='/dashboard' component={UserDashboard} loggedIn={this.state.loggedIn}/>
+                                <PrivateRoute path='/publish-offer' component={PublishOffer} loggedIn={this.state.loggedIn}/>
+                                <PrivateRoute path='/profile/:id' component={AuthorProfile} loggedIn={this.state.loggedIn}/>
+                                <Route exact path={["/", "/:offerId"]} render={(props) => <Main {...props} />} />
                             </Switch>
                         {/* </CSSTransitionGroup>
                     )} /> */}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import customAxios from '../../utils/customAxios';
 import { Link } from 'react-router-dom'
+import { signup, loggedIn } from '../../utils/authMethods'
 
 import "./Authentication.scss"
 
@@ -30,17 +30,10 @@ class SignUp extends Component {
     //submit function
     handleSubmit = (event) => {
         event.preventDefault();
-        let newUser = this.state
-        customAxios({
-            method: 'post',
-            url: '/signup',
-            data: newUser
-        }).then((res) => {
-            if(res.data.errorMessage) this.setState({errorMessage: res.data.errorMessage})
-            else {
-                this.props.loggedIn(true,this.state.username)
-                this.props.history.push('/dashboard')
-            }
+        signup(this.state)
+        .then(() => {
+            this.props.updateNav(loggedIn())
+            this.props.history.push('/dashboard')
         }).catch((err) => {
             this.setState({errorMessage: "Something went wrong"})
         })

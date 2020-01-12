@@ -49,6 +49,7 @@ class UserSettings extends Component {
             url: '/user-settings',
             data: editUser
         }).then(() => {
+            //TODO update user in localstorage
             this.props.openSection('profile')
             this.props.history.push('/dashboard')
         }).catch(err => {
