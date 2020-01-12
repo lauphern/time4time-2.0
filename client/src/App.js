@@ -17,7 +17,7 @@ import Footer from './components/Footer'
 import Nav from './components/Nav';
 
 const Loader = () => {
-    return <i class="fas fa-spinner fa-pulse loader"></i>
+    return <i className="fas fa-spinner fa-pulse loader"></i>
 }
 
 class App extends Component {
@@ -69,7 +69,7 @@ class App extends Component {
                             transitionEnterTimeout={500}
                             transitionLeaveTimeout={300}
                         > */}
-                            <Switch >
+                            <Switch>
                                 <Route path='/login' render={(props) => <Login {...props} loggedIn={this.loggedIn}/>} />
                                 <Route path='/signup' render={(props) => <Signup {...props} loggedIn={this.loggedIn}/>} /> 
                                 <PrivateRoute path='/dashboard' component={UserDashboard} {...this.state} currentUsername={this.state.username} loggedIn={this.state.loggedIn} />

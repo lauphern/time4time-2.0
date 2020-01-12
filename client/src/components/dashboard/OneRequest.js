@@ -61,7 +61,7 @@ class OneRequest extends Component {
                     <p style={{color: 'red'}}>{this.state.error? this.state.error:''}</p>
                     </div>
                 </div>
-                <footer>
+                <div>
                     {this.state.offerApproved ?
                         <p> Offer status: &nbsp; {this.state.offerApproved.status}</p> :
                         <p> Offer status: &nbsp; {this.props.status}</p>
@@ -80,7 +80,7 @@ class OneRequest extends Component {
                         }
                     </>
                     }
-                </footer>
+                </div>
             </div>
         );
     }

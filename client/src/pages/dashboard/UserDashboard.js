@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import AllRequests from '../../components/dashboard/AllRequests'
-import MyPetitions from '../../components/dashboard/MyPetitions'
 import DirectMessages from '../../components/dashboard/messages/DirectMessages'
 import UserSettings from '../../components/dashboard/UserSettings'
 import MyProfile from '../../components/dashboard/MyProfile'
+import Activity from '../../components/dashboard/Activity'
+
 import customAxios from '../../utils/customAxios';
 
 import "./UserDashboard.scss"
@@ -13,7 +13,7 @@ class UserDashboard extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            activeSection: 'all requests',
+            activeSection: 'activity',
             petitionsNotification: false,
             listOfPetitions: [],
             myOffers: false,
@@ -27,23 +27,20 @@ class UserDashboard extends Component {
         this.setState({activeSection: selectedSection})
         //This switch case is for selecting the active item in the menu
         switch(selectedSection) {
-            case 'all requests':
-                this.setState({activeMenuItems: [true, false, false, false, false]})
-                break;
-            case 'my petitions':
-                this.setState({activeMenuItems: [false, true, false, false, false]})
+            case 'activity':
+                this.setState({activeMenuItems: [true, false, false, false]})
                 break;
             case 'messages':
-                this.setState({activeMenuItems: [false, false, true, false, false]})
+                this.setState({activeMenuItems: [false, true, false, false]})
                 break;
             case 'profile':
-                this.setState({activeMenuItems: [false, false, false, true, false]})
+                this.setState({activeMenuItems: [false, false, true, false]})
                 break;
             case 'settings':
-                this.setState({activeMenuItems: [false, false, false, false, true]})
+                this.setState({activeMenuItems: [false, false, false, true]})
                 break;
             default:
-                this.setState({activeMenuItems: [true, false, false, false, false]})
+                this.setState({activeMenuItems: [true, false, false, false]})
         }
     }
     notificationControl = (dataFromRequest, statusControl) => {
@@ -103,41 +100,47 @@ class UserDashboard extends Component {
             <div className="user-dashboard">
                 <aside>
                     <ul>
+                        {/* TODO do notifications */}
                         <li>
+                            <Link className={this.state.activeMenuItems[0] ? "is-active" : "inactive"} onClick={()=> {this.openSection('activity')}}>
+                                <span><i className="fas fa-th-large"></i> Activity</span>
+                            </Link>
+                        </li>
+                        {/* <li>
                             {this.state.myOffers ?
                                 <Link className={this.state.activeMenuItems[0] ? "is-active" : "has-notification"} onClick={()=> {this.openSection('all requests')}}>
-                                    <span><i class="fas fa-th-large"></i> My offers &nbsp;<i className="fas fa-bell"></i></span>
+                                    <span><i className="fas fa-th-large"></i> My offers &nbsp;<i className="fas fa-bell"></i></span>
                                 </Link>
                                 :
                                 <Link className={this.state.activeMenuItems[0] ? "is-active" : "inactive"} onClick={()=> {this.openSection('all requests')}}>
-                                    <span><i class="fas fa-th-large"></i> My offers &nbsp;<i className="fas fa-bell-slash"></i></span>
+                                    <span><i className="fas fa-th-large"></i> My offers &nbsp;<i className="fas fa-bell-slash"></i></span>
                                 </Link>
                             }
                         </li>
                         <li>
                             {this.state.petitionsNotification ?
                                 <Link className={this.state.activeMenuItems[1] ? "is-active" : "has-notification"} onClick={()=> {this.openSection('my petitions')}}>
-                                    <span><i class="fas fa-th-large"></i> My petitions &nbsp;<i className="fas fa-bell"></i></span>
+                                    <span><i className="fas fa-th-large"></i> My petitions &nbsp;<i className="fas fa-bell"></i></span>
                                 </Link>
                                 :
                                 <Link className={this.state.activeMenuItems[1] ? "is-active" : "inactive"} onClick={()=> {this.openSection('my petitions')}}>
-                                    <span><i class="fas fa-th-large"></i> My petitions &nbsp;<i className="fas fa-bell-slash"></i></span>
+                                    <span><i className="fas fa-th-large"></i> My petitions &nbsp;<i className="fas fa-bell-slash"></i></span>
                                 </Link>
                             }
-                        </li>
+                        </li> */}
                         <li>
-                            <Link className={this.state.activeMenuItems[2] ? "is-active" : "inactive"} onClick={()=> {this.openSection('messages')}}>
-                                <span><i class="fas fa-comments"></i> Chat</span>
+                            <Link className={this.state.activeMenuItems[1] ? "is-active" : "inactive"} onClick={()=> {this.openSection('messages')}}>
+                                <span><i className="fas fa-comments"></i> Chat</span>
                             </Link>
                         </li>
                         <li>
-                            <Link className={this.state.activeMenuItems[3] ? "is-active" : "inactive"} onClick={()=> {this.openSection('profile')}}>
-                                <span><i class="fas fa-user-alt"></i> Profile</span>
+                            <Link className={this.state.activeMenuItems[2] ? "is-active" : "inactive"} onClick={()=> {this.openSection('profile')}}>
+                                <span><i className="fas fa-user-alt"></i> Profile</span>
                             </Link>
                         </li>
                         <li>
-                            <Link className={this.state.activeMenuItems[4] ? "is-active" : "inactive"} onClick={()=> {this.openSection('settings')}}>
-                                <span><i class="fas fa-sliders-h"></i> Settings</span>
+                            <Link className={this.state.activeMenuItems[3] ? "is-active" : "inactive"} onClick={()=> {this.openSection('settings')}}>
+                                <span><i className="fas fa-sliders-h"></i> Settings</span>
                             </Link>
                         </li>
                     </ul>
@@ -147,10 +150,8 @@ class UserDashboard extends Component {
                     //this switch case is used to open the selected section when you click the menu item
                     /* TODO combinar offers, petitions y (en el futuro) offers bookmarked */
                     switch(this.state.activeSection) {
-                        case 'all requests':
-                            return <AllRequests {...this.props} {...this.state} cleanNotif={this.cleanNotif} updateOffers={this.getMyOffers} listOfMyOffers={this.state.listOfMyOffers}/>;
-                        case 'my petitions':
-                            return <MyPetitions {...this.props} {...this.state} cleanNotif={this.cleanNotif} listOfPetitions={this.state.listOfPetitions} />;
+                        case 'activity':
+                            return <Activity {...this.props} {...this.state} cleanNotif={this.cleanNotif} updateOffers={this.getMyOffers} listOfMyOffers={this.state.listOfMyOffers} listOfPetitions={this.state.listOfPetitions}/>;
                         case 'messages':
                             return <DirectMessages/>
                         case 'profile':
@@ -158,7 +159,7 @@ class UserDashboard extends Component {
                         case 'settings':
                             return <UserSettings {...this.props} openSection={this.openSection}/>
                         default:
-                            return <AllRequests {...this.props} {...this.state} listOfMyOffers={this.state.listOfMyOffers}/>
+                            return <Activity {...this.props} {...this.state} cleanNotif={this.cleanNotif} updateOffers={this.getMyOffers} listOfMyOffers={this.state.listOfMyOffers} listOfPetitions={this.state.listOfPetitions}/>;
                     }
                 })()}
                 </div>

@@ -97,7 +97,7 @@ class Main extends Component {
                 <header className="hero">
                     <div>
                         <div>
-                            <h1 ref={h1 => this.mainTitle = h1} class="main-title">
+                            <h1 ref={h1 => this.mainTitle = h1} className="main-title">
                                 <span ref={span => this.firstSpan = span}>Time </span>
                                 <span ref={span => this.secondSpan = span}>for </span>
                                 <span ref={span => this.thirdSpan = span}>time</span>

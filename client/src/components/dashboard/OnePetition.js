@@ -12,10 +12,10 @@ class OnePetition extends Component {
                     </p>
                 </header>
                 <div>
-                    <div >
-                    <p>Author: {this.props.Username}</p>
-                    <p>Date: <Moment format="D MMM YYYY" withTitle>{this.props.date}</Moment></p>
-                    <p>Duration: {this.props.duration} hour(s)</p>
+                    <div>
+                        <p>Author: {this.props.Username}</p>
+                        <p>Date: <Moment format="D MMM YYYY" withTitle>{this.props.date}</Moment></p>
+                        <p>Duration: {this.props.duration} hour(s)</p>
                     </div>
                 </div>
                 <footer>
