@@ -50,7 +50,7 @@ class Login extends Component {
                                 </div>
                             </div>
                             <p style={{color: 'red'}}>{this.state.error? this.state.error:''}</p>
-                            <button>Login</button>
+                            <button className="btn">Login</button>
                         </form>
                     </div>
                     <p> New to Time4Time?

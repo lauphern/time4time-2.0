@@ -34,7 +34,7 @@ class Intro extends Component {
                         <h2>Meet new friends!</h2>
                         {/* TODO do an about us page, with both of us */}
                         <p>The world is more connected every day. But, oddly enough, we are also feeling lonelier than ever. At <Link to="/about-us">Time for time</Link> we feel it's time to look back to our own communities and strengthen and make new bonds with the people around us.</p>
-                        <Link to="/signup">Join us</Link>
+                        <Link className="btn" to="/signup">Join us</Link>
                     </div>
                     <div>
                         <img ref={img => this.communityImg = img} src="/community3.jpg" alt="Group of people in community"/>
@@ -47,7 +47,7 @@ class Intro extends Component {
                         When you sign up, we give you two hours so you can try some activities; after that, you can offer your own activities to earn money for your Time Wallet. Perhaps you are very handy and know how to fix your bike so you could teach someone else. Show off your hidden talents!</p>
                         {/* TODO no hace scroll realmente, mirar esto */}
                         {/* habria que meter una transition [!!!] */}
-                        <a href="#pick-category" onClick={this.props.toggleOfferList}>See the offers</a>
+                        <a href="#pick-category" className="btn" onClick={this.props.toggleOfferList}>See the offers</a>
                     </div>
                     <div>
                         <img ref={img => this.activityImg = img} src="/guitar1.jpg" alt="Group of people in community"/>

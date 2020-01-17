@@ -5,6 +5,7 @@
 html {
     scroll-behavior: smooth;
     height: 100%;
+    color: $title-sm;
 }
 
 body {
@@ -25,7 +26,6 @@ body {
 .loader {
     font-size: 3em;
     margin: auto;
-    // transform: translate(-50%, -50%);
 }
 
 .content {
@@ -38,6 +38,39 @@ h1, h2, h3, h4, h5, h6 {
     // font-weight: 700;
 }
 
+h1, h2, h3, h4, h5, h6, p {
+
+    &::selection {
+        // TODO revisar dependiendo de que color use para main al final
+        // y mirar por que esta sacando un color un poco distinto
+        background-color: $main;
+        color: white;
+    }
+}
+
 a {
     text-decoration: none;
+    color: $main;
 }
+
+button, input {
+
+    &:focus {
+        outline: none;
+    }
+}
+
+input {
+    caret-color: $main;
+}
+
+.btn {
+    background-color: $main;
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 10px 60px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 2px $light-grey;
+}
+
