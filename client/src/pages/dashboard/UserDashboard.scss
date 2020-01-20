@@ -1,10 +1,14 @@
 @import "../../Setup.scss";
 
 .user-dashboard {
-    display: flex;
     height: 100%;
+    padding-top: 9vh;
+    display: grid;
+    grid-template-columns: 17% 80%;
+    grid-column-gap: 2%;
 
-    aside {
+    & > aside {
+        grid-column: 1 / 2;
         background-color: white;
         padding: 9vh 1vw 0;
         height: 91vh;
@@ -47,9 +51,8 @@
     }
 
     .dashboard-content {
-        padding-top: 9vh;
+        grid-column: 2 / 3;
         max-width: 90vw;
-        margin-left: 17vw;
 
         .activity-section {
             padding: 1rem;
