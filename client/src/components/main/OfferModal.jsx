@@ -187,6 +187,7 @@ class OfferModal extends Component {
           </section>
           <footer>
             <Link>
+            {/* TODO revisar */}
               {this.props.loggedIn ? (
                 <>
                   {this.props.authorUsername === this.props.username ? (

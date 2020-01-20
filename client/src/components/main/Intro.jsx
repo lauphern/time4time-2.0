@@ -62,8 +62,8 @@ class Intro extends Component {
               The world is more connected every day. But, oddly enough, we are
               also feeling lonelier than ever. At{" "}
               <Link to="/about-us">Time for time</Link> we feel it's time to
-              look back to our own communities and strengthen and make new bonds
-              with the people around us.
+              look back to our own communities and <strong>strengthen and create new bonds</strong>
+               with the people around us.
             </p>
             <Link className="btn" to="/signup">
               Join us
@@ -83,14 +83,14 @@ class Intro extends Component {
             <p>
               Have you always wanted to learn to play the guitar? Join our
               community and find someone that will help you achieve your goal.
-              How much does it cost? It's for free! You only have to pay with
-              your money.
+              How much does it cost? <strong>It's for free!</strong> You only have to
+              pay with your time.
               <br />
-              When you sign up, we give you two hours so you can try some
-              activities; after that, you can offer your own activities to earn
-              money for your Time Wallet. Perhaps you are very handy and know
-              how to fix your bike so you could teach someone else. Show off
-              your hidden talents!
+              When you sign up, <strong>we give you two hours</strong> so you can try
+              some activities; after that, you can offer your own activities to
+              earn money for your Time Wallet. Perhaps you are very handy and
+              know how to fix your bike so you could teach someone else. Show
+              off your hidden talents!
             </p>
             {/* TODO no hace scroll realmente, mirar esto */}
             {/* habria que meter una transition [!!!] */}

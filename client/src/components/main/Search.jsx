@@ -43,6 +43,7 @@ class Search extends Component {
   render() {
     return (
       <section id="search">
+      {/* TODO revisar que funciona */}
         <h6 id="pick-category">Pick a category</h6>
         {/* <form onSubmit={(e) => {this.props.handleSearch(e, this.state)}}> */}
         <form className="category-search">

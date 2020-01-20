@@ -140,7 +140,7 @@ class SignUp extends Component {
               <p style={{ color: "red" }}>
                 {this.state.errorMessage && this.state.errorMessage}
               </p>
-              <button value="submit">Sign up</button>
+              <button className="btn" value="submit">Sign up</button>
             </form>
           </div>
           <p>
