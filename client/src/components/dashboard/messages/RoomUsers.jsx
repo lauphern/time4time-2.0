@@ -1,5 +1,5 @@
-import React from 'react';
-import Proptypes from 'prop-types';
+import React from "react";
+import Proptypes from "prop-types";
 
 const RoomUsers = props => {
   const { roomUsers, sendDM, currentUser } = props;
@@ -32,7 +32,7 @@ const RoomUsers = props => {
 RoomUsers.propTypes = {
   roomUsers: Proptypes.array.isRequired,
   sendDM: Proptypes.func.isRequired,
-  currentUser: Proptypes.object.isRequired,
+  currentUser: Proptypes.object.isRequired
 };
 
 export default RoomUsers;

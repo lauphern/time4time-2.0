@@ -1,20 +1,19 @@
-import Chatkit from '@pusher/chatkit-client';
-import customAxios from './customAxios';
-
+import Chatkit from "@pusher/chatkit-client";
+import customAxios from "./customAxios";
 
 function sendMessage(event) {
   event.preventDefault();
   const { newMessage, currentUser, currentRoom } = this.state;
 
-  if (newMessage.trim() === '') return;
+  if (newMessage.trim() === "") return;
 
   currentUser.sendMessage({
     text: newMessage,
-    roomId: `${currentRoom.id}`,
+    roomId: `${currentRoom.id}`
   });
 
   this.setState({
-    newMessage: '',
+    newMessage: ""
   });
 }
 
@@ -22,7 +21,7 @@ function handleInput(event) {
   const { value, name } = event.target;
 
   this.setState({
-    [name]: value,
+    [name]: value
   });
 }
 
@@ -30,7 +29,7 @@ function connectToRoom(id = process.env.REACT_APP_CHATKIT_GENERAL_ROOM_ID) {
   const { currentUser } = this.state;
 
   this.setState({
-    messages: [],
+    messages: []
   });
 
   return currentUser
@@ -40,20 +39,20 @@ function connectToRoom(id = process.env.REACT_APP_CHATKIT_GENERAL_ROOM_ID) {
       hooks: {
         onMessage: message => {
           this.setState({
-            messages: [...this.state.messages, message],
+            messages: [...this.state.messages, message]
           });
         },
         onPresenceChanged: () => {
           const { currentRoom } = this.state;
           this.setState({
             roomUsers: currentRoom.users.sort(a => {
-              if (a.presence.state === 'online') return -1;
+              if (a.presence.state === "online") return -1;
 
               return 1;
-            }),
+            })
           });
-        },
-      },
+        }
+      }
     })
     .then(currentRoom => {
       const roomName =
@@ -67,60 +66,60 @@ function connectToRoom(id = process.env.REACT_APP_CHATKIT_GENERAL_ROOM_ID) {
         currentRoom,
         roomUsers: currentRoom.users,
         rooms: currentUser.rooms,
-        roomName,
+        roomName
       });
     })
     .catch(console.error);
 }
 
 function connectToChatkit(username) {
-
-  if (username === null || username.trim() === '') {
-    alert('Invalid userId');
+  if (username === null || username.trim() === "") {
+    alert("Invalid userId");
     return;
   }
 
   this.setState({
-    isLoading: true,
+    isLoading: true
   });
 
   customAxios({
-    method: 'post',
-    url:'/chat-users',
+    method: "post",
+    url: "/chat-users",
     data: { userId: username }
-  }).then(() => {
-    const tokenProvider = new Chatkit.TokenProvider({
-      url: `${process.env.REACT_APP_API}/authenticate`,
-    });
-
-    const chatManager = new Chatkit.ChatManager({
-      instanceLocator: process.env.REACT_APP_CHATKIT_INSTANCE_LOCATOR,
-      userId: username,
-      tokenProvider,
-    });
-    return chatManager
-      .connect({
-        onAddedToRoom: room => {
-          const { rooms } = this.state;
-          this.setState({
-            rooms: [...rooms, room],
-          });
-        },
-      })
-      .then(currentUser => {
-        this.setState(
-          {
-            currentUser,
-            showLogin: false,
-            isLoading: false,
-            rooms: currentUser.rooms,
-          },
-          () => connectToRoom.call(this)
-        );
+  })
+    .then(() => {
+      const tokenProvider = new Chatkit.TokenProvider({
+        url: `${process.env.REACT_APP_API}/authenticate`
       });
+
+      const chatManager = new Chatkit.ChatManager({
+        instanceLocator: process.env.REACT_APP_CHATKIT_INSTANCE_LOCATOR,
+        userId: username,
+        tokenProvider
+      });
+      return chatManager
+        .connect({
+          onAddedToRoom: room => {
+            const { rooms } = this.state;
+            this.setState({
+              rooms: [...rooms, room]
+            });
+          }
+        })
+        .then(currentUser => {
+          this.setState(
+            {
+              currentUser,
+              showLogin: false,
+              isLoading: false,
+              rooms: currentUser.rooms
+            },
+            () => connectToRoom.call(this)
+          );
+        });
     })
     .catch(() => {
-      console.error()
+      console.error();
     });
 }
 
@@ -133,9 +132,9 @@ function createPrivateRoom(id) {
       const arr = [currentUser.id, id];
       const { userIds } = room.customData;
 
-      if (arr.sort().join('') === userIds.sort().join('')) {
+      if (arr.sort().join("") === userIds.sort().join("")) {
         return {
-          room,
+          room
         };
       }
     }
@@ -153,8 +152,8 @@ function createPrivateRoom(id) {
     addUserIds: [`${id}`],
     customData: {
       isDirectMessage: true,
-      userIds: [currentUser.id, id],
-    },
+      userIds: [currentUser.id, id]
+    }
   });
 }
 

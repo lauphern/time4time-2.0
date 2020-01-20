@@ -1,13 +1,13 @@
-import React from 'react';
-import Proptypes from 'prop-types';
+import React from "react";
+import Proptypes from "prop-types";
 
 //set up roomlist for a public chat
 const RoomList = props => {
   const { rooms, currentRoom, connectToRoom, currentUser } = props;
 
   const roomList = rooms.map(room => {
-    const roomIcon = !room.isPrivate ? '🌐' : '🔒';
-    const isRoomActive = room.id === currentRoom.id ? 'active' : '';
+    const roomIcon = !room.isPrivate ? "🌐" : "🔒";
+    const isRoomActive = room.id === currentRoom.id ? "active" : "";
     return (
       <li
         className={isRoomActive}
@@ -37,7 +37,7 @@ RoomList.propTypes = {
   rooms: Proptypes.array.isRequired,
   currentRoom: Proptypes.object.isRequired,
   connectToRoom: Proptypes.func.isRequired,
-  currentUser: Proptypes.object.isRequired,
+  currentUser: Proptypes.object.isRequired
 };
 
 export default RoomList;

@@ -1,12 +1,12 @@
-import React from 'react';
-import Proptypes from 'prop-types';
-import { format } from 'date-fns';
+import React from "react";
+import Proptypes from "prop-types";
+import { format } from "date-fns";
 
 //chat session using chatkit API
 const ChatSession = props => {
   const { messages } = props;
   return messages.map(message => {
-    const time = format(new Date(`${message.updatedAt}`), 'HH:mm');
+    const time = format(new Date(`${message.updatedAt}`), "HH:mm");
 
     return (
       <li key={message.id}>
@@ -21,7 +21,7 @@ const ChatSession = props => {
 };
 
 ChatSession.propTypes = {
-  messages: Proptypes.arrayOf(Proptypes.object).isRequired,
+  messages: Proptypes.arrayOf(Proptypes.object).isRequired
 };
 
 export default ChatSession;
