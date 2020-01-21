@@ -14,6 +14,18 @@ import { loadProgressBar } from "axios-progress-bar";
 //TODO revisar que funciona
 loadProgressBar(customAxios);
 
+let SearchList = props => {
+  return (
+  <div className={"search-list"}>
+    <Search handleSearch={props.thisCtx.handleSearch} error={props.thisCtx.state.error} />
+    <OfferList
+      {...props.thisCtx.props}
+      filteredOffers={props.thisCtx.state.filteredOffers}
+      noResultsFound={props.thisCtx.state.noResultsFound}
+    />
+  </div>
+);}
+
 class Main extends Component {
   constructor(props) {
     super(props);
@@ -32,28 +44,11 @@ class Main extends Component {
     this.thirdSpan = null;
     this.titleTimeline = gsap.timeline();
 
-    this.introSection = (
-      <Intro
-        toggleOfferList={this.toggleOfferList}
-        hideOffers={this.state.hideOffers}
-      />
-    );
-    this.searchListSection = (
-      <div className={"search-list"}>
-        <Search handleSearch={this.handleSearch} error={this.state.error} />
-        <OfferList
-          {...this.props}
-          filteredOffers={this.state.filteredOffers}
-          noResultsFound={this.state.noResultsFound}
-        />
-      </div>
-    );
   }
 
   //search button
   handleSearch = search => {
-    if (Object.values(search).every(val => val === ""))
-      this.setState({ filteredOffers: [], noResultsFound: null });
+    if (Object.values(search).every(val => val === "")) this.setState({ filteredOffers: [], noResultsFound: null });
     else {
       customAxios({
         method: "post",
@@ -72,11 +67,11 @@ class Main extends Component {
   };
 
   toggleOfferList = () => {
-    if (this.state.mainSection === this.introSection && !this.state.showSection)
+    if (this.state.mainSection === "Intro" && !this.state.showSection)
       this.setState({ showSection: true });
-    else if (this.state.mainSection === this.introSection)
-      this.setState({ mainSection: this.searchListSection });
-    else this.setState({ mainSection: this.introSection });
+    else if (this.state.mainSection === "Intro")
+      this.setState({ mainSection: "SearchList" });
+    else this.setState({ mainSection: "Intro" });
   };
 
   handleScroll = () => {
@@ -91,7 +86,7 @@ class Main extends Component {
   };
 
   componentDidMount() {
-    this.setState({ mainSection: this.introSection });
+    this.setState({ mainSection: "Intro" });
     window.addEventListener("scroll", this.handleScroll);
     this.titleTimeline
       .fromTo(this.firstSpan, 0.8, { y: +200 }, { y: 0 })
@@ -125,7 +120,7 @@ class Main extends Component {
           </div>
           <div
             className={
-              this.state.mainSection !== this.searchListSection
+              this.state.mainSection !== "SearchList"
                 ? "arrow"
                 : "hidden-element"
             }
@@ -142,7 +137,16 @@ class Main extends Component {
         </header>
         {/* TODO cuando la lista esta mostrada, si hago click en Home o en el Logo de la navbar en la navbar no hace reload asi que no muestra las otras secciones, y deberia 
                 tal vez puedo forzara ese boton a recargar la pagina incluso si ya estamos en esa route, pero solo a ese*/}
-        {this.state.showSection ? this.state.mainSection : null}
+        {this.state.showSection ?
+        (this.state.mainSection === "SearchList" ? 
+        <SearchList thisCtx={this}/>
+        :
+        <Intro
+          toggleOfferList={this.toggleOfferList}
+          hideOffers={this.state.hideOffers}
+        />)
+        :
+        null}
       </>
     );
   }

@@ -107,6 +107,12 @@ class OfferList extends Component {
     this.getAllOffers();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps !== this.props) {
+      debugger
+    }
+  }
+
   render() {
     const { firstOffers } = this.state;
 
