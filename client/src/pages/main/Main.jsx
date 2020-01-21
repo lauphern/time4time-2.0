@@ -35,8 +35,8 @@ class Main extends Component {
       noResultsFound: null,
       hideOffers: true,
       mainSection: null,
-      // scrollPos: window.pageYOffset,
-      showSection: true
+      scrollPos: window.pageYOffset,
+      showSection: false
     };
 
     this.mainTitle = null;
@@ -87,9 +87,9 @@ class Main extends Component {
   };
 
   componentDidMount() {
-    this.setState({ mainSection: "SearchList" });
-    // TODO luego volver a poner esto
-    // window.addEventListener("scroll", this.handleScroll);
+    if(this.props.match.path === "/:offerId") this.setState({ mainSection: "SearchList", showSection: true });
+    else this.setState({ mainSection: "Intro" });
+    window.addEventListener("scroll", this.handleScroll);
     this.titleTimeline
       .fromTo(this.firstSpan, 0.8, { y: +200 }, { y: 0 })
       .fromTo(this.secondSpan, 0.8, { y: +200 }, { y: 0 }, "-=0.5")
@@ -97,7 +97,7 @@ class Main extends Component {
   }
 
   componentWillUnmount() {
-    // window.removeEventListener("scroll", this.handleScroll);
+    window.removeEventListener("scroll", this.handleScroll);
   }
 
   render() {
