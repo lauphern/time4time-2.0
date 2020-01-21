@@ -78,9 +78,6 @@ class Main extends Component {
   handleScroll = () => {
     const currentScrollPos = window.pageYOffset;
     let showSection = !!(currentScrollPos >= 90);
-    //TODO arreglar que lo esconde de nuevo
-    //con un if statement para cuando this.state.showSection es true, no volverlo a cambiar
-    //y luego mirar si los botones funcionan
     if (this.state.showSection === true)
       this.setState({ scrollPos: currentScrollPos });
     else this.setState({ scrollPos: currentScrollPos, showSection });
@@ -103,7 +100,6 @@ class Main extends Component {
   render() {
     return (
       <>
-        {/* TODO some type of spinner here so we don't miss the title animation */}
         <header className="hero">
           <div>
             <div>

@@ -5,7 +5,7 @@ moment().format()
 
 const { offersCollection } = require("../../utils/db")
 
-router.get('/display-offers', function(req, res) {
+router.get('/fetch-offers', function(req, res) {
     offersCollection.where("status", "==", "Open").get()
     .then( snap => {
         let allOffers = []

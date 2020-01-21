@@ -74,7 +74,7 @@ class OfferList extends Component {
   getAllOffers = () => {
     customAxios({
       method: "get",
-      url: "/display-offers"
+      url: "/fetch-offers"
     })
       .then(responseFromApi => {
         this.setState({

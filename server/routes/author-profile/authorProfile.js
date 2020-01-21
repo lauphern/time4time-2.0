@@ -23,7 +23,6 @@ router.get('/author-profile/:id', function(req, res) {
 });
 
 router.post('/author-profile', upload.single('review-image'), function(req, res) {
-    debugger
     let newReview = {
         rating: req.body.rate1,
         opinion: req.body.opinion,
@@ -34,7 +33,6 @@ router.post('/author-profile', upload.single('review-image'), function(req, res)
     //TODO test
     reviewsCollection.add(newReview)
     .then(snap => {
-        debugger
         //TODO revisar esto
         let reviewCreated = snap.data()
         res.json(reviewCreated)
@@ -60,7 +58,6 @@ router.post('/user-reviewed-id', function(req, res) {
 })
 
 router.post('/get-reviews', function(req, res){
-    debugger
     reviewsCollection.where("userReviewed", "==", req.body.userReviewedId).get()
     .then((snap) => {
         let allReviews = []

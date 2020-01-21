@@ -6,6 +6,7 @@ const { offersCollection } = require("../../utils/db")
 
 
 router.post('/publish-offer', singleUpload.single('offerImage'), function (req,res) {
+    debugger
     //TODO asegurarme de que la duration se añade como numero
     let newOffer = {
         author:         req.session.user.id,
@@ -20,13 +21,15 @@ router.post('/publish-offer', singleUpload.single('offerImage'), function (req,r
         image:          req.file.location,
         userRequest:    ''
     }
+    debugger
     offersCollection.add(newOffer)
     .then((snap) => {
+        debugger
         return snap.get()
     })
     .then(snap => {
-        debugger
         let newOffer = snap.data()
+        debugger
         res.json(newOffer)
     })
     .catch((err) => {

@@ -61,7 +61,6 @@ router.post('/approve-offer', function(req, res, next) {
         })
     })
     .then(() => {
-        debugger
         res.json({offerApproved: res.offerApproved})
     })
     .catch((err) => {
