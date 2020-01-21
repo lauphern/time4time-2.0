@@ -94,6 +94,7 @@ input[type=text], input[type=password], input[type=email], textarea {
     padding: 10px 60px;
     border-radius: 5px;
     box-shadow: 0px 2px 2px $light-grey;
+    cursor: pointer;
 }
 
 .btn-cancel {

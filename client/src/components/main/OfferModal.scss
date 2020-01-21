@@ -2,8 +2,7 @@
 
 
 .modal-container {
-
-    // display: none;
+    
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -13,23 +12,36 @@
     position: fixed;
     top: 0;
     left: 0;
-    // z-index: -200;
     visibility: hidden;
     transition: all 1s;
 
     &.show {
-        // width: 100vw;
-        // height: 100vh;
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
-        // position: fixed;
-        // top: 0;
-        // left: 0;
         z-index: 200;
         visibility: visible;
         transition: all 1s;
+        animation-duration: 0.5s;
+        animation-name: show;
 
+        .offer-modal {
+            animation-duration: 0.5s;
+            animation-name: modalAppear;    
+        }
+    }
+
+    &.hide {
+        z-index: -100 !important;
+        animation-duration: 0.5s;
+        animation-name: fadeOut;
+        visibility: hidden;
+
+        .offer-modal {
+            animation-duration: 0.5s;
+            animation-name: modalDisappear;    
+        }
+
+        .modal-bg {
+            background-color: $light-grey;
+        }
     }
 
 
@@ -40,7 +52,6 @@
             overflow: scroll;
             position: relative;
             z-index: 200;
-            // opacity: 0;
         }
     }
 
@@ -58,11 +69,11 @@
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 0;
+        // z-index: 0;
         background-color: $light-grey;
         backdrop-filter: blur(5px);
-        animation-duration: 0.5s;
-        animation-name: show;
+        // animation-duration: 0.5s;
+        // animation-name: show;
     }
    
 }
@@ -81,3 +92,39 @@
     }
 }
 
+// TODO arreglar el background raro
+
+@keyframes fadeOut {
+
+    from {
+        opacity: 100;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+
+@keyframes modalAppear {
+
+    from {
+        transform: scale(0.5);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+
+@keyframes modalDisappear {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(0.9);
+    }
+}

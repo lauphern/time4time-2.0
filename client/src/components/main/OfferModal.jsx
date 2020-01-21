@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import customAxios from "../../utils/customAxios";
 import Moment from "react-moment";
 
+import { loggedIn, getUser } from "../../utils/authMethods";
+
 import "./OfferModal.scss";
 
 import {
@@ -14,8 +16,6 @@ import {
   PinterestIcon
 } from "react-share";
 
-import { gsap } from "gsap";
-
 class OfferModal extends Component {
   constructor(props) {
     super(props);
@@ -25,15 +25,12 @@ class OfferModal extends Component {
       author: "",
       description: "",
       category: "",
-      errorTimeWallet: "",
-      myOffer: undefined
+      errorTimeWallet: ""
     };
 
-    this.modalContainer = null;
-    this.modalDialog = null;
-    this.modalTween = gsap.timeline();
-    this.closeModalTween = gsap.timeline();
   }
+
+  // TODO revisar todos estos methods
 
   handleApply = event => {
     event.preventDefault();
@@ -76,135 +73,100 @@ class OfferModal extends Component {
   };
 
   redirectToAuthorProfile = () => {
-    if (this.props.authorUsername === this.props.username)
-      this.props.history.push("/dashboard");
-    else this.props.history.push(`/profile/${this.props.author}`);
+    if( !!getUser() ) {
+      if (this.props.authorUsername === getUser().username) {
+        this.props.history.push("/dashboard")
+        return
+      }
+    }
+    // TODO revisar esta url
+    this.props.history.push(`/profile/${this.props.author}`);
   };
 
   closeFadeModal = () => {
-    this.modalTween.reverse();
     this.props.history.push("/");
-    //TODO arreglar que no desaparezca a trozos
   };
 
-  componentDidMount() {
-    this.modalTween
-      .to(this.modalContainer, 0.1, {
-        css: { className: "+= modal-container show" }
-      })
-      .fromTo(this.modalDialog, 0.2, { y: -50 }, { y: 0 })
-      .reversed(true)
-      .paused(false);
-  }
-
-  componentDidUpdate() {
-    this.modalTween.reversed(!this.props.toggle);
-  }
 
   render() {
+    let usersUsername = undefined
+    if( !!getUser() ) usersUsername = getUser().username
     return (
-      //TODO esto era para intentar hacer el fadeout
-      // <div ref={div => this.modalContainer = div} className={`modal-container ${this.props.toggle ? `show` : undefined}`} >
-      <div
-        ref={div => (this.modalContainer = div)}
-        className={`modal-container`}
-      >
-        <div
-          ref={div => (this.modalDialog = div)}
-          className="offer offer-modal"
-        >
-          <header>
+      <div className={`modal-container ${this.props.toggle ? "show" : "hide"}`} >
+        <div className="offer offer-modal">
+          <div>
             <p>{this.props.title}</p>
             <Link>
               <i className="fa fa-times-circle" onClick={this.props.close}></i>
             </Link>
-          </header>
+          </div>
           <section>
+            <p>Username: {this.props.authorUsername}</p>
+            <Link>
+              <button onClick={this.redirectToAuthorProfile}>
+                Visit profile
+              </button>
+            </Link>
             <div>
+              {/* TODO */}
+              {/* <img src={`${process.env.REACT_APP_API}/${this.props.image}`} alt=""/> */}
+              <h1>Description</h1>
+              <p>{this.props.description}</p>
               <div>
-                <p>Username: {this.props.authorUsername}</p>
-                <div>
-                  <div>
-                    <Link>
-                      <button onClick={this.redirectToAuthorProfile}>
-                        Visit profile
-                      </button>
-                    </Link>
-                  </div>
-                </div>
+                {/* TODO check on deploy */}
+                <FacebookShareButton
+                  url={`${process.env.REACT_APP_FRONT}${this.props.location.pathname}`}
+                >
+                  <FacebookIcon size={32} round={true} />
+                </FacebookShareButton>
+                <TwitterShareButton
+                  url={`${process.env.REACT_APP_FRONT}${this.props.location.pathname}`}
+                >
+                  <TwitterIcon size={32} round={true} />
+                </TwitterShareButton>
+                {/* TODO */}
+                <PinterestShareButton
+                  url={`${process.env.REACT_APP_FRONT}${this.props.location.pathname}`}
+                  media={`${process.env.REACT_APP_API}`}
+                >
+                  <PinterestIcon size={32} round={true} />
+                </PinterestShareButton>
               </div>
-            </div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    {/* TODO */}
-                    {/* <img src={`${process.env.REACT_APP_API}/${this.props.image}`} alt=""/> */}
-                  </div>
-                  <div>
-                    <h1>Description</h1>
-                    <p>{this.props.description}</p>
-                    <div>
-                      {/* TODO check on deploy */}
-                      <FacebookShareButton
-                        url={`${process.env.REACT_APP_FRONT}${this.props.location.pathname}`}
-                      >
-                        <FacebookIcon size={32} round={true} />
-                      </FacebookShareButton>
-                      <TwitterShareButton
-                        url={`${process.env.REACT_APP_FRONT}${this.props.location.pathname}`}
-                      >
-                        <TwitterIcon size={32} round={true} />
-                      </TwitterShareButton>
-                      {/* TODO */}
-                      <PinterestShareButton
-                        url={`${process.env.REACT_APP_FRONT}${this.props.location.pathname}`}
-                        media={`${process.env.REACT_APP_API}`}
-                      >
-                        <PinterestIcon size={32} round={true} />
-                      </PinterestShareButton>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div>
-                    <h1>Category</h1>
-                    <p>{this.props.category}</p>
-                  </div>
-                  <div>
-                    <h1>Date</h1>
-                    <p>
-                      <Moment format="D MMM YYYY" withTitle>
-                        {this.props.dateOffer}
-                      </Moment>
-                    </p>
-                    <h1>Duration</h1>
-                    <p>{this.props.durationOffer} hour(s)</p>
-                  </div>
-                </div>
-              </div>
+              <h1>Category</h1>
+              <p>{this.props.category}</p>
+              <h1>Date</h1>
+              <p>
+                <Moment format="D MMM YYYY" withTitle>
+                  {this.props.dateOffer}
+                </Moment>
+              </p>
+              <h1>Duration</h1>
+              <p>{this.props.durationOffer} hour(s)</p>
             </div>
           </section>
-          <footer>
+          <div>
             <Link>
-            {/* TODO revisar */}
-              {this.props.loggedIn ? (
+              {/* TODO revisar */}
+              {loggedIn() ? (
                 <>
-                  {this.props.authorUsername === this.props.username ? (
-                    <button disabled>Apply </button>
+                  {this.props.authorUsername === usersUsername ? (
+                    <button disabled>Apply</button>
                   ) : (
                     <button
+                      className="btn"
                       onClick={e => {
                         this.handleApply(e);
                         this.sendEmail(e);
                       }}
                     >
-                      Apply{" "}
+                      Apply
                     </button>
                   )}
                 </>
               ) : (
-                <button onClick={this.redirectToLogin}>Apply </button>
+                <button className="btn" onClick={this.redirectToLogin}>
+                  Apply
+                </button>
               )}
             </Link>
             {this.state.errorTimeWallet ? (
@@ -212,14 +174,14 @@ class OfferModal extends Component {
             ) : (
               <p></p>
             )}
-            {this.props.authorUsername === this.props.username ? (
+            {this.props.authorUsername === usersUsername ? (
               <p style={{ color: "red" }}>
                 &nbsp;You can't apply to your own offer
               </p>
             ) : (
               <p></p>
             )}
-          </footer>
+          </div>
         </div>
         <div
           onClick={() => {

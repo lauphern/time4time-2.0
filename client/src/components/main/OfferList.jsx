@@ -55,19 +55,16 @@ let OfferCard = props => {
 class OfferList extends Component {
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
     this.state = {
-      toggle: false,
       listOfOffers: [],
       firstOffers: [],
       hasMore: true
     };
+    this.toggle = this.toggle.bind(this);
   }
 
   toggle(offerId) {
-    this.setState(() => ({
-      toggle: offerId
-    }));
+
     // TODO revisar que funciona la url unica del modal
     typeof offerId == "string"
       ? this.props.history.push(`/${offerId}`)

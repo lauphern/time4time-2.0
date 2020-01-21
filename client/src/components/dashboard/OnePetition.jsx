@@ -10,6 +10,7 @@ class OnePetition extends Component {
         </header>
         <div>
           <div>
+          {/* TODO revisar */}
             <p>Author: {this.props.Username}</p>
             <p>
               Date:{" "}
