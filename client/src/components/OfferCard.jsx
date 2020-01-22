@@ -8,6 +8,7 @@ const OfferCard = props => {
       <h2>Title: {props.title}</h2>
       {props.authorUsername ? <p>Author: {props.authorUsername}</p> : null}
       <p>Duration: {props.duration} hour(s)</p>
+      {/* TODO necesito hacer validation con esto porque tengo status duplicado en RequestSnippet (y eso lo tengoq eu testear tb) */}
       <p>Status: {props.status}</p>
       <p>Category: {props.category}</p>
       {props.children}

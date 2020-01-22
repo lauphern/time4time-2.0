@@ -5,6 +5,8 @@ import customAxios from "../../utils/customAxios";
 
 import OfferCard from "../OfferCard";
 
+// TODO borrar este component
+
 // TODO dependiendo de como haga los methods, tal vez no necesito este file y lo meto directamente en Offers.jsx
 
 // tal vez puedo hacer como un HOC que renders props.children y cuando lo inserto en el dom pongo el <OfferCard /> dentro. Es bastante nesting pero es algo que ya tengo...

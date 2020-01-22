@@ -92,6 +92,7 @@ app.use('/api', require('./routes/dashboard/myProfile'));
 app.use('/api', require('./routes/dashboard/offers'));
 app.use('/api', require('./routes/dashboard/directMessages'));
 app.use('/api', require('./routes/dashboard/petitions'));
+app.use('/api', require('./routes/dashboard/getBookmarks'));
 app.use('/api', require('./routes/dashboard/userSettings'));
 app.use('/api', require('./routes/publish-offer/publishOffer'));
 
