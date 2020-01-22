@@ -28,12 +28,12 @@ class OfferModal extends Component {
       author: "",
       description: "",
       category: "",
-      errorTimeWallet: ""
+      errorTimeWallet: "",
+      isItBookmarked: false
     };
   }
 
   bookmark = () => {
-    debugger;
     customAxios({
       method: "post",
       url: "/bookmark",
@@ -42,11 +42,28 @@ class OfferModal extends Component {
       .then(res => {
         // Update user in localStorage to have the new bookmarks
         updateUser(res.data);
+        this.setState({isItBookmarked: true})
       })
       .catch(err => {
         console.log(err);
       });
   };
+
+  removeBookmark = () => {
+    customAxios({
+      method: "post",
+      url: "/remove-bookmark",
+      data: { offerId: this.props.offerIdentificator }
+    })
+      .then(res => {
+        // Update user in localStorage to have the new bookmarks
+        updateUser(res.data);
+        this.setState({isItBookmarked: false})
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
   // TODO revisar todos estos methods
 
@@ -106,8 +123,12 @@ class OfferModal extends Component {
   };
 
   render() {
+    let bookmarks = undefined;
     let usersUsername = undefined;
-    if (!!getUser()) usersUsername = getUser().username;
+    if (!!getUser()) {
+      bookmarks = getUser().bookmarks
+      usersUsername = getUser().username
+    }
     return (
       <div className={`modal-container ${this.props.toggle ? "show" : "hide"}`}>
         <div className="offer offer-modal">
@@ -116,14 +137,17 @@ class OfferModal extends Component {
             <a>
               <i className="fa fa-times-circle" onClick={this.props.close}></i>
             </a>
+            {/* If the user is not logged in or its their own offer, we don't show any bookmark button
+            Otherwise, we show the bookmark button depending on if the user has already bookmarked it */}
             {this.props.authorUsername === usersUsername ||
-            !usersUsername ? null : (
-              <a>
+            !usersUsername ? null : (bookmarks ? (
+              bookmarks.indexOf(this.props.offerIdentificator) !== -1 || this.state.isItBookmarked ?
+              <a><i class="fas fa-bookmark" onClick={this.removeBookmark}></i></a> : <a>
                 <i className="far fa-bookmark" onClick={this.bookmark}></i>
               </a>
-            )}
-            {/* TODO logic for the offers you've bookmarked */}
-            {/* <i class="fas fa-bookmark"></i> */}
+            ) : null)}
+            
+            
           </div>
           <section>
             <p>Username: {this.props.authorUsername}</p>

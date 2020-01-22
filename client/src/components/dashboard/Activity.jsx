@@ -40,7 +40,7 @@ const Activity = props => {
       <Petitions listOfPetitions={listOfPetitions} />
       <article className="activity-card">
         <h2>Offers bookmarked</h2>
-        {/* TODO */}
+        {/* TODO continuar por aqui!*/}
         <p>In progress!</p>
       </article>
       <Offers listOfOffers={listOfOffers} />
