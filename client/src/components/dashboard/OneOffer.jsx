@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import customAxios from "../../utils/customAxios";
-import Moment from "react-moment";
 
+import customAxios from "../../utils/customAxios";
+
+import OfferCard from "../OfferCard";
+
+// TODO dependiendo de como haga los methods, tal vez no necesito este file y lo meto directamente en Offers.jsx
+
+// tal vez puedo hacer como un HOC que renders props.children y cuando lo inserto en el dom pongo el <OfferCard /> dentro. Es bastante nesting pero es algo que ya tengo...
 class OneOffer extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +26,7 @@ class OneOffer extends Component {
       data: { offerId: this.props.offerId }
     })
       .then(res => {
+        // TODO revisar
         this.setState({
           offerStatus: "Approved",
           offerApproved: res.data.offerApproved
@@ -48,40 +54,40 @@ class OneOffer extends Component {
   };
   render() {
     return (
-      <div>
-        <header>
-          <p>{this.props.title}</p>
-        </header>
+      <OfferCard
+        title={this.props.title}
+        duration={this.props.duration}
+        status={this.props.status}
+        category={this.props.category}
+      >
+
+      {/* continue: put this jsx in RequestSnippet and the things that come from the state, send it from the parent through props
+      and put the methods in the Offers component, so the parent manages the logic */}
+        {/* TODO revisar esto porque es un caos */}
         <div>
-          <div>
-            <p>
-              Date: &nbsp;{" "}
-              <Moment format="D MMM YYYY" withTitle>
-                {this.props.date}
-              </Moment>
-            </p>
-            <p>Duration: &nbsp; {this.props.duration} hour(s)</p>
-            {this.props.userRequest ? (
-              <p>Who applied to your offer: {this.props.userRequest}</p>
-            ) : (
-              null
-            )}
+          {this.props.userRequest ? (
+            <p>Who applied to your offer: {this.props.userRequest}</p>
+          ) : null}
+
+          {this.state.offerStatus ? (
             <p style={{ color: "green" }}>
-              {this.state.offerStatus
-                ? `You got ${this.state.offerApproved.duration} hour(s) in your Time Wallet!`
-                : ""}
+              You gained {this.state.offerApproved.duration} hour(s) in your Time
+              Wallet!
             </p>
-            <p style={{ color: "red" }}>
-              {this.state.error ? this.state.error : ""}
-            </p>
-          </div>
+          ) : null}
+
+          <p style={{ color: "red" }}>
+            {this.state.error ? this.state.error : ""}
+          </p>
         </div>
+
         <div>
           {this.state.offerApproved ? (
             <p> Offer status: &nbsp; {this.state.offerApproved.status}</p>
           ) : (
             <p> Offer status: &nbsp; {this.props.status}</p>
           )}
+
           {this.state.offerStatus === "Approved" ? (
             <Link>Approved!</Link>
           ) : (
@@ -98,7 +104,7 @@ class OneOffer extends Component {
             </>
           )}
         </div>
-      </div>
+      </OfferCard>
     );
   }
 }

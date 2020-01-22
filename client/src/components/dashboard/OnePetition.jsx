@@ -1,5 +1,6 @@
 import React from "react";
-import Moment from "react-moment";
+
+// TODO borrar este component
 
 const OnePetition = props => {
   return (
@@ -10,13 +11,7 @@ const OnePetition = props => {
       <div>
         <div>
           <p>Author: {props.authorUsername}</p>
-          <p>
-            Date:{" "}
-            {/* TODO revisar */}
-            <Moment format="D MMM YYYY" withTitle>
-              {props.date}
-            </Moment>
-          </p>
+
           <p>Duration: {props.duration} hour(s)</p>
         </div>
       </div>

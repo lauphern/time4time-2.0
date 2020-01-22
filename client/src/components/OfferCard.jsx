@@ -1,15 +1,16 @@
 import React from "react";
-import Moment from "react-moment";
+
+// TODO ver como puedo agregar classes dinamically, tal vez dependiendo de algun prop? y que los nombres de las classes sean similares pero tengan el comienzo distinto, porque con scss puedes combinar nombres de classes
 
 const OfferCard = props => {
   return (
     <article>
-      <h2>{props.title}</h2>
-      {/* TODO do validation so it doesn't show on your own offer */}
-      <p>{props.authorUsername}</p>
+      <h2>Title: {props.title}</h2>
+      {props.authorUsername ? <p>Author: {props.authorUsername}</p> : null}
       <p>Duration: {props.duration} hour(s)</p>
-      <p>{props.status}</p>
-      <p>{props.category}</p>
+      <p>Status: {props.status}</p>
+      <p>Category: {props.category}</p>
+      {props.children}
     </article>
   );
 };
@@ -17,8 +18,6 @@ const OfferCard = props => {
 export default OfferCard;
 
 // title | |
-
-// date |
 
 // duration
 
@@ -35,3 +34,12 @@ export default OfferCard;
 // description
 
 // props.toggle [!] + view offer
+
+
+// In Petitions component - DONE:
+
+// title
+// authorUsername
+// duration
+// status
+// category

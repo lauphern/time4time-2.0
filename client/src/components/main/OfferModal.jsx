@@ -141,7 +141,7 @@ class OfferModal extends Component {
             {this.props.authorUsername === usersUsername ||
             !usersUsername ? null : (bookmarks ? (
               bookmarks.indexOf(this.props.offerIdentificator) !== -1 || this.state.isItBookmarked ?
-              <a><i class="fas fa-bookmark" onClick={this.removeBookmark}></i></a> : <a>
+              <a><i className="fas fa-bookmark" onClick={this.removeBookmark}></i></a> : <a>
                 <i className="far fa-bookmark" onClick={this.bookmark}></i>
               </a>
             ) : null)}

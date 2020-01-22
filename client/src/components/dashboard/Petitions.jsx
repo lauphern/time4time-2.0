@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import OnePetition from "./OnePetition";
+import OfferCard from "../OfferCard";
 
 //This component renders the offers the user has applied to
 const Petitions = props => {
@@ -21,12 +21,12 @@ const Petitions = props => {
         <div>
           {props.listOfPetitions.map(mypetition => {
             return (
-              <OnePetition
+              <OfferCard
                 title={mypetition.title}
                 authorUsername={mypetition.authorUsername}
-                date={mypetition.date}
                 duration={mypetition.duration}
                 status={mypetition.status}
+                category={mypetition.category}
               />
             );
           })}

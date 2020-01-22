@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import OneOffer from "./OneOffer";
 
+const RequestSnippet = props => {}
+
 //This component renders the offers the user has posted
 const Offers = props => {
   // componentWillUnmount() {
@@ -27,9 +29,9 @@ const Offers = props => {
                   offerId={myOffer.id}
                   title={myOffer.title}
                   authorUsername={myOffer.authorUsername}
-                  date={myOffer.date}
                   duration={myOffer.duration}
                   status={myOffer.status}
+                  category={myOffer.category}
                   userRequest={myOffer.userRequest}
                 />
               );
@@ -51,9 +53,9 @@ const Offers = props => {
                   offerId={myOffer.id}
                   title={myOffer.title}
                   authorUsername={myOffer.authorUsername}
-                  date={myOffer.date}
                   duration={myOffer.duration}
                   status={myOffer.status}
+                  category={myOffer.category}
                   userRequest={myOffer.userRequest}
                 />
               );
