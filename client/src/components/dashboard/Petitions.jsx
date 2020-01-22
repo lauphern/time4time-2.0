@@ -23,7 +23,7 @@ const Petitions = props => {
             return (
               <OnePetition
                 title={mypetition.title}
-                Username={mypetition.authorUsername}
+                authorUsername={mypetition.authorUsername}
                 date={mypetition.date}
                 duration={mypetition.duration}
                 status={mypetition.status}

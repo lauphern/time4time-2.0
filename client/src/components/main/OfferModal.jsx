@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import customAxios from "../../utils/customAxios";
-import Moment from "react-moment";
 
 import {
   loggedIn,
@@ -181,12 +180,6 @@ class OfferModal extends Component {
               </div>
               <h1>Category</h1>
               <p>{this.props.category}</p>
-              <h1>Date</h1>
-              <p>
-                <Moment format="D MMM YYYY" withTitle>
-                  {this.props.dateOffer}
-                </Moment>
-              </p>
               <h1>Duration</h1>
               <p>{this.props.durationOffer} hour(s)</p>
             </div>

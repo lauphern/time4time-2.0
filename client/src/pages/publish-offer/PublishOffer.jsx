@@ -3,7 +3,6 @@ import customAxios from "../../utils/customAxios";
 
 import "./PublishOffer.scss";
 
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // TODO
 // import { loadProgressBar } from 'axios-progress-bar'
@@ -19,7 +18,6 @@ class PublishOffer extends Component {
       startDate: Date.now(),
       title: "",
       description: "",
-      date: "",
       duration: "",
       category: "",
       error: "",
@@ -44,8 +42,6 @@ class PublishOffer extends Component {
   handleSubmit = event => {
     event.preventDefault();
     let formData = new FormData(this.form.current);
-    //We need to add the date because the DatePicker component doesn't have an actual input element
-    formData.set("date", this.state.date);
     customAxios({
       method: "post",
       url: "/publish-offer",
@@ -94,18 +90,6 @@ class PublishOffer extends Component {
                 maxLength="250"
                 value={this.state.description}
               />
-            </div>
-            <div>
-              <label>Date</label>
-              {/* <input onChange={this.handleInput} name='date' type="date" placeholder="Date" value={this.state.date}/> */}
-              {/* TODO required */}
-              <DatePicker
-                selected={this.state.startDate}
-                // onChange={date => setStartDate(date)}
-                onChange={this.dateHandler}
-                inline
-              />
-              {this.state.dateError && <p>{this.state.dateError}</p>}
             </div>
             <div>
               <label>Duration</label>
