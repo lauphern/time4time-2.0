@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import OnePetition from "./OnePetition";
 
-//render my applications for another offers
+//This component renders the offers the user has applied to
 const Petitions = props => {
   // componentWillUnmount() {
   // TODO
@@ -22,8 +22,6 @@ const Petitions = props => {
           {props.listOfPetitions.map(mypetition => {
             return (
               <OnePetition
-                // TODO revisar
-                {...props}
                 title={mypetition.title}
                 Username={mypetition.authorUsername}
                 date={mypetition.date}

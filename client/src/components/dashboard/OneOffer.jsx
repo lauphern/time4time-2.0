@@ -64,7 +64,7 @@ class OneOffer extends Component {
             {this.props.userRequest ? (
               <p>Who applied to your offer: {this.props.userRequest}</p>
             ) : (
-              <p></p>
+              null
             )}
             <p style={{ color: "green" }}>
               {this.state.offerStatus

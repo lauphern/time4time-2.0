@@ -24,13 +24,13 @@ let OfferCard = props => {
         <p>
           <strong>Category</strong>: {props.offer.category}
         </p>
-        <Link
+        <a
           onClick={() => {
             props.toggle(props.offer.id);
           }}
         >
           View offer
-        </Link>
+        </a>
         <div className="view-offer"></div>
       </div>
       <OfferModal

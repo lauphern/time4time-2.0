@@ -293,7 +293,7 @@ class AuthorProfile extends Component {
               </div>
             </>
           ) : (
-            <></>
+            null
           )}
         </div>
       </div>

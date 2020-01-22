@@ -86,6 +86,7 @@ app.use((req, res, next) => {
 
 app.use('/api', require('./routes/author-profile/authorProfile'));
 app.use('/api', require('./routes/main/applyOffer'))
+app.use('/api', require('./routes/main/bookmarkOffer'))
 app.use('/api', require('./routes/main/sendNotification'))
 app.use('/api', require('./routes/dashboard/myProfile'));
 app.use('/api', require('./routes/dashboard/offers'));

@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import customAxios from "../../utils/customAxios";
 import Moment from "react-moment";
 
-import { loggedIn, getUser } from "../../utils/authMethods";
+import {
+  loggedIn,
+  getUser,
+  saveUser as updateUser
+} from "../../utils/authMethods";
 
 import "./OfferModal.scss";
 
@@ -27,8 +30,23 @@ class OfferModal extends Component {
       category: "",
       errorTimeWallet: ""
     };
-
   }
+
+  bookmark = () => {
+    debugger;
+    customAxios({
+      method: "post",
+      url: "/bookmark",
+      data: { offerId: this.props.offerIdentificator }
+    })
+      .then(res => {
+        // Update user in localStorage to have the new bookmarks
+        updateUser(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   // TODO revisar todos estos methods
 
@@ -73,10 +91,10 @@ class OfferModal extends Component {
   };
 
   redirectToAuthorProfile = () => {
-    if( !!getUser() ) {
+    if (!!getUser()) {
       if (this.props.authorUsername === getUser().username) {
-        this.props.history.push("/dashboard")
-        return
+        this.props.history.push("/dashboard");
+        return;
       }
     }
     // TODO revisar esta url
@@ -87,26 +105,31 @@ class OfferModal extends Component {
     this.props.history.push("/");
   };
 
-
   render() {
-    let usersUsername = undefined
-    if( !!getUser() ) usersUsername = getUser().username
+    let usersUsername = undefined;
+    if (!!getUser()) usersUsername = getUser().username;
     return (
-      <div className={`modal-container ${this.props.toggle ? "show" : "hide"}`} >
+      <div className={`modal-container ${this.props.toggle ? "show" : "hide"}`}>
         <div className="offer offer-modal">
           <div>
             <p>{this.props.title}</p>
-            <Link>
+            <a>
               <i className="fa fa-times-circle" onClick={this.props.close}></i>
-            </Link>
+            </a>
+            {this.props.authorUsername === usersUsername ||
+            !usersUsername ? null : (
+              <a>
+                <i className="far fa-bookmark" onClick={this.bookmark}></i>
+              </a>
+            )}
+            {/* TODO logic for the offers you've bookmarked */}
+            {/* <i class="fas fa-bookmark"></i> */}
           </div>
           <section>
             <p>Username: {this.props.authorUsername}</p>
-            <Link>
-              <button onClick={this.redirectToAuthorProfile}>
-                Visit profile
-              </button>
-            </Link>
+            <button onClick={this.redirectToAuthorProfile}>
+              Visit profile
+            </button>
             <div>
               {/* TODO */}
               {/* <img src={`${process.env.REACT_APP_API}/${this.props.image}`} alt=""/> */}
@@ -145,47 +168,41 @@ class OfferModal extends Component {
             </div>
           </section>
           <div>
-            <Link>
-              {/* TODO revisar */}
-              {loggedIn() ? (
-                <>
-                  {this.props.authorUsername === usersUsername ? (
-                    <button disabled>Apply</button>
-                  ) : (
-                    <button
-                      className="btn"
-                      onClick={e => {
-                        this.handleApply(e);
-                        this.sendEmail(e);
-                      }}
-                    >
-                      Apply
-                    </button>
-                  )}
-                </>
-              ) : (
-                <button className="btn" onClick={this.redirectToLogin}>
-                  Apply
-                </button>
-              )}
-            </Link>
+            {/* TODO revisar */}
+            {loggedIn() ? (
+              <>
+                {this.props.authorUsername === usersUsername ? (
+                  <button disabled>Apply</button>
+                ) : (
+                  <button
+                    className="btn"
+                    onClick={e => {
+                      this.handleApply(e);
+                      this.sendEmail(e);
+                    }}
+                  >
+                    Apply
+                  </button>
+                )}
+              </>
+            ) : (
+              <button className="btn" onClick={this.redirectToLogin}>
+                Apply
+              </button>
+            )}
             {this.state.errorTimeWallet ? (
               <p style={{ color: "red" }}>&nbsp;{this.state.errorTimeWallet}</p>
-            ) : (
-              <p></p>
-            )}
+            ) : null}
             {this.props.authorUsername === usersUsername ? (
               <p style={{ color: "red" }}>
                 &nbsp;You can't apply to your own offer
               </p>
-            ) : (
-              <p></p>
-            )}
+            ) : null}
           </div>
         </div>
         <div
           onClick={() => {
-            this.closeFadeModal(); /*this.props.close()*/
+            this.closeFadeModal();
           }}
           className={"modal-bg"}
         ></div>

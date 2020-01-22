@@ -132,7 +132,7 @@ class MyProfile extends Component {
               </div>
             </>
           ) : (
-            <></>
+            null
           )}
         </div>
       </div>
