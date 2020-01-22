@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import customAxios from "../../utils/customAxios";
 import Moment from "react-moment";
 
-class OneRequest extends Component {
+class OneOffer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -103,4 +103,4 @@ class OneRequest extends Component {
   }
 }
 
-export default OneRequest;
+export default OneOffer;

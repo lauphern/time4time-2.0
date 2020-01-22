@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import DirectMessages from "../../components/dashboard/messages/DirectMessages";
 import UserSettings from "../../components/dashboard/UserSettings";
 import MyProfile from "../../components/dashboard/MyProfile";
 import Activity from "../../components/dashboard/Activity";
 
-import customAxios from "../../utils/customAxios";
+// import customAxios from "../../utils/customAxios";
 
 import "./UserDashboard.scss";
 
@@ -14,6 +13,7 @@ class UserDashboard extends Component {
     super(props);
     this.state = {
       activeSection: "activity",
+      // TODO notifications
       petitionsNotification: false,
       listOfPetitions: [],
       myOffers: false,
@@ -65,37 +65,37 @@ class UserDashboard extends Component {
         return null;
     }
   };
-  getMyOffers = () => {
-    customAxios({
-      method: "get",
-      url: "/my-offers"
-    }).then(responseFromApi => {
-      this.setState({
-        listOfMyOffers: responseFromApi.data
-      });
-      this.notificationControl(responseFromApi.data, "offers");
-    });
-  };
-  getMyPetitions = () => {
-    customAxios({
-      method: "get",
-      url: "/my-petitions"
-    }).then(responseFromApi => {
-      this.setState({
-        listOfPetitions: responseFromApi.data
-      });
-      this.notificationControl(responseFromApi.data, "petitions");
-    });
-  };
+  // getMyOffers = () => {
+  //   customAxios({
+  //     method: "get",
+  //     url: "/my-offers"
+  //   }).then(responseFromApi => {
+  //     this.setState({
+  //       listOfMyOffers: responseFromApi.data
+  //     });
+  //     this.notificationControl(responseFromApi.data, "offers");
+  //   });
+  // };
+  // getMyPetitions = () => {
+  //   customAxios({
+  //     method: "get",
+  //     url: "/my-petitions"
+  //   }).then(responseFromApi => {
+  //     this.setState({
+  //       listOfPetitions: responseFromApi.data
+  //     });
+  //     this.notificationControl(responseFromApi.data, "petitions");
+  //   });
+  // };
   cleanNotif = sectionNotif => {
     if (sectionNotif === "offers") this.setState({ myOffers: false });
     else if (sectionNotif === "petitions")
       this.setState({ petitionsNotification: false });
   };
-  componentDidMount() {
-    this.getMyPetitions();
-    this.getMyOffers();
-  }
+  // componentDidMount() {
+  //   this.getMyPetitions();
+  //   this.getMyOffers();
+  // }
   render() {
     return (
       <div className="user-dashboard">
@@ -103,7 +103,7 @@ class UserDashboard extends Component {
           <ul>
             {/* TODO do notifications */}
             <li>
-              <Link
+              <a
                 className={
                   this.state.activeMenuItems[0] ? "is-active" : "inactive"
                 }
@@ -114,7 +114,7 @@ class UserDashboard extends Component {
                 <span>
                   <i className="fas fa-th-large"></i> Activity
                 </span>
-              </Link>
+              </a>
             </li>
             {/* <li>
                             {this.state.myOffers ?
@@ -139,7 +139,7 @@ class UserDashboard extends Component {
                             }
                         </li> */}
             <li>
-              <Link
+              <a
                 className={
                   this.state.activeMenuItems[1] ? "is-active" : "inactive"
                 }
@@ -150,10 +150,10 @@ class UserDashboard extends Component {
                 <span>
                   <i className="fas fa-comments"></i> Chat
                 </span>
-              </Link>
+              </a>
             </li>
             <li>
-              <Link
+              <a
                 className={
                   this.state.activeMenuItems[2] ? "is-active" : "inactive"
                 }
@@ -164,10 +164,10 @@ class UserDashboard extends Component {
                 <span>
                   <i className="fas fa-user-alt"></i> Profile
                 </span>
-              </Link>
+              </a>
             </li>
             <li>
-              <Link
+              <a
                 className={
                   this.state.activeMenuItems[3] ? "is-active" : "inactive"
                 }
@@ -178,14 +178,13 @@ class UserDashboard extends Component {
                 <span>
                   <i className="fas fa-sliders-h"></i> Settings
                 </span>
-              </Link>
+              </a>
             </li>
           </ul>
         </aside>
         <div className="dashboard-content">
           {(() => {
             //this switch case is used to open the selected section when you click the menu item
-            /* TODO combinar offers, petitions y (en el futuro) offers bookmarked */
             switch (this.state.activeSection) {
               case "activity":
                 return (

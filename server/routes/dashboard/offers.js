@@ -3,15 +3,15 @@ const router = express.Router();
 
 const { usersCollection, offersCollection, admin: firebase } = require("../../utils/db")
 
-router.get('/my-offers', function(req, res) {
+router.get('/get-offers', function(req, res) {
     offersCollection.where("authorUsername", "==", req.session.user.username).get()
     .then((snap) =>{
-        let myOffers = []
+        let offers = []
         snap.forEach(doc => {
             let { id } = doc
-            myOffers.push({id, ...doc.data()})
+            offers.push({id, ...doc.data()})
         })
-        res.json(myOffers)
+        res.json(offers)
     }) 
     .catch((err) =>{
         res.status(404).json({errorMessage: 'not found'})

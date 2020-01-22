@@ -88,9 +88,9 @@ app.use('/api', require('./routes/author-profile/authorProfile'));
 app.use('/api', require('./routes/main/applyOffer'))
 app.use('/api', require('./routes/main/sendNotification'))
 app.use('/api', require('./routes/dashboard/myProfile'));
-app.use('/api', require('./routes/dashboard/myOffers'));
+app.use('/api', require('./routes/dashboard/offers'));
 app.use('/api', require('./routes/dashboard/directMessages'));
-app.use('/api', require('./routes/dashboard/myPetitions'));
+app.use('/api', require('./routes/dashboard/petitions'));
 app.use('/api', require('./routes/dashboard/userSettings'));
 app.use('/api', require('./routes/publish-offer/publishOffer'));
 
