@@ -63,9 +63,6 @@ class OneOffer extends Component {
         category={this.props.category}
       >
 
-      {/* continue: put this jsx in RequestSnippet and the things that come from the state, send it from the parent through props
-      and put the methods in the Offers component, so the parent manages the logic */}
-        {/* TODO revisar esto porque es un caos */}
         <div>
           {this.props.userRequest ? (
             <p>Who applied to your offer: {this.props.userRequest}</p>

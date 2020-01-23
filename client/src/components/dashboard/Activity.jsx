@@ -40,6 +40,7 @@ const Activity = props => {
       url: "/get-bookmarks"
     })
       .then(responseFromApi => {
+        debugger
         setListOfBookmarks(responseFromApi.data);
       })
       .catch(err => console.log(err));

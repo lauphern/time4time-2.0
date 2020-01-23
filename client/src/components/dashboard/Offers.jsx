@@ -10,6 +10,7 @@ import customAxios from "../../utils/customAxios";
 const RequestSnippet = props => {
   return (
     <>
+    {/* TODO revisar esto porque es un caos */}
       <div>
         {props.userRequest ? (
           <p>Who applied to your offer: {props.userRequest}</p>

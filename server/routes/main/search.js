@@ -4,10 +4,7 @@ const router = express.Router();
 const { offersCollection } = require("../../utils/db")
 
 router.post('/search', function(req, res) {
-    //TODO revisar
-    //necesito las variables? no seria suficiente con strings?
     const { house, technology, music, repair, languages, cooking } = req.body
-    //TODO revisar
     offersCollection.where("category", "in", [house, technology, music, repair, languages, cooking]).where("status", "==", "Open").get()
     .then(snap => {
         let filteredOffers = []

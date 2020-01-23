@@ -67,7 +67,6 @@ router.post('/approve-offer', function(req, res, next) {
         res.status(400).json({errorMessage: 'Could not find offer author and update their time wallet'})
     })
 })
-//continuar en el frontend!
 
 
 module.exports = router;
