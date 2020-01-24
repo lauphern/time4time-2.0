@@ -5,7 +5,7 @@ nav {
     justify-content: space-between;
     height: 5vh;
     padding: 2vh 2vw;
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
@@ -104,8 +104,35 @@ nav {
 @media (max-width: 600px) {
     nav {
 
-        .nav-burger {
-            display: block;
+        & > div:nth-of-type(1) {
+            width: 100vw;
+            display: flex;
+            justify-content: space-between;
+
+            .nav-burger {
+                display: block;
+                align-self: center;
+            }
+        }
+
+        .dropdown-show {
+            width: 100vw;
+            position: fixed;
+            top: 9vh;
+            left: 0;
+            right: 0;
+            background-color: white;
+            transition: 0.5s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        &.shrink-nav {
+            
+            .dropdown-show {
+                top: 6vh;
+            }
         }
 
         .full-menu {
