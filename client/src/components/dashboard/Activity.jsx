@@ -40,7 +40,6 @@ const Activity = props => {
       url: "/get-bookmarks"
     })
       .then(responseFromApi => {
-        debugger
         setListOfBookmarks(responseFromApi.data);
       })
       .catch(err => console.log(err));
@@ -56,7 +55,7 @@ const Activity = props => {
     <section className="activity-section">
       <Petitions listOfPetitions={listOfPetitions} />
       <Bookmarks listOfBookmarks={listOfBookmarks}/>
-      <Offers listOfOffers={listOfOffers} />
+      <Offers listOfOffers={listOfOffers} updateOffers={getOffers}/>
     </section>
   );
 };

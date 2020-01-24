@@ -4,8 +4,6 @@ import UserSettings from "../../components/dashboard/UserSettings";
 import MyProfile from "../../components/dashboard/MyProfile";
 import Activity from "../../components/dashboard/Activity";
 
-// import customAxios from "../../utils/customAxios";
-
 import "./UserDashboard.scss";
 
 class UserDashboard extends Component {
@@ -15,9 +13,7 @@ class UserDashboard extends Component {
       activeSection: "activity",
       // TODO notifications
       petitionsNotification: false,
-      listOfPetitions: [],
       myOffers: false,
-      listOfMyOffers: [],
       messages: [],
       activeMenuItems: [true, false, false, false, false]
     };
@@ -65,37 +61,13 @@ class UserDashboard extends Component {
         return null;
     }
   };
-  // getMyOffers = () => {
-  //   customAxios({
-  //     method: "get",
-  //     url: "/my-offers"
-  //   }).then(responseFromApi => {
-  //     this.setState({
-  //       listOfMyOffers: responseFromApi.data
-  //     });
-  //     this.notificationControl(responseFromApi.data, "offers");
-  //   });
-  // };
-  // getMyPetitions = () => {
-  //   customAxios({
-  //     method: "get",
-  //     url: "/my-petitions"
-  //   }).then(responseFromApi => {
-  //     this.setState({
-  //       listOfPetitions: responseFromApi.data
-  //     });
-  //     this.notificationControl(responseFromApi.data, "petitions");
-  //   });
-  // };
+
   cleanNotif = sectionNotif => {
     if (sectionNotif === "offers") this.setState({ myOffers: false });
     else if (sectionNotif === "petitions")
       this.setState({ petitionsNotification: false });
   };
-  // componentDidMount() {
-  //   this.getMyPetitions();
-  //   this.getMyOffers();
-  // }
+  
   render() {
     return (
       <div className="user-dashboard">
@@ -189,12 +161,7 @@ class UserDashboard extends Component {
               case "activity":
                 return (
                   <Activity
-                    {...this.props}
-                    {...this.state}
                     cleanNotif={this.cleanNotif}
-                    updateOffers={this.getMyOffers}
-                    listOfMyOffers={this.state.listOfMyOffers}
-                    listOfPetitions={this.state.listOfPetitions}
                   />
                 );
               case "messages":
@@ -211,12 +178,7 @@ class UserDashboard extends Component {
               default:
                 return (
                   <Activity
-                    {...this.props}
-                    {...this.state}
                     cleanNotif={this.cleanNotif}
-                    updateOffers={this.getMyOffers}
-                    listOfMyOffers={this.state.listOfMyOffers}
-                    listOfPetitions={this.state.listOfPetitions}
                   />
                 );
             }

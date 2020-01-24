@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import OfferCard from "../OfferCard";
 
@@ -10,7 +10,7 @@ import customAxios from "../../utils/customAxios";
 const RequestSnippet = props => {
   return (
     <>
-    {/* TODO revisar esto porque es un caos */}
+      {/* TODO revisar esto porque es un caos */}
       <div>
         {props.userRequest ? (
           <p>Who applied to your offer: {props.userRequest}</p>
@@ -42,7 +42,7 @@ const RequestSnippet = props => {
                 {props.status === "Approved" ? (
                   <Link>Approved!</Link>
                 ) : (
-                  <Link onClick={props.approveOffer}>Approve</Link>
+                  <Link onClick={e => props.approveOffer(e, props.offerId)}>Approve</Link>
                 )}
               </>
             )}
@@ -64,31 +64,32 @@ const Offers = props => {
   const [error, setError] = useState("");
   const [offerApproved, setOfferApproved] = useState(undefined);
 
-  const approveOffer = event => {
+  let history = useHistory();
+
+
+  const approveOffer = (event, offerId) => {
     event.preventDefault();
+    let test = props
+    debugger
     customAxios({
       method: "post",
-      url: "/approve-offer"
-      // TODO check where I have the offerId, if I don't have it in props, sends through method call
-      // data: { offerId: props.offerId }
+      url: "/approve-offer",
+      data: { offerId }
     })
       .then(res => {
         // TODO revisar
         setOfferStatus("Approved");
         setOfferApproved(res.data.offerApproved);
-        //TODO get this prop here (it comes from UserDashboard)
         props.updateOffers();
         //TODO test que este orden funciona
         return customAxios({
           method: "post",
-          url: "/update-time-wallet"
-          // TODO check where I have the offerId, if I don't have it in props, sends through method call
-          // data: { offerId: props.offerId }
-        })
+          url: "/update-time-wallet",
+          data: { offerId }
+        });
       })
       .then(() => {
-        //TODO check if I have history. If I don't, there's a hook for it
-        props.history.push("/dashboard");
+        history.push("/dashboard");
       })
       .catch(err => {
         setError("Something went wrong!");
@@ -122,6 +123,7 @@ const Offers = props => {
                   userRequest={myOffer.userRequest}
                 >
                   <RequestSnippet
+                    offerId={myOffer.id}
                     approveOffer={approveOffer}
                     offerStatus={offerStatus}
                     offerApproved={offerApproved}
@@ -154,6 +156,7 @@ const Offers = props => {
                   userRequest={myOffer.userRequest}
                 >
                   <RequestSnippet
+                    offerId={myOffer.id}
                     approveOffer={approveOffer}
                     offerStatus={offerStatus}
                     offerApproved={offerApproved}
