@@ -10,12 +10,12 @@ nav {
     left: 0;
     right: 0;
     z-index: 100;
-    background: white;
+    background: $main;
     transition: 0.5s;
     overflow: hidden;
 
     a {
-        color: black;
+        color: white;
     }
 
     &.shrink-nav {
@@ -32,7 +32,7 @@ nav {
         display: none;
     
         &:after, &:before, div {
-            background-color: $title-sm;
+            background-color: white;
             border-radius: 3px;
             content: '';
             display: block;
@@ -55,11 +55,19 @@ nav {
     }
 
     .dropdown-hidden {
-        display: none;
+        // display: none;
+        animation-duration: 0.5s;
+        animation-name: hide-dropdown;
+        animation-timing-function: ease-out;
+        transform-origin: top;
     }
 
     .dropdown-show {
         display: block;
+        animation-duration: 0.5s;
+        animation-name: show-dropdown;
+        animation-timing-function: ease-out;
+        transform-origin: top;
     }
 
     .full-menu {
@@ -76,7 +84,7 @@ nav {
 
             &:before {
                 position: absolute;
-                color: $main;
+                color: $accent;
                 top: 0px;
                 left: 0px;
                 overflow: hidden;
@@ -115,13 +123,13 @@ nav {
             }
         }
 
-        .dropdown-show {
+        .dropdown {
             width: 100vw;
             position: fixed;
             top: 9vh;
             left: 0;
             right: 0;
-            background-color: white;
+            background-color: $main;
             transition: 0.5s;
             display: flex;
             flex-direction: column;
@@ -140,4 +148,28 @@ nav {
         }
     }
     
+}
+
+
+@keyframes show-dropdown {
+
+    from {
+        transform: scaleY(0);
+    }
+
+    to {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes hide-dropdown {
+
+    from {
+        transform: scaleY(1);
+
+    }
+
+    to {
+        transform: scaleY(0);
+    }
 }

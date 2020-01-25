@@ -109,12 +109,6 @@ class Main extends Component {
                 <span ref={span => (this.thirdSpan = span)}>time</span>
               </h1>
             </div>
-            <div>
-              <p>
-                We think time is priceless. Do you want to join us and share new
-                experiences and pay with just your time?
-              </p>
-            </div>
           </div>
           <div
             className={

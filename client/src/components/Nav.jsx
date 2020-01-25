@@ -7,7 +7,7 @@ import "./Nav.scss";
 const AuthNav = props => {
   return (
     <>
-      <div className={props.dropdownMenu}>
+      <div className={`dropdown ${props.dropdownMenu} ${props.hideElement}`}>
         <NavLink
           onClick={props.toggleDropdownMenu}
           exact
@@ -29,6 +29,13 @@ const AuthNav = props => {
           activeClassName="active-nav-item"
         >
           Publish new offer
+        </NavLink>
+        <NavLink
+          onClick={props.toggleDropdownMenu}
+          to="/about-us"
+          activeClassName="active-nav-item"
+        >
+          About us
         </NavLink>
         <NavLink
           onClick={() => {
@@ -59,6 +66,13 @@ const AuthNav = props => {
         >
           Publish new offer
         </NavLink>
+        <NavLink
+          alt="About us"
+          to="/about-us"
+          activeClassName="active-nav-item"
+        >
+          About us
+        </NavLink>
         <p>
           Hello,{" "}
           <NavLink
@@ -85,7 +99,7 @@ const AuthNav = props => {
 const UnauthNav = props => {
   return (
     <>
-      <div className={props.dropdownMenu}>
+      <div className={`dropdown ${props.dropdownMenu} ${props.hideElement}`}>
         <NavLink
           onClick={props.toggleDropdownMenu}
           exact
@@ -93,6 +107,21 @@ const UnauthNav = props => {
           activeClassName="active-nav-item"
         >
           Home
+        </NavLink>
+        <NavLink
+          onClick={props.toggleDropdownMenu}
+          to="/publish-offer"
+          activeClassName="active-nav-item"
+        >
+          Publish new offer
+        </NavLink>
+        <NavLink
+          onClick={props.toggleDropdownMenu}
+          exact
+          to="/about-us"
+          activeClassName="active-nav-item"
+        >
+          About us
         </NavLink>
         <NavLink
           onClick={props.toggleDropdownMenu}
@@ -120,6 +149,13 @@ const UnauthNav = props => {
         >
           Publish new offer
         </NavLink>
+        <NavLink
+          alt="About us"
+          to="/about-us"
+          activeClassName="active-nav-item"
+        >
+          About us
+        </NavLink>
         <NavLink alt="Login" to="/login" activeClassName="active-nav-item">
           Login
         </NavLink>
@@ -136,14 +172,18 @@ class Nav extends Component {
     super(props);
     this.state = {
       dropdownMenu: "dropdown-hidden",
-      scrollPos: window.pageYOffset
+      scrollPos: window.pageYOffset,
+      hideElement: "hidden-element"
     };
   }
 
   toggleDropdownMenu = () => {
     if (this.state.dropdownMenu === "dropdown-hidden")
-      this.setState({ dropdownMenu: "dropdown-show" });
-    else this.setState({ dropdownMenu: "dropdown-hidden" });
+      this.setState({ dropdownMenu: "dropdown-show", hideElement: undefined });
+    else {
+      this.setState({ dropdownMenu: "dropdown-hidden" })
+      setTimeout(() => this.setState({hideElement: "hidden-element"}), 400)
+    }
   };
 
   handleScroll = () => {
@@ -167,7 +207,7 @@ class Nav extends Component {
       <nav className={this.state.scrollPos > 150 ? "shrink-nav" : null}>
         <div>
           <NavLink to="/" activeClassName="active-nav-item">
-            <img src="/logo_black.png" alt=""></img>
+            <img src="/logo_white.png" alt=""></img>
           </NavLink>
           <div className="nav-burger" onClick={this.toggleDropdownMenu}>
             <div></div>
@@ -177,6 +217,7 @@ class Nav extends Component {
           <AuthNav
             dropdownMenu={this.state.dropdownMenu}
             toggleDropdownMenu={this.toggleDropdownMenu}
+            hideElement={this.state.hideElement}
             logMeOut={() => {
               logout();
               this.props.updateNav();
@@ -186,6 +227,7 @@ class Nav extends Component {
           <UnauthNav
             dropdownMenu={this.state.dropdownMenu}
             toggleDropdownMenu={this.toggleDropdownMenu}
+            hideElement={this.state.hideElement}
           />
         )}
       </nav>

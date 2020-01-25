@@ -1,9 +1,21 @@
+@import "../Setup.scss";
+
 footer {
-    background-color: white;
+    background-color: $main;
+    height: 20vh;
+    box-sizing: border-box;
+    margin-top: 5vh;
+    padding: 0 2vw;
     flex-shrink: 0;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     & > div > img {
         width: 5vw;
+    }
+
+    a {
+        color: white;
     }
 }

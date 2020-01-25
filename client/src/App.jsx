@@ -15,6 +15,8 @@ import Signup from "./pages/authentication/Signup";
 import AuthorProfile from "./pages/author-profile/AuthorProfile";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
+import AboutUs from "./pages/about-us/AboutUs";
+import FAQ from "./pages/faq/FAQ";
 
 const Loader = () => {
   return <i className="fas fa-spinner fa-pulse loader"></i>;
@@ -64,6 +66,8 @@ class App extends Component {
                 <Signup {...props} updateNav={this.syncLoggedIn} />
               )}
             />
+            <Route path="/about-us" component={AboutUs} />
+            <Route path="/faq" component={FAQ} />
             <PrivateRoute
               path="/dashboard"
               component={UserDashboard}
