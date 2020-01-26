@@ -207,7 +207,7 @@ class Nav extends Component {
       <nav className={this.state.scrollPos > 150 ? "shrink-nav" : null}>
         <div>
           <NavLink to="/" activeClassName="active-nav-item">
-            <img src="/logo_white.png" alt=""></img>
+            <img src="/logo_white_new.png" alt=""></img>
           </NavLink>
           <div className="nav-burger" onClick={this.toggleDropdownMenu}>
             <div></div>
