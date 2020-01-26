@@ -20,9 +20,7 @@ class Search extends Component {
 
   handleCheck = event => {
     let generalSearch = { ...this.state.search };
-    generalSearch[event.target.name] = event.target.checked
-      ? event.target.name
-      : "";
+    generalSearch[event.target.name] = event.target.checked ? event.target.name : "";
     this.setState({ search: generalSearch });
   };
 
@@ -43,8 +41,8 @@ class Search extends Component {
   render() {
     return (
       <section id="search">
-      {/* TODO revisar que funciona */}
-        <h6 id="pick-category">Pick a category</h6>
+        {/* TODO revisar que funciona */}
+        <h2 id="pick-category">Pick a category</h2>
         {/* <form onSubmit={(e) => {this.props.handleSearch(e, this.state)}}> */}
         <form className="category-search">
           <input
@@ -137,11 +135,11 @@ class Search extends Component {
             Cooking
           </label>
 
-          {/* <button className="search-btn"><i className="fas fa-search"></i> Search</button> */}
-
-          <p style={{ color: "red" }}>
-            {this.props.error ? this.props.error : ""}
-          </p>
+          {this.props.error ? (
+            <p style={{ color: "red" }}>{this.props.error}</p>
+          ) : (
+            null
+          )}
         </form>
       </section>
     );

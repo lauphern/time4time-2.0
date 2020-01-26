@@ -4,7 +4,7 @@ import React from "react";
 
 const OfferCard = props => {
   return (
-    <article>
+    <article className={props.classes ? props.classes : undefined}>
       <h2>{props.title}</h2>
       {props.authorUsername ? <p>Author: {props.authorUsername}</p> : null}
       <p>Duration: {props.duration} hour(s)</p>
@@ -17,30 +17,3 @@ const OfferCard = props => {
 };
 
 export default OfferCard;
-
-// title | |
-
-// duration
-
-// status |
-
-// category
-
-// authorUsername |
-
-// users that requested your offer
-
-// onClick to approveOffer
-
-// description
-
-// props.toggle [!] + view offer
-
-
-// In Petitions component - DONE:
-
-// title
-// authorUsername
-// duration
-// status
-// category

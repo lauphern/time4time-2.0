@@ -128,7 +128,7 @@ class UserSettings extends Component {
                 </p>
               </div>
               <p style={{ color: "red" }}>
-                {this.state.error ? this.state.error : ""}
+                {this.state.error ? this.state.error : null}
               </p>
               <button value="submit">Edit personal information</button>
             </form>

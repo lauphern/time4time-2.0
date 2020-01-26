@@ -11,6 +11,7 @@ import "./OfferList.scss";
 
 //TODO
 //asegurarme de que funciona
+
 //this component displays all offers in the main page with OPEN status
 //pending and closed offers don't show in main page
 
@@ -18,14 +19,12 @@ let OfferBlock = props => {
   let location = useLocation();
   return (
     <>
-      {/* TODO revisar el styling 
-     className="offer main-card"
-     */}
       <OfferCard
         title={props.offer.title}
         authorUsername={props.offer.authorUsername}
         duration={props.offer.duration}
         category={props.offer.category}
+        classes="offer main-card"
       >
         <p>{props.offer.description}</p>
         <a
@@ -37,25 +36,6 @@ let OfferBlock = props => {
         </a>
         <div className="view-offer"></div>
       </OfferCard>
-      {/* TODO borrar esto */}
-      {/* <div className="offer main-card" key={props.offer.id}>
-        <h3>{props.offer.title}</h3>
-        <h4>
-          <strong>User</strong>: {props.offer.authorUsername}
-        </h4>
-        <p>{props.offer.description}</p>
-        <p>
-          <strong>Category</strong>: {props.offer.category}
-        </p>
-        <a
-          onClick={() => {
-            props.toggle(props.offer.id);
-          }}
-        >
-          View offer
-        </a>
-        <div className="view-offer"></div>
-      </div> */}
       <OfferModal
         close={props.toggle}
         toggle={location.pathname === `/${props.offer.id}`}

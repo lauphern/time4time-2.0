@@ -7,7 +7,7 @@
 
     form.category-search {
 
-        display: flex;
+        display: grid;
     
         label {
             border: 1.5px solid $main;
@@ -81,3 +81,53 @@
     }
 }
 
+
+/////////---------------MEDIA QUERIES---------------/////////
+
+//Tablets
+@media (min-width: 361px) and (max-width: 768px) {
+    #search {
+    
+        form.category-search {
+            grid-template-columns: 1fr 1fr;
+        }
+    }    
+}
+
+//Big tablets
+@media (min-width: 769px) and (max-width: 1024px) {
+    #search {
+    
+        form.category-search {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    }    
+}
+
+//Laptops
+@media (min-width: 1025px) and (max-width: 1280px) {
+    #search {
+    
+        form.category-search {
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+
+            label:nth-last-child(3) {
+                grid-column: 2 / 3;
+            }
+
+            label:nth-last-child(1) {
+                grid-column: 3 / 4;
+            }
+        }
+    }    
+}
+
+//Desktop
+@media (min-width: 1281px) {
+    #search {
+    
+        form.category-search {
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        }
+    }   
+}

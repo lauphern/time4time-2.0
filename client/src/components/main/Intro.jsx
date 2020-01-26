@@ -57,13 +57,8 @@ class Intro extends Component {
         <article>
           <div ref={div => (this.communityText = div)}>
             <h2>Meet new friends!</h2>
-            {/* TODO do an about us page, with both of us */}
             <p>
-              The world is more connected every day. But, oddly enough, we are
-              also feeling lonelier than ever. At{" "}
-              <Link to="/about-us">Time for time</Link> we feel it's time to
-              look back to our own communities and <strong>strengthen and create new bonds</strong>
-               with the people around us.
+              The world is more connected every day. But, oddly enough, we are also feeling lonelier than ever. At <Link to="/about-us">Time for time</Link> we feel it's time to look back to our own communities and <strong>strengthen and create new bonds</strong> with the people around us.
             </p>
             <Link className="btn" to="/signup">
               Join us

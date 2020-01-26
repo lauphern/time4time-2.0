@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import customAxios from "../../utils/customAxios";
 
 import "./PublishOffer.scss";
-
-import "react-datepicker/dist/react-datepicker.css";
 // TODO
 // import { loadProgressBar } from 'axios-progress-bar'
 
@@ -21,7 +19,8 @@ class PublishOffer extends Component {
       duration: "",
       category: "",
       error: "",
-      dateError: ""
+      dateError: "",
+      fileName: "Choose file..."
     };
     this.form = React.createRef();
   }
@@ -29,14 +28,10 @@ class PublishOffer extends Component {
   handleInput = event => {
     let update = {};
     update[event.target.name] = event.target.value;
+    if(event.target.type === "file") update.fileName = event.target.files["0"].name
     this.setState(update);
   };
 
-  dateHandler = date => {
-    if (date < Date.now() || date === Date.now())
-      this.setState({ dateError: "You have to pick a future date!" });
-    else this.setState({ dateError: "", startDate: date, date: date });
-  };
 
   //submit button
   handleSubmit = event => {
@@ -120,17 +115,21 @@ class PublishOffer extends Component {
               </select>
             </div>
             <div>
-              <label>Image</label>
-              <input
-                onChange={this.handleInput}
-                name="offerImage"
-                type="file"
-                required
-              />
+              <label className="file-input">
+                <span>{this.state.fileName}</span>
+                <input
+                  onChange={this.handleInput}
+                  name="offerImage"
+                  type="file"
+                  required
+                />
+              </label>
             </div>
-            <p style={{ color: "red" }}>
-              {this.state.error ? this.state.error : ""}
-            </p>
+
+            {this.state.error ? (
+              <p style={{ color: "red" }}>{this.state.error}</p>
+            ) : null}
+
             <div>
               <button className="btn btn-cancel">Cancel</button>
               <button className="btn">Submit</button>

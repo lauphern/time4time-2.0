@@ -40,41 +40,35 @@ class Login extends Component {
       >
         <div className="auth-panel">
           <h3>Login</h3>
-          <p>Please login to proceed.</p>
           <div>
             <form onSubmit={this.handleSubmit}>
-              <div>
-                <div>
-                  <input
-                    onChange={this.handleInput}
-                    type="text"
-                    name="username"
-                    placeholder="Username"
-                    value={this.state.username}
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <div>
-                  <input
-                    onChange={this.handleInput}
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    value={this.state.password}
-                    required
-                  />
-                </div>
-              </div>
-              <p style={{ color: "red" }}>
-                {this.state.error ? this.state.error : ""}
-              </p>
+              <input
+                onChange={this.handleInput}
+                type="text"
+                name="username"
+                placeholder="Username"
+                value={this.state.username}
+                required
+              />
+              <input
+                onChange={this.handleInput}
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={this.state.password}
+                required
+              />
+
+              {this.state.error ? (
+                <p style={{ color: "red" }}>{this.state.error}</p>
+              ) : (
+                null
+              )}
+
               <button className="btn">Login</button>
             </form>
           </div>
           <p>
-            {" "}
             New to Time4Time?
             <Link to="/signup"> Sign Up</Link>
           </p>

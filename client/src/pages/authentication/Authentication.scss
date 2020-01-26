@@ -1,17 +1,18 @@
 .auth-background {
-    height: 100%;
+    height: calc(100% - 9vh);
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
 
     .auth-panel {
         background-color: rgba(255, 255, 255, 0.8);
-        // width: 30vw;
         display: flex;
         flex-direction: column;
         border-radius: 10px;
         padding: 4vh;
+        margin: 4vh;
     }
 }

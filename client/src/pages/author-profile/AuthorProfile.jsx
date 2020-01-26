@@ -189,9 +189,11 @@ class AuthorProfile extends Component {
             <form ref={this.form} onSubmit={this.handleSubmitReview}>
               <div>
                 <label>Reviews</label>
-                <p style={{ color: "green" }}>
-                  {this.state.success ? this.state.success : ""}
-                </p>
+
+                {this.state.success ? (
+                  <p style={{ color: "green" }}>{this.state.success}</p>
+                ) : null}
+
                 <div>
                   <h2>
                     Your Rating: {rating}{" "}
@@ -292,9 +294,7 @@ class AuthorProfile extends Component {
                 </InfiniteScroll>
               </div>
             </>
-          ) : (
-            null
-          )}
+          ) : null}
         </div>
       </div>
     );

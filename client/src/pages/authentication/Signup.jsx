@@ -47,100 +47,91 @@ class SignUp extends Component {
       >
         <div className="auth-panel">
           <h3>Sign up</h3>
-          <p>Please sign up to proceed.</p>
           <div>
             <form onSubmit={this.handleSubmit}>
-              <div>
-                <div>
-                  <input
-                    onChange={this.handleInput}
-                    type="text"
-                    name="firstname"
-                    placeholder="First name"
-                    value={this.state.firstname}
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <div>
-                  <input
-                    onChange={this.handleInput}
-                    type="text"
-                    name="lastname"
-                    placeholder="Last name"
-                    value={this.state.lastname}
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <div>
-                  <input
-                    onChange={this.handleInput}
-                    type="text"
-                    name="username"
-                    placeholder="Username"
-                    value={this.state.username}
-                    pattern="[a-zA-Z0-9]+"
-                    title="only characters and numbers"
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <div>
-                  <input
-                    onChange={this.handleInput}
-                    type="email"
-                    name="email"
-                    placeholder="e-mail"
-                    value={this.state.email}
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <div>
-                  <input
-                    onChange={this.handleInput}
-                    type="date"
-                    name="birth"
-                    placeholder="Birth Date"
-                    value={this.state.birth}
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <label>Time wallet:</label>
-                <div>
-                  <p style={{ color: "green" }}>
-                    When you sign up you get 2 hours to spend!
-                  </p>
-                </div>
-              </div>
-              <div>
-                <p>
-                  <input
-                    onChange={this.handleInput}
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    value={this.state.password}
-                    pattern="^[a-zA-Z0-9]{8,}$"
-                    title="At least 8 characters"
-                    required
-                  />
-                  <span>
-                    <i className="fa fa-lock" aria-hidden="true"></i>
-                  </span>
+              <label>
+                First name:
+                <input
+                  onChange={this.handleInput}
+                  type="text"
+                  name="firstname"
+                  placeholder="First name"
+                  value={this.state.firstname}
+                  required
+                />
+              </label>
+              <label>
+                Last name:
+                <input
+                  onChange={this.handleInput}
+                  type="text"
+                  name="lastname"
+                  placeholder="Last name"
+                  value={this.state.lastname}
+                  required
+                />
+              </label>
+              <label>
+                Username:
+                <input
+                  onChange={this.handleInput}
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  value={this.state.username}
+                  pattern="[a-zA-Z0-9]+"
+                  title="only characters and numbers"
+                  required
+                />
+              </label>
+              <label>
+                E-mail:
+                <input
+                  onChange={this.handleInput}
+                  type="email"
+                  name="email"
+                  placeholder="e-mail"
+                  value={this.state.email}
+                  required
+                />
+              </label>
+              <label>
+                Date of birth:
+                <input
+                  onChange={this.handleInput}
+                  type="date"
+                  name="birth"
+                  value={this.state.birth}
+                  required
+                />
+              </label>
+              <label>
+                Time wallet:
+                <p style={{ color: "green" }}>
+                  When you sign up you get 2 hours to spend!
                 </p>
-              </div>
-              <p style={{ color: "red" }}>
-                {this.state.errorMessage && this.state.errorMessage}
-              </p>
-              <button className="btn" value="submit">Sign up</button>
+              </label>
+              <label>
+                Password:
+                <input
+                  onChange={this.handleInput}
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={this.state.password}
+                  pattern="^[a-zA-Z0-9]{8,}$"
+                  title="At least 8 characters"
+                  required
+                />
+              </label>
+
+              {this.state.errorMessage ? (
+                <p style={{ color: "red" }}>{this.state.errorMessage}</p>
+              ) : null}
+
+              <button className="btn" value="submit">
+                Sign up
+              </button>
             </form>
           </div>
           <p>

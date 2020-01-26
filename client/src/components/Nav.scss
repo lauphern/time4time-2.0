@@ -16,6 +16,10 @@ nav {
 
     a {
         color: white;
+
+        &:visited {
+            color: white;
+        }
     }
 
     &.shrink-nav {
@@ -81,6 +85,8 @@ nav {
         a {
             position: relative;
             text-transform: uppercase;
+            font-weight: 700;
+            color: white;
 
             &:before {
                 position: absolute;
@@ -93,6 +99,7 @@ nav {
                 transform: scale(1.5);
                 opacity: 0;
                 padding: 1vw 3vw;
+                font-weight: 700;
             }
 
             &:hover:before {
@@ -108,8 +115,34 @@ nav {
 }
 
 
+@keyframes show-dropdown {
 
-@media (max-width: 600px) {
+    from {
+        transform: scaleY(0);
+    }
+
+    to {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes hide-dropdown {
+
+    from {
+        transform: scaleY(1);
+
+    }
+
+    to {
+        transform: scaleY(0);
+    }
+}
+
+
+/////////---------------MEDIA QUERIES---------------/////////
+
+//Mobile and tablets
+@media (max-width: 768px) {
     nav {
 
         & > div:nth-of-type(1) {
@@ -138,7 +171,7 @@ nav {
 
         &.shrink-nav {
             
-            .dropdown-show {
+            .dropdown {
                 top: 6vh;
             }
         }
@@ -150,26 +183,9 @@ nav {
     
 }
 
+@media (max-width: 1024px) {
 
-@keyframes show-dropdown {
-
-    from {
-        transform: scaleY(0);
-    }
-
-    to {
-        transform: scaleY(1);
-    }
-}
-
-@keyframes hide-dropdown {
-
-    from {
-        transform: scaleY(1);
-
-    }
-
-    to {
-        transform: scaleY(0);
+    .full-menu {
+        font-size: 0.85em;
     }
 }

@@ -23,7 +23,7 @@ const RequestSnippet = props => {
           </p>
         ) : null}
 
-        <p style={{ color: "red" }}>{props.error ? props.error : ""}</p>
+        {props.error ? <p style={{ color: "red" }}>{props.error}</p> : null}
       </div>
 
       <div>
@@ -69,8 +69,6 @@ const Offers = props => {
 
   const approveOffer = (event, offerId) => {
     event.preventDefault();
-    let test = props
-    debugger
     customAxios({
       method: "post",
       url: "/approve-offer",
