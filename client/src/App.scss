@@ -32,10 +32,26 @@ body {
     flex: 1 0 auto;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    // font-family: Heebo;
-    // font-family: "Playfair Display";
-    // font-weight: 700;
+h2, h3, h4, h5, h6 {
+    color: $main;
+    position: relative;
+    z-index: 1;
+    align-self: flex-start;
+
+    & > span:nth-of-type(1) {
+        &:after {
+            content: "";
+            background-color: $accent;
+            position: absolute;
+            left: -5%;
+            top: 45%;
+            transform: skew(-15deg);
+            width: 110%;
+            height: 30%;
+            z-index: -1;
+        }
+    }
+    
 }
 
 h1, h2, h3, h4, h5, h6, p {

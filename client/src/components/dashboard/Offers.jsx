@@ -100,9 +100,9 @@ const Offers = props => {
 
   return (
     <article className="activity-card offers-card">
-      <h2>Offers</h2>
+      <h2><span>Offers</span></h2>
       <div>
-        <h3>Requests you got!</h3>
+        <h3><span>Requests you got!</span></h3>
         {offersRequested.length === 0 ? (
           <p>
             You didn't get any request for any of your offers. <em>Yet!</em>
@@ -134,7 +134,7 @@ const Offers = props => {
         )}
       </div>
       <div>
-        <h3>All your offers posted</h3>
+        <h3><span>All your offers posted</span></h3>
         {props.listOfOffers.length === 0 ? (
           <p>
             You didn't post any! Do you want to{" "}

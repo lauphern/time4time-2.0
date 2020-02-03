@@ -5,7 +5,7 @@ import OfferCard from "../OfferCard"
 const Bookmarks = props => {
   return (
     <article className="activity-card">
-      <h2>Offers bookmarked</h2>
+      <h2><span>Offers bookmarked</span></h2>
       {props.listOfBookmarks.length === 0 ? (
         <p>You haven't saved any offers yet!</p>
       ) : (

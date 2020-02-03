@@ -1,0 +1,27 @@
+@import "../../Setup.scss";
+
+.FAQ {
+    p {
+        display: none;
+        animation-duration: 0.5s;
+        animation-name: fadeOut;
+    }
+
+    h3:hover {
+        color: $main;
+    }
+
+    .show-faq {
+        color: $main;
+
+        & + p {
+            display: block;
+            animation-duration: 0.5s;
+            animation-name: show;
+        }
+    }
+
+    .hide-faq + p {
+        display: none;
+    }
+}

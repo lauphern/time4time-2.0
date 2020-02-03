@@ -39,7 +39,7 @@ class Login extends Component {
         style={{ backgroundImage: `url(/bg${this.state.bgNum}.jpg)` }}
       >
         <div className="auth-panel">
-          <h3>Login</h3>
+          <h3><span>Login</span></h3>
           <div>
             <form onSubmit={this.handleSubmit}>
               <input

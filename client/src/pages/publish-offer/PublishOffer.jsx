@@ -58,7 +58,7 @@ class PublishOffer extends Component {
     return (
       <div className="publish-offer-container">
         <div className="publish-offer-card">
-          <h3>Publish an offer</h3>
+          <h3><span>Publish an offer</span></h3>
           <form
             ref={this.form}
             onSubmit={this.handleSubmit}

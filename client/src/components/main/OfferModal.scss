@@ -81,29 +81,7 @@
 
 
 
-@keyframes show {
 
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 100;
-    }
-}
-
-// TODO arreglar el background raro
-
-@keyframes fadeOut {
-
-    from {
-        opacity: 100;
-    }
-
-    to {
-        opacity: 0;
-    }
-}
 
 
 @keyframes modalAppear {

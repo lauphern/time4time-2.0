@@ -60,7 +60,7 @@ class UserSettings extends Component {
     return (
       <section>
         <div>
-          <h3>User's settings</h3>
+          <h3><span>User's settings</span></h3>
           <EditProfileImage
             handleSubmitProfileImage={this.handleSubmitProfileImage}
           />

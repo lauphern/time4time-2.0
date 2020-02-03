@@ -9,7 +9,6 @@
 // Set your brand colors
 $background-color: rgb(247, 250, 245);
 $light-grey: rgba(0,0,0,0.2);
-// $main: #E9B872;
 $main: #082873;
 $accent: #FFFF00;
 $title-sm: #3A3335;
@@ -20,6 +19,8 @@ $title-sm: #3A3335;
 // #235789
 // #0A369D
 // #072364
+// #082873
+// #004CFF or blue
 
 // TEXT
 // #3A3335
@@ -27,3 +28,28 @@ $title-sm: #3A3335;
 // #1C1D21
 
 
+//General animation I use in more than one component
+
+@keyframes show {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 100;
+    }
+}
+
+// TODO arreglar el background raro
+
+@keyframes fadeOut {
+
+    from {
+        opacity: 100;
+    }
+
+    to {
+        opacity: 0;
+    }
+}

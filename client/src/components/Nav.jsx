@@ -28,7 +28,7 @@ const AuthNav = props => {
           to="/publish-offer"
           activeClassName="active-nav-item"
         >
-          Publish new offer
+          New offer
         </NavLink>
         <NavLink
           onClick={props.toggleDropdownMenu}
@@ -60,11 +60,12 @@ const AuthNav = props => {
           Dashboard
         </NavLink>
         <NavLink
-          alt="Publish new offer"
+          alt="New offer"
           to="/publish-offer"
           activeClassName="active-nav-item"
+          className="cta-item"
         >
-          Publish new offer
+          New offer
         </NavLink>
         <NavLink
           alt="About us"
@@ -73,16 +74,6 @@ const AuthNav = props => {
         >
           About us
         </NavLink>
-        <p>
-          Hello,{" "}
-          <NavLink
-            alt={getUser().username}
-            to="/dashboard"
-            activeClassName="active-nav-item"
-          >
-            {getUser().username}
-          </NavLink>
-        </p>
         <NavLink
           alt="Logout"
           to="/login"
@@ -113,7 +104,7 @@ const UnauthNav = props => {
           to="/publish-offer"
           activeClassName="active-nav-item"
         >
-          Publish new offer
+          New offer
         </NavLink>
         <NavLink
           onClick={props.toggleDropdownMenu}
@@ -143,11 +134,12 @@ const UnauthNav = props => {
           Home
         </NavLink>
         <NavLink
-          alt="Publish new offer"
+          alt="New offer"
           to="/publish-offer"
           activeClassName="active-nav-item"
+          className="cta-item"
         >
-          Publish new offer
+          New offer
         </NavLink>
         <NavLink
           alt="About us"

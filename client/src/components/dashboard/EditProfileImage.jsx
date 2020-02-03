@@ -161,9 +161,9 @@ function EditProfileImage(props) {
         </div>
         <aside>
           {previewImg}
-          <h4>Accepted files</h4>
+          <h4><span>Accepted files</span></h4>
           <ul>{acceptedFilesItems}</ul>
-          <h4>Rejected files</h4>
+          <h4><span>Rejected files</span></h4>
           <ul>{rejectedFilesItems}</ul>
         </aside>
         <button>Save changes</button>
