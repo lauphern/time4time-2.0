@@ -26,6 +26,7 @@ body {
 .loader {
     font-size: 3em;
     margin: auto;
+    color: $main;
 }
 
 .content {
@@ -87,7 +88,7 @@ button, input, textarea {
     }
 }
 
-input[type=text], input[type=password], input[type=email], textarea, input[type=date] {
+input[type=text], input[type=password], input[type=email], textarea, input[type=date], input[type=number] {
     display: block;
     caret-color: $main;
     box-shadow: 0px 2px 2px $light-grey;

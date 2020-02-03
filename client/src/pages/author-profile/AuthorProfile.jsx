@@ -197,9 +197,7 @@ class AuthorProfile extends Component {
                 <div>
                   <h2>
                     Your Rating: {rating}{" "}
-                    <span style={{ color: "red" }}>
-                      <small>*Required</small>
-                    </span>
+                      <small style={{ color: "red" }}>*Required</small>
                   </h2>
                   <StarRatingComponent
                     name="rate1"

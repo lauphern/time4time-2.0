@@ -57,7 +57,7 @@ class PublishOffer extends Component {
   render() {
     return (
       <div className="publish-offer-container">
-        <div className="publish-offer-card">
+        <div className="publish-offer-card card">
           <h3><span>Publish an offer</span></h3>
           <form
             ref={this.form}

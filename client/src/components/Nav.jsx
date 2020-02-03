@@ -26,7 +26,6 @@ const AuthNav = props => {
         <NavLink
           onClick={props.toggleDropdownMenu}
           to="/publish-offer"
-          activeClassName="active-nav-item"
         >
           New offer
         </NavLink>
@@ -62,7 +61,6 @@ const AuthNav = props => {
         <NavLink
           alt="New offer"
           to="/publish-offer"
-          activeClassName="active-nav-item"
           className="cta-item"
         >
           New offer
@@ -102,7 +100,6 @@ const UnauthNav = props => {
         <NavLink
           onClick={props.toggleDropdownMenu}
           to="/publish-offer"
-          activeClassName="active-nav-item"
         >
           New offer
         </NavLink>
@@ -136,7 +133,6 @@ const UnauthNav = props => {
         <NavLink
           alt="New offer"
           to="/publish-offer"
-          activeClassName="active-nav-item"
           className="cta-item"
         >
           New offer
