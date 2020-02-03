@@ -46,7 +46,7 @@ class SignUp extends Component {
         style={{ backgroundImage: `url(/bg${this.state.bgNum}.jpg)` }}
       >
         <div className="auth-panel">
-          <h3><span>Sign up</span></h3>
+          <h3>Sign up</h3>
           <div>
             <form onSubmit={this.handleSubmit}>
               <label>

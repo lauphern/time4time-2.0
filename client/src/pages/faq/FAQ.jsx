@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import QuestionAnswer from "../../components/faq/QuestionAnswer"
+
 import "./FAQ.scss";
 
 const listFAQ = [
@@ -16,30 +18,6 @@ const listFAQ = [
     a: "Third answer"
   }
 ];
-
-const QuestionAnswer = props => {
-  return (
-    <>
-      <div>
-        <h3
-          className={props.toggle ? "show-faq" : null}
-          onClick={() => props.setShowAnswer(props.toggle ? "" : props.id)}
-        >
-          <span>
-            {props.question}{" "}
-            {props.toggle ? (
-              <i class="fas fa-minus"></i>
-            ) : (
-              <i class="fas fa-plus"></i>
-            )}
-          </span>
-        </h3>
-        <p>{props.answer}</p>
-      </div>
-      <hr />
-    </>
-  );
-};
 
 const FAQ = props => {
   const hideAll = () => {};

@@ -130,7 +130,7 @@ class OfferModal extends Component {
     }
     return (
       <div className={`modal-container ${this.props.toggle ? "show" : "hide"}`}>
-        <div className="offer offer-modal">
+        <div className="offer offer-modal card">
           <div>
             <p>{this.props.title}</p>
             <a>

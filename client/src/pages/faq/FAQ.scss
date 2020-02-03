@@ -1,27 +1,39 @@
 @import "../../Setup.scss";
 
 .FAQ {
+    display: flex;
+    flex-direction: column;
+
     p {
         display: none;
         animation-duration: 0.5s;
         animation-name: fadeOut;
     }
 
-    h3:hover {
-        color: $main;
-    }
+    .faq-card {
+        display: flex;
+        flex-direction: column;
 
-    .show-faq {
-        color: $main;
-
-        & + p {
-            display: block;
-            animation-duration: 0.5s;
-            animation-name: show;
+        h3 {
+            cursor: pointer;
+            &:hover {
+                color: $main;
+            }
+        }
+    
+        .show-faq {
+            color: $main;
+    
+            & + p {
+                display: block;
+                animation-duration: 0.5s;
+                animation-name: show;
+            }
+        }
+    
+        .hide-faq + p {
+            display: none;
         }
     }
 
-    .hide-faq + p {
-        display: none;
-    }
 }

@@ -24,7 +24,7 @@ let OfferBlock = props => {
         authorUsername={props.offer.authorUsername}
         duration={props.offer.duration}
         category={props.offer.category}
-        classes="offer main-card"
+        classes="offer card main-card"
       >
         <p>{props.offer.description}</p>
         <a
