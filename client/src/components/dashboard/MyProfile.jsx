@@ -123,7 +123,7 @@ class MyProfile extends Component {
           </div>
           {this.state.myReviews.length > 0 ? (
             <>
-              <h1>Reviews I have received</h1>
+              <h2>Reviews I have received</h2>
               <div>
                 {renderReviews}
                 <div>

@@ -268,7 +268,7 @@ class AuthorProfile extends Component {
           </div>
           {this.state.listOfReviews.length > 0 ? (
             <>
-              <h1>List of reviews</h1>
+              <h2>List of reviews</h2>
               {/* TODO */}
               {/* organize css */}
               <div

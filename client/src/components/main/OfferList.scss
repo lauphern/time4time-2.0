@@ -11,6 +11,8 @@
 
     a {
         align-self: flex-end;
+        color: white;
+        text-shadow: 1px 1px 2px $main;
         z-index: 2;
         position: relative;
     }
@@ -40,6 +42,14 @@
 
         &:before {
             transform: scale(50);
+        }
+
+        h2 {
+            color: white;
+
+            & > span:after {
+                display: none;
+            }
         }
     }
 

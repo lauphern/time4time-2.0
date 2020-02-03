@@ -41,7 +41,7 @@ class OfferModal extends Component {
       .then(res => {
         // Update user in localStorage to have the new bookmarks
         updateUser(res.data);
-        this.setState({isItBookmarked: true})
+        this.setState({ isItBookmarked: true });
       })
       .catch(err => {
         console.log(err);
@@ -57,12 +57,12 @@ class OfferModal extends Component {
       .then(res => {
         // Update user in localStorage to have the new bookmarks
         updateUser(res.data);
-        this.setState({isItBookmarked: false})
+        this.setState({ isItBookmarked: false });
       })
       .catch(err => {
         console.log(err);
       });
-  }
+  };
 
   // TODO revisar todos estos methods
 
@@ -125,40 +125,49 @@ class OfferModal extends Component {
     let bookmarks = undefined;
     let usersUsername = undefined;
     if (!!getUser()) {
-      bookmarks = getUser().bookmarks
-      usersUsername = getUser().username
+      bookmarks = getUser().bookmarks;
+      usersUsername = getUser().username;
     }
     return (
       <div className={`modal-container ${this.props.toggle ? "show" : "hide"}`}>
         <div className="offer offer-modal card">
-          <div>
-            <p>{this.props.title}</p>
+          <div className="modal-header">
+            <div>
+              <h2>{this.props.title}</h2>
+              {/* If the user is not logged in or its their own offer, we don't show any bookmark button
+              Otherwise, we show the bookmark button depending on if the user has already bookmarked it */}
+              {this.props.authorUsername === usersUsername ||
+              !usersUsername ? null : bookmarks ? (
+                bookmarks.indexOf(this.props.offerIdentificator) !== -1 ||
+                this.state.isItBookmarked ? (
+                  <a>
+                    <i
+                      className="fas fa-bookmark"
+                      onClick={this.removeBookmark}
+                    ></i>
+                  </a>
+                ) : (
+                  <a>
+                    <i className="far fa-bookmark" onClick={this.bookmark}></i>
+                  </a>
+                )
+              ) : null}
+            </div>
             <a>
               <i className="fa fa-times-circle" onClick={this.props.close}></i>
             </a>
-            {/* If the user is not logged in or its their own offer, we don't show any bookmark button
-            Otherwise, we show the bookmark button depending on if the user has already bookmarked it */}
-            {this.props.authorUsername === usersUsername ||
-            !usersUsername ? null : (bookmarks ? (
-              bookmarks.indexOf(this.props.offerIdentificator) !== -1 || this.state.isItBookmarked ?
-              <a><i className="fas fa-bookmark" onClick={this.removeBookmark}></i></a> : <a>
-                <i className="far fa-bookmark" onClick={this.bookmark}></i>
-              </a>
-            ) : null)}
-            
-            
           </div>
           <section>
             <p>Username: {this.props.authorUsername}</p>
-            <button onClick={this.redirectToAuthorProfile}>
+            <button className="btn" onClick={this.redirectToAuthorProfile}>
               Visit profile
             </button>
             <div>
               {/* TODO */}
               {/* <img src={`${process.env.REACT_APP_API}/${this.props.image}`} alt=""/> */}
-              <h1>Description</h1>
+              <h3>Description</h3>
               <p>{this.props.description}</p>
-              <div>
+              <div className="modal-share">
                 {/* TODO check on deploy */}
                 <FacebookShareButton
                   url={`${process.env.REACT_APP_FRONT}${this.props.location.pathname}`}
@@ -178,9 +187,9 @@ class OfferModal extends Component {
                   <PinterestIcon size={32} round={true} />
                 </PinterestShareButton>
               </div>
-              <h1>Category</h1>
+              <h3>Category</h3>
               <p>{this.props.category}</p>
-              <h1>Duration</h1>
+              <h3>Duration</h3>
               <p>{this.props.durationOffer} hour(s)</p>
             </div>
           </section>
