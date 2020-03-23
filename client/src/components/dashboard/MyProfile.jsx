@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import customAxios from "../../utils/customAxios";
 import Moment from "react-moment";
-import MyReview from "./MyReview";
+import Review from "../Review";
 
 //render my profile with my time wallet and basic personal settings
 class MyProfile extends Component {
@@ -61,7 +61,7 @@ class MyProfile extends Component {
     );
     const renderReviews = currentReviews.map(review => {
       return (
-        <MyReview
+        <Review
           rating={review.rating}
           opinion={review.opinion}
           date={review.date}

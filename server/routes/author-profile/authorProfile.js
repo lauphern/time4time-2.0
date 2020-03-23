@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-// TODO do I need this now? can I combine it with the new stuff?
-const multer = require("multer")
-const upload = multer({ dest: 'public/images' })
+
 
 const { usersCollection, reviewsCollection } = require("../../utils/db")
 
@@ -14,6 +12,7 @@ router.get('/author-profile/:id', function(req, res) {
         if(!snap.exists) res.status(500).json({errorMessage: 'author data not found'});
         else {
             let authorProfile = snap.data()
+            authorProfile.id = snap.id;
             res.status(200).json(authorProfile)
         }
     })
@@ -22,13 +21,15 @@ router.get('/author-profile/:id', function(req, res) {
     });
 });
 
-router.post('/author-profile', upload.single('review-image'), function(req, res) {
+router.post('/new-review', function(req, res) {
+    //TODO check that it works
     let newReview = {
         rating: req.body.rate1,
         opinion: req.body.opinion,
         date: req.body.date,
-        picture: req.file.path,
         reviewer: req.session.user.id,
+        //TODO
+        userReviewed: req.body.userReviewedId
     }
     //TODO test
     reviewsCollection.add(newReview)
@@ -40,24 +41,26 @@ router.post('/author-profile', upload.single('review-image'), function(req, res)
     .catch(err => res.json(err))
 })
 
-router.post('/user-reviewed-id', function(req, res) {
-    //TODO revisar cuando se hacia esta request, porque parece parte de otra
-    reviewsCollection.doc(req.body.newReviewId).update({
-        userReviewed: req.body.userReviewedId
-    })
-    .then(() => {
-        return reviewsCollection.doc(req.body.newReviewId).get()
-    })
-    .then(snap => {
-        let reviewUpdated = snap.data()
-        res.status(200).json(reviewUpdated)
-    })
-    .catch(err => {
-        res.status(500).json({errorMessage: 'Could not update review'})
-    })
-})
+// router.post('/user-reviewed-id', function(req, res) {
+//     //TODO revisar cuando se hacia esta request, porque parece parte de otra
+//     //tiene que ir dentro de lo de /new-review
+//     reviewsCollection.doc(req.body.newReviewId).update({
+//         userReviewed: req.body.userReviewedId
+//     })
+//     .then(() => {
+//         return reviewsCollection.doc(req.body.newReviewId).get()
+//     })
+//     .then(snap => {
+//         let reviewUpdated = snap.data()
+//         res.status(200).json(reviewUpdated)
+//     })
+//     .catch(err => {
+//         res.status(500).json({errorMessage: 'Could not update review'})
+//     })
+// })
 
 router.post('/get-reviews', function(req, res){
+    //TODO revisar
     reviewsCollection.where("userReviewed", "==", req.body.userReviewedId).get()
     .then((snap) => {
         let allReviews = []
@@ -69,7 +72,9 @@ router.post('/get-reviews', function(req, res){
     })
 })
 
+//TODO tal vez lo puedo convertir en una route reusable para conseguir un username siempre, y en el front end convertirlo en una function qeu la pongo en utils, como lo de auth. Y aqui, pues tal vez en utils, no se
 router.post('/reviewer', function(req, res) {
+    //TODO revisar
     usersCollection.doc(req.body.reviewerId).get()
     .then((snap) => {
         let reviewer = snap.data()

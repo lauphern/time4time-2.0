@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import customAxios from "../../utils/customAxios";
+import customAxios from "../utils/customAxios";
 import Moment from "react-moment";
 
-class MyReview extends Component {
+class Review extends Component {
   constructor(props) {
     super(props);
     this.state = {
       reviewer: {}
     };
   }
-  //call to database and get username's reviewer
+  //call to database and take username's reviewer
   getReviewerUsername = () => {
     customAxios({
       method: "post",
@@ -38,13 +38,6 @@ class MyReview extends Component {
             </Moment>
           </p>
           <div>
-            <figure>
-              {/* TODO */}
-              <img
-                src={`${process.env.REACT_APP_API}/${this.props.pictureUrl}`}
-                alt="Review"
-              />
-            </figure>
             <p>{this.props.opinion}</p>
           </div>
         </div>
@@ -53,4 +46,4 @@ class MyReview extends Component {
   }
 }
 
-export default MyReview;
+export default Review;

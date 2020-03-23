@@ -83,8 +83,6 @@ class App extends Component {
               component={AuthorProfile}
               loggedIn={this.state.loggedIn}
             />
-            {/* TODO
-            arreglar como se ve cuando vas directamente a la ruta, que no sale bien con lo de dividir la landing en dos paginas */}
             <Route
               exact
               path={["/", "/:offerId"]}

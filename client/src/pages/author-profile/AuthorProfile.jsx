@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Moment from "react-moment";
 import customAxios from "../../utils/customAxios";
-import Review from "../../components/author-profile/Review";
+import Review from "../../components/Review";
 
 class AuthorProfile extends Component {
   constructor() {
@@ -52,13 +52,16 @@ class AuthorProfile extends Component {
   //add a review and sent to database
   handleSubmitReview = event => {
     event.preventDefault();
-    // TODO revisar que funciona que this esta bound
     let formData = new FormData(this.form.current);
+    formData.append("userReviewedId", this.state.authorProfile.id);
+    let postData = {};
+    for (let el of formData) {
+      postData[el[0]] = el[1];
+    }
     customAxios({
       method: "post",
-      url: "/author-profile",
-      config: { headers: { "Content-Type": "multipart/form-data" } },
-      data: formData
+      url: "/new-review",
+      data: postData
     })
       .then(databaseResponse => {
         this.setState({
@@ -67,7 +70,7 @@ class AuthorProfile extends Component {
         });
       })
       .then(() => {
-        this.sendUserId();
+        // this.sendUserId();
         this.getReviews();
       })
       .catch(err => {
@@ -75,25 +78,23 @@ class AuthorProfile extends Component {
       });
   };
 
-  // TODO
-  // probablemente pueda usar populate en el backend
-  //send user id (review author)
-  sendUserId = () => {
-    customAxios({
-      method: "post",
-      url: "/user-reviewed-id",
-      data: {
-        userReviewedId: this.state.authorProfile._id,
-        newReviewId: this.state.newReview._id
-      }
-    })
-      .then(() => {
-        console.log("Found the user");
-      })
-      .catch(err => {
-        this.setState({ error: "Could not add your review" });
-      });
-  };
+  // TODO borrar
+  // sendUserId = () => {
+  //   customAxios({
+  //     method: "post",
+  //     url: "/user-reviewed-id",
+  //     data: {
+  //       userReviewedId: this.state.authorProfile._id,
+  //       newReviewId: this.state.newReview._id
+  //     }
+  //   })
+  //     .then(() => {
+  //       console.log("Found the user");
+  //     })
+  //     .catch(err => {
+  //       this.setState({ error: "Could not add your review" });
+  //     });
+  // };
   //render author's reviews
   getReviews = () => {
     customAxios({
@@ -144,7 +145,6 @@ class AuthorProfile extends Component {
           rating={review.rating}
           opinion={review.opinion}
           date={review.date}
-          pictureUrl={review.picture}
           reviewer={review.reviewer}
         />
       );
@@ -155,9 +155,8 @@ class AuthorProfile extends Component {
         <div>
           <div>
             <figure>
-              {/* TODO */}
               <img
-                src={`${process.env.REACT_APP_API}/${this.state.authorProfile.profileImage}`}
+                src={this.state.authorProfile.profileImage}
                 alt="User profile"
               ></img>
             </figure>
@@ -197,7 +196,7 @@ class AuthorProfile extends Component {
                 <div>
                   <h2>
                     Your Rating: {rating}{" "}
-                      <small style={{ color: "red" }}>*Required</small>
+                    <small style={{ color: "red" }}>*Required</small>
                   </h2>
                   <StarRatingComponent
                     name="rate1"
@@ -236,20 +235,6 @@ class AuthorProfile extends Component {
                     value={this.state.date}
                     type="date"
                     placeholder="Date of activity"
-                    required
-                  />
-                </div>
-              </div>
-              <div>
-                <label>Picture</label>{" "}
-                <span style={{ color: "red" }}>
-                  <small>*Required</small>
-                </span>
-                <div>
-                  <input
-                    onChange={this.handleInput}
-                    name="review-image"
-                    type="file"
                     required
                   />
                 </div>

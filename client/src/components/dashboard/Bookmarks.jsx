@@ -14,6 +14,8 @@ const Bookmarks = props => {
             return (
               <OfferCard
                 title={bookmark.title}
+                linkToOffer={true}
+                offerId={bookmark.id}
                 authorUsername={bookmark.authorUsername}
                 duration={bookmark.duration}
                 status={bookmark.status}

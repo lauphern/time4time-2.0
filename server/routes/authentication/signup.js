@@ -24,8 +24,7 @@ router.post("/signup", (req, res) => {
             birth: req.body.birth,
             password: hash,
             registrationDate: Date.now(),
-            //TODO check if the user added a profile img (I still have to implement it)
-            //and if they didn't, add a default
+            //TODO add a default profile image
             profileImage: "",
             bookmarks: []
           };

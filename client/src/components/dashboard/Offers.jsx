@@ -113,6 +113,7 @@ const Offers = props => {
               return (
                 <OfferCard
                   offerId={myOffer.id}
+                  linkToOffer={true}
                   title={myOffer.title}
                   authorUsername={myOffer.authorUsername}
                   duration={myOffer.duration}
@@ -146,6 +147,7 @@ const Offers = props => {
               return (
                 <OfferCard
                   offerId={myOffer.id}
+                  linkToOffer={true}
                   title={myOffer.title}
                   authorUsername={myOffer.authorUsername}
                   duration={myOffer.duration}

@@ -19,14 +19,16 @@ const Petitions = props => {
         </p>
       ) : (
         <div>
-          {props.listOfPetitions.map(mypetition => {
+          {props.listOfPetitions.map(myPetition => {
             return (
               <OfferCard
-                title={mypetition.title}
-                authorUsername={mypetition.authorUsername}
-                duration={mypetition.duration}
-                status={mypetition.status}
-                category={mypetition.category}
+                title={myPetition.title}
+                linkToOffer={true}
+                offerId={myPetition.id}
+                authorUsername={myPetition.authorUsername}
+                duration={myPetition.duration}
+                status={myPetition.status}
+                category={myPetition.category}
               />
             );
           })}
