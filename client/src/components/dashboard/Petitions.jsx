@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import OfferCard from "../OfferCard";
 
 //This component renders the offers the user has applied to
-const Petitions = props => {
+const Petitions = (props) => {
   // componentWillUnmount() {
   // TODO
   // this.props.cleanNotif("petitions");
@@ -19,18 +19,8 @@ const Petitions = props => {
         </p>
       ) : (
         <div>
-          {props.listOfPetitions.map(myPetition => {
-            return (
-              <OfferCard
-                title={myPetition.title}
-                linkToOffer={true}
-                offerId={myPetition.id}
-                authorUsername={myPetition.authorUsername}
-                duration={myPetition.duration}
-                status={myPetition.status}
-                category={myPetition.category}
-              />
-            );
+          {props.listOfPetitions.map((myPetition) => {
+            return <OfferCard offerInfo={myPetition} />;
           })}
         </div>
       )}

@@ -9,7 +9,7 @@
 
 .main-card {
 
-    a {
+    & > a {
         align-self: flex-end;
         color: white;
         text-shadow: 1px 1px 2px $main;
@@ -44,7 +44,7 @@
             transform: scale(50);
         }
 
-        h2 {
+        h2, a {
             color: white;
 
             & > span:after {

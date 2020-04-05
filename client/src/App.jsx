@@ -69,7 +69,7 @@ class App extends Component {
             <Route path="/about-us" component={AboutUs} />
             <Route path="/faq" component={FAQ} />
             <PrivateRoute
-              path="/dashboard"
+              path={["/dashboard", "/dashboard/:offerId"]}
               component={UserDashboard}
               loggedIn={this.state.loggedIn}
             />

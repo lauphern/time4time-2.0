@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import customAxios from "../../utils/customAxios";
+import { toggleModal } from "../../utils/uiMethods";
 
 import OfferCard from "../OfferCard";
-import OfferModal from "./OfferModal";
+import OfferModal from "../OfferModal";
 
 import "./OfferList.scss";
 
@@ -15,21 +16,19 @@ import "./OfferList.scss";
 //this component displays all offers in the main page with OPEN status
 //pending and closed offers don't show in main page
 
-let OfferBlock = props => {
+let OfferBlock = (props) => {
   let location = useLocation();
+  let history = useHistory();
+
   return (
     <>
-      <OfferCard
-        title={props.offer.title}
-        authorUsername={props.offer.authorUsername}
-        duration={props.offer.duration}
-        category={props.offer.category}
-        classes="offer card main-card"
-      >
+      <OfferCard offerInfo={props.offer} classes="offer card main-card">
         <p>{props.offer.description}</p>
         <a
           onClick={() => {
-            props.toggle(props.offer.id);
+            if (location.pathname === "/dashboard")
+              toggleModal(`/dashboard/${props.offer.id}`, history);
+            else toggleModal(`/${props.offer.id}`, history);
           }}
         >
           View offer
@@ -37,19 +36,9 @@ let OfferBlock = props => {
         <div className="view-offer"></div>
       </OfferCard>
       <OfferModal
-        close={props.toggle}
-        toggle={location.pathname === `/${props.offer.id}`}
+        booleanShow={location.pathname === `/${props.offer.id}`}
         location={location}
-        offerIdentificator={props.offer.id}
-        title={props.offer.title}
-        image={props.offer.image}
-        author={props.offer.author}
-        authorUsername={props.offer.authorUsername}
-        description={props.offer.description}
-        category={props.offer.category}
-        dateOffer={props.offer.date}
-        durationOffer={props.offer.duration}
-        history={props.history}
+        offerInfo={props.offer}
       />
     </>
   );
@@ -61,30 +50,22 @@ class OfferList extends Component {
     this.state = {
       listOfOffers: [],
       firstOffers: [],
-      hasMore: true
+      hasMore: true,
     };
-    this.toggle = this.toggle.bind(this);
-  }
-
-  toggle(offerId) {
-    // TODO revisar que funciona la url unica del modal
-    typeof offerId == "string"
-      ? this.props.history.push(`/${offerId}`)
-      : this.props.history.push("/");
   }
 
   getAllOffers = () => {
     customAxios({
       method: "get",
-      url: "/fetch-offers"
+      url: "/fetch-offers",
     })
-      .then(responseFromApi => {
+      .then((responseFromApi) => {
         this.setState({
           listOfOffers: responseFromApi.data,
-          firstOffers: responseFromApi.data.slice(0, 5)
+          firstOffers: responseFromApi.data.slice(0, 5),
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -92,13 +73,13 @@ class OfferList extends Component {
   fetchMoreData = () => {
     if (this.state.listOfOffers.length === this.state.firstOffers.length) {
       this.setState({
-        hasMore: false
+        hasMore: false,
       });
     }
     let currentLength = this.state.firstOffers.length;
     setTimeout(() => {
       this.setState({
-        firstOffers: this.state.listOfOffers.slice(0, currentLength + 5)
+        firstOffers: this.state.listOfOffers.slice(0, currentLength + 5),
       });
     }, 1000);
   };
@@ -111,22 +92,14 @@ class OfferList extends Component {
     const { firstOffers } = this.state;
 
     //All the offers we see by default, before searching
-    const renderOffers = firstOffers.map(offer => (
-      <OfferBlock
-        offer={offer}
-        toggle={this.toggle}
-        history={this.props.history}
-      />
+    const renderOffers = firstOffers.map((offer) => (
+      <OfferBlock offer={offer} />
     ));
 
     //Offers you get when you search
-    let renderFilteredOffers = this.props.filteredOffers.map(filteredOffer => (
-      <OfferBlock
-        offer={filteredOffer}
-        toggle={this.toggle}
-        history={this.props.history}
-      />
-    ));
+    let renderFilteredOffers = this.props.filteredOffers.map(
+      (filteredOffer) => <OfferBlock offer={filteredOffer} />
+    );
 
     return (
       <section>
