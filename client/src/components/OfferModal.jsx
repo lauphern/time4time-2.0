@@ -77,6 +77,7 @@ let OfferModal = (props) => {
       data: { offerId: props.offerInfo.id },
     })
       .then((res) => {
+        debugger
         //validation to make sure you have enough hours in your time wallet to apply to an activity
         if (res.data.message === "Not enough time in the wallet to apply")
           setErrorTimeWallet(
@@ -85,6 +86,7 @@ let OfferModal = (props) => {
         else history.push("/dashboard");
       })
       .catch((err) => {
+        debugger
         console.log(err);
       });
   };
@@ -104,10 +106,6 @@ let OfferModal = (props) => {
       });
   };
 
-  const redirectToLogin = () => {
-    history.push("/login");
-  };
-
   const redirectToAuthorProfile = () => {
     if (!!getUser()) {
       if (props.offerInfo.authorUsername === getUser().username) {
@@ -115,7 +113,6 @@ let OfferModal = (props) => {
         return;
       }
     }
-    // TODO revisar esta url
     history.push(`/profile/${props.offerInfo.author}`);
   };
 
@@ -124,10 +121,8 @@ let OfferModal = (props) => {
       <div className="offer offer-modal card">
         <div className="modal-header">
           <div>
-            <h2>
-              {props.offerInfo.title}
-            </h2>
-            {/* If the user is not logged in or its their own offer, we don't show any bookmark button
+            <h2>{props.offerInfo.title}</h2>
+            {/* If the user is not logged in or it's their own offer, we don't show any bookmark button
               Otherwise, we show the bookmark button depending on if the user has already bookmarked it */}
             {props.offerInfo.authorUsername === usersUsername ||
             !usersUsername ? null : bookmarks ? (
@@ -205,8 +200,9 @@ let OfferModal = (props) => {
                 <button
                   className="btn"
                   onClick={(e) => {
+                    //TODO deberia ir asi?? si el apply falla, no deberia enviar el email
                     handleApply(e);
-                    sendEmail(e);
+                    // sendEmail(e);
                   }}
                 >
                   Apply
@@ -214,7 +210,7 @@ let OfferModal = (props) => {
               )}
             </>
           ) : (
-            <button className="btn" onClick={redirectToLogin}>
+            <button className="btn" onClick={() => history.push("/login")}>
               Apply
             </button>
           )}

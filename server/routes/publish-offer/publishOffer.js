@@ -6,15 +6,13 @@ const { offersCollection } = require("../../utils/db")
 
 
 router.post('/publish-offer', singleUpload.single('offerImage'), function (req,res) {
-    debugger
-    //TODO asegurarme de que la duration se añade como numero
     let newOffer = {
         author:         req.session.user.id,
         authorUsername: req.session.user.username,
         authorMail:     req.session.user.email,
         title :         req.body.title,
         description :   req.body.description,
-        duration :      req.body.duration,
+        duration :      Number(req.body.duration),
         category :      req.body.category,
         status:         'Open',
         image:          req.file.location,

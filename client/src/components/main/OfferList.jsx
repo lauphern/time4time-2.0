@@ -52,6 +52,7 @@ class OfferList extends Component {
       firstOffers: [],
       hasMore: true,
     };
+    this.fetchMoreData = this.fetchMoreData.bind(this);
   }
 
   getAllOffers = () => {
@@ -71,11 +72,14 @@ class OfferList extends Component {
   };
 
   fetchMoreData = () => {
+    if (this.state.listOfOffers.length === 0) return;
     if (this.state.listOfOffers.length === this.state.firstOffers.length) {
       this.setState({
         hasMore: false,
       });
+      return;
     }
+
     let currentLength = this.state.firstOffers.length;
     setTimeout(() => {
       this.setState({
