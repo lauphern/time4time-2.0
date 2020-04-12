@@ -3,7 +3,6 @@
 
 .modal-container {
     
-    position: absolute;
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -12,15 +11,14 @@
     position: fixed;
     top: 0;
     left: 0;
-    visibility: hidden;
     transition: all 1s;
 
     &.show {
         z-index: 200;
         visibility: visible;
-        transition: all 1s;
         animation-duration: 0.5s;
         animation-name: show;
+        opacity: 1;
 
         .offer-modal {
             animation-duration: 0.5s;
@@ -29,19 +27,17 @@
     }
 
     &.hide {
-        z-index: -100 !important;
-        animation-duration: 0.5s;
-        animation-name: fadeOut;
+
         visibility: hidden;
+        opacity: 0;
+        transition: all 0.5s;
+        z-index: 200;
 
         .offer-modal {
             animation-duration: 0.5s;
             animation-name: modalDisappear;    
         }
 
-        .modal-bg {
-            background-color: $light-grey;
-        }
     }
 
 
@@ -105,11 +101,8 @@
         position: fixed;
         top: 0;
         left: 0;
-        // z-index: 0;
         background-color: $light-grey;
         backdrop-filter: blur(5px);
-        // animation-duration: 0.5s;
-        // animation-name: show;
     }
    
 }
