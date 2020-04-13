@@ -30,6 +30,14 @@ nav {
         height: 100%;
     }
 
+    & > div:nth-child(1) {
+        height: 100%;
+
+        & > a:nth-child(1) {
+            height: 100%;
+        }
+    }
+
     .cta-item {
         // background-color: rgba(255,255,0, 0.5);
         &:after {

@@ -3,8 +3,6 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 
 import { toggleModal } from "../utils/uiMethods";
 
-// TODO ver como puedo agregar classes dinamically, tal vez dependiendo de algun prop? y que los nombres de las classes sean similares pero tengan el comienzo distinto, porque con scss puedes combinar nombres de classes
-
 const OfferCard = (props) => {
   let history = useHistory();
   let location = useLocation();

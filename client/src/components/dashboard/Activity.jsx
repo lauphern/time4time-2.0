@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import OfferCard from "../OfferCard";
 import OfferModal from "../OfferModal";
@@ -10,8 +10,6 @@ const RequestSnippet = (props) => {
   const [offerStatus, setOfferStatus] = useState("");
   const [error, setError] = useState("");
   const [offerApproved, setOfferApproved] = useState(undefined);
-
-  let history = useHistory();
 
   const approveOffer = (event, offerId) => {
     event.preventDefault();
@@ -25,15 +23,6 @@ const RequestSnippet = (props) => {
         setOfferStatus("Approved");
         setOfferApproved(res.data.offerApproved);
         props.updateOffers();
-        //TODO test que este orden funciona
-        return customAxios({
-          method: "post",
-          url: "/update-time-wallet",
-          data: { offerId },
-        });
-      })
-      .then(() => {
-        history.push("/dashboard");
       })
       .catch((err) => {
         setError("Something went wrong!");
@@ -44,11 +33,9 @@ const RequestSnippet = (props) => {
     <>
       {/* TODO revisar esto porque es un caos */}
       <div>
-        {props.userRequest ? (
-          <p>Who applied to your offer: {props.userRequest}</p>
-        ) : null}
+        <p>Who applied to your offer: {props.offerInfo.userRequest}</p>
 
-        {offerStatus ? (
+        {offerStatus && offerApproved ? (
           <p style={{ color: "green" }}>
             You gained {offerApproved.duration} hour(s) in your Time Wallet!
           </p>
@@ -58,26 +45,17 @@ const RequestSnippet = (props) => {
       </div>
 
       <div>
-        {offerApproved ? (
-          <p> Offer status: &nbsp; {offerApproved.status}</p>
-        ) : (
-          <p> Offer status: &nbsp; {props.status}</p>
-        )}
 
         {offerStatus === "Approved" ? (
           <Link>Approved!</Link>
         ) : (
           <>
-            {props.status === "Open" ? null : (
-              <>
-                {props.status === "Approved" ? (
-                  <Link>Approved!</Link>
-                ) : (
-                  <Link onClick={(e) => approveOffer(e, props.offerId)}>
-                    Approve
-                  </Link>
-                )}
-              </>
+            {props.offerInfo.status === "Approved" ? (
+              null
+            ) : (
+              <Link onClick={(e) => approveOffer(e, props.offerInfo.id)}>
+                Approve
+              </Link>
             )}
           </>
         )}
@@ -87,8 +65,7 @@ const RequestSnippet = (props) => {
 };
 
 const OneColumn = (props) => {
-
-  let location = useLocation()
+  let location = useLocation();
 
   return (
     <props.containerEl
@@ -103,9 +80,9 @@ const OneColumn = (props) => {
             return (
               <>
                 <OfferCard offerInfo={offer}>
-                  {props.updateOffers ? (
+                  {offer.userRequest ? (
                     <RequestSnippet
-                      offerId={offer.id}
+                      offerInfo={offer}
                       updateOffers={props.updateOffers}
                     />
                   ) : null}

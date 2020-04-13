@@ -19,6 +19,7 @@ router.get('/get-offers', function(req, res) {
 });
 
 router.post('/approve-offer', function(req, res, next) {
+    //First, we retrieve the offer and update the "status" field to "Approved"
     offersCollection.doc(req.body.offerId).update({
         status: 'Approved'
     })
@@ -39,6 +40,7 @@ router.post('/approve-offer', function(req, res, next) {
 
 
 router.post('/approve-offer', function(req, res, next) {
+    //Second, we update the timeWallet of the user that published the offer
     let { duration } = res.offerApproved
     usersCollection.doc(req.session.user.id).update({
         timeWallet: firebase.firestore.FieldValue.increment(duration)
@@ -52,7 +54,8 @@ router.post('/approve-offer', function(req, res, next) {
 })
 
 
-router.post('/approve-offer', function(req, res, next) {
+router.post('/approve-offer', function(req, res) {
+    //Last, we update the timeWallet of the user that requested the offer
     let { userRequest, duration } = res.offerApproved
     usersCollection.where("username", "==", userRequest).get()
     .then(snap => {
@@ -64,7 +67,7 @@ router.post('/approve-offer', function(req, res, next) {
         res.json({offerApproved: res.offerApproved})
     })
     .catch((err) => {
-        res.status(400).json({errorMessage: 'Could not find offer author and update their time wallet'})
+        res.status(400).json({errorMessage: 'Could not find the user that requested the offer and update their time wallet'})
     })
 })
 

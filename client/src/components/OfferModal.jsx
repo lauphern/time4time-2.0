@@ -77,7 +77,6 @@ let OfferModal = (props) => {
       data: { offerId: props.offerInfo.id },
     })
       .then((res) => {
-        debugger
         //validation to make sure you have enough hours in your time wallet to apply to an activity
         if (res.data.message === "Not enough time in the wallet to apply")
           setErrorTimeWallet(
@@ -86,7 +85,6 @@ let OfferModal = (props) => {
         else history.push("/dashboard");
       })
       .catch((err) => {
-        debugger
         console.log(err);
       });
   };
