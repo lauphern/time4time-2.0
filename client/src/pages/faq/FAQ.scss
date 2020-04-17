@@ -3,6 +3,7 @@
 .FAQ {
     display: flex;
     flex-direction: column;
+    padding: 5vh 10vw;
 
     p {
         display: none;
@@ -15,14 +16,23 @@
         flex-direction: column;
 
         h3 {
+            opacity: 0.7;
+            transition: 0.3s;
             cursor: pointer;
+
             &:hover {
                 color: $main;
+                opacity: 1;
+            }
+
+            & > span:nth-of-type(1):after {
+                visibility: hidden;
             }
         }
     
         .show-faq {
             color: $main;
+            opacity: 1;
     
             & + p {
                 display: block;
