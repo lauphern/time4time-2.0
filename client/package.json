@@ -10,6 +10,8 @@
     "axios": "^0.18.1",
     "axios-progress-bar": "^1.2.0",
     "date-fns": "^1.30.1",
+    "dotenv": "^8.2.0",
+    "dotenv-cli": "^3.1.0",
     "gsap": "^3.0.4",
     "material-components-web": "^3.2.0",
     "moment": "^2.24.0",
