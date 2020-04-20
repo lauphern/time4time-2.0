@@ -5,12 +5,12 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 //TODO desinstalar
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 const cors = require("cors");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 //TODO desinstalar
-const MongoStore = require("connect-mongo")(session);
+// const MongoStore = require("connect-mongo")(session);
 
 const app = express();
 
@@ -39,14 +39,6 @@ if (process.env.ENV == "development") {
   );
 }
 
-//TODO
-mongoose.connect(process.env.MONGOURI, { useNewUrlParser: true }, function (
-  err
-) {
-  if (err) console.log("ERROR");
-  else console.log("connected");
-});
-
 app.use(
   session({
     secret: "njwkifenicmoswiid",
@@ -57,10 +49,10 @@ app.use(
     },
     // TODO puedo guardar esto en firestore?
     //https://www.npmjs.com/package/@google-cloud/connect-firestore
-    store: new MongoStore({
-      mongooseConnection: mongoose.connection,
-      ttl: 24 * 60 * 60, // 1 day
-    }),
+    // store: new MongoStore({
+    //   mongooseConnection: mongoose.connection,
+    //   ttl: 24 * 60 * 60, // 1 day
+    // }),
   })
 );
 
